@@ -60,23 +60,23 @@ var $=function(i){return document.getElementById(i)};
 var nf=function(x,k){var s=(+x).toFixed(k==null?3:k);return L==="vi"?s.replace(".",","):s;};
 var fmtInt=function(x){return Math.round(x).toLocaleString(L==="vi"?"vi-VN":"en-US");};
 // ---------- map
-var Lf=window.L, map=Lf.map("map").setView([10.8,106.74],12), GM=Geo.init(map,"hcm",{types:true});
+var Lf=window.L, map=Lf.map("map").setView([10.8,106.74],12), GM=Geo.init(map,"hcm",{types:true,amen:true,mlu:true});
 var ringLayer=Lf.layerGroup().addTo(map), stLayer=Lf.layerGroup().addTo(map), clickLayer=Lf.layerGroup().addTo(map);
 var RING_R=[500,800,1200,2000], RING_C=["#0b5ea8","#2e86c1","#85c1e9","#aed6f1"], MD=6000, TP="all";
-var ptsL=new Geo.TypeLayer(D.points,{filter:function(p){return p[4]<=MD&&(TP==="all"||p[3]===TP)}});
+var PM=400, ptsL=new Geo.TypeLayer(D.points,{city:"hcm",filter:function(p){return p[4]<=MD&&p[2]<=PM&&(TP==="all"||p[3]===TP)},onView:function(l){var v=l.map(function(p){return p[2]}),e=$("sv");if(e)e.textContent=v.length?fmtInt(v.length)+" · "+nf(median(v),1):"\u2013"}});
 function drawStations(){stLayer.clearLayers();D.stations.forEach(function(s){var m=GM.station(s,{label:L==="vi"?s.vi:s.en,ix:s.id==="S01"}).addTo(stLayer);s.m=m;});}
-function drawRings(){ringLayer.clearLayers();if(!$("rings").checked)return;D.stations.forEach(function(s){RING_R.forEach(function(r,i){Lf.circle([s.lat,s.lng],{radius:r,color:RING_C[i],weight:1,fill:false,opacity:.7,interactive:false}).addTo(ringLayer)})});}
+function drawRings(){ringLayer.clearLayers();if(!$("rings").checked)return;D.stations.forEach(function(s){RING_R.forEach(function(r,i){Lf.circle([s.lat,s.lng],{radius:r,color:RING_C[i],weight:1,fill:true,fillColor:RING_C[i],fillOpacity:.05,opacity:.75,interactive:false}).addTo(ringLayer)})});}
 function median(a){if(!a.length)return NaN;a=a.slice().sort(function(x,y){return x-y});var m=a.length>>1;return a.length%2?a[m]:(a[m-1]+a[m])/2;}
-function drawPts(){MD=+$("rng").value;TP=$("typ").value;var v=[];$("rngv").textContent=fmtInt(MD)+" m";
- D.points.forEach(function(p){if(p[4]<=MD&&(TP==="all"||p[3]===TP))v.push(p[2])});
+function drawPts(){MD=+$("rng").value;TP=$("typ").value;PM=+$("pmx").value;var v=[];$("rngv").textContent=fmtInt(MD)+" m";$("pmxv").textContent=PM>=400?"400+":PM;
+ D.points.forEach(function(p){if(p[4]<=MD&&p[2]<=PM&&(TP==="all"||p[3]===TP))v.push(p[2])});
  if($("pts").checked){if(!map.hasLayer(ptsL))map.addLayer(ptsL);ptsL.redraw()}else map.removeLayer(ptsL);
  $("sn").textContent=v.length?fmtInt(v.length):"\u2013";$("sm").textContent=v.length?nf(median(v),1):"\u2013";$("sa").textContent=v.length?nf(v.reduce(function(a,b){return a+b},0)/v.length,1):"\u2013";}
 function hav(a,b,c,d){var R=6371000,r=Math.PI/180,x=(c-a)*r,y=(d-b)*r,h=Math.sin(x/2)*Math.sin(x/2)+Math.cos(a*r)*Math.cos(c*r)*Math.sin(y/2)*Math.sin(y/2);return 2*R*Math.asin(Math.sqrt(h));}
-map.on("click",function(e){var best=null,bd=1e12;D.stations.forEach(function(s){var d=hav(e.latlng.lat,e.latlng.lng,s.lat,s.lng);if(d<bd){bd=d;best=s}});
+map.on("click",function(e){if(ptsL._map&&ptsL.hit(e.containerPoint))return;var best=null,bd=1e12;D.stations.forEach(function(s){var d=hav(e.latlng.lat,e.latlng.lng,s.lat,s.lng);if(d<bd){bd=d;best=s}});
  var r=bd<=500?"r1":bd<=800?"r2":bd<=1200?"r3":bd<=2000?"r4":null,t=T[L],c=D.coefs.hcm.E0.rings.filter(function(x){return x.t===r})[0];
  clickLayer.clearLayers();Lf.marker(e.latlng).addTo(clickLayer);Lf.polyline([e.latlng,[best.lat,best.lng]],{color:"#c2410c",dashArray:"4 4"}).addTo(clickLayer);
  $("clickinfo").textContent=t.nearest+": "+(L==="vi"?best.vi:best.en)+" · "+t.dist+": "+fmtInt(bd)+" m · "+(r?t.ring+" "+t.rn[r]+" · E0: "+nf(c.est,3)+" ("+t.ci+" "+nf(c.lo,3)+" … "+nf(c.hi,3)+")":t.ref);});
-["rng","typ","pts"].forEach(function(i){$(i).addEventListener("input",drawPts)});$("rings").addEventListener("input",drawRings);
+["rng","typ","pts","pmx"].forEach(function(i){$(i).addEventListener("input",drawPts)});$("rings").addEventListener("input",drawRings);
 // ---------- charts
 var ch={};function mk(id,cfg){if(ch[id])ch[id].destroy();ch[id]=new Chart($(id).getContext("2d"),cfg);}
 var css=function(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()};
