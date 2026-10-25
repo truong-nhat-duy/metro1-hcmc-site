@@ -67,3 +67,15 @@ section.sec>table{border:1px solid var(--line)}
 .qr{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.qr img{width:150px;height:150px;border-radius:10px;border:1px solid var(--line);background:#fff;padding:6px}
 footer{border-top:1px solid var(--line);color:var(--mute);font-size:.85rem;padding:24px 0 40px}
 @media(max-width:640px){nav .brand span{display:none}.hero .wrap{padding-top:36px}}
+/* maps */
+.lbl{pointer-events:none}.lbl span{display:block;transform:translate(-50%,-50%);white-space:nowrap;font:600 11px/1.1 var(--sans);text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 2px #fff,0 0 6px #fff;letter-spacing:.02em}
+.lbl.d span{color:#1e293b;text-transform:uppercase;font-size:11.5px;letter-spacing:.06em}.lbl.w span{color:#475569;font-weight:500;font-size:10px}
+.lbl.d,.lbl.w{display:none}.zl-d .lbl.d{display:block}.zl-w .lbl.w{display:block}.zl-w .lbl.d{display:none}
+.stl{background:rgba(255,255,255,.92);border:0;box-shadow:0 1px 4px rgba(0,0,0,.25);color:#0f172a;font:600 11px var(--sans);padding:1px 6px;border-radius:4px}.stl:before{display:none}
+.stl{display:none}.zl-s .stl{display:block}.ptt{font:12px/1.35 var(--sans);border-radius:8px;border:0;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.maplg{background:rgba(255,255,255,.94);color:#111827;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.2);font:12px/1.4 var(--sans);max-width:260px;margin:0 0 22px 10px;padding:6px 10px}
+.maplg summary{cursor:pointer;font-weight:600}.maplg .lgb{margin-top:6px;display:grid;gap:3px}.maplg b{margin-top:6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#475569}
+.maplg div{display:flex;align-items:center;gap:6px}.maplg svg{flex:none}.maplg small{color:#64748b;margin-top:6px;display:block;font-size:10.5px}
+.ramp i{display:block;height:8px;width:150px;border-radius:4px;background:linear-gradient(90deg,#3b82f6,#facc15,#ef4444)}.rl{justify-content:space-between;width:150px;font-size:10px;color:#475569}
+.leaflet-control-layers{border-radius:10px!important;border:0!important;box-shadow:0 2px 12px rgba(0,0,0,.2)!important;font:13px var(--sans)}
+.leaflet-container{font-family:var(--sans)}
