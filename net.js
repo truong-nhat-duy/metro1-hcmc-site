@@ -1,6 +1,6 @@
 (function(){
 var N=window.NET,Lf=window.L;if(!N||!Lf)return;
-var T={en:{nav_find:"Findings",nav_pd:"Price vs distance",nav_data:"Data",tag:"Fulbright MPP thesis · Urban economics",
+var T={en:{ch1t:"Explore the map",ch1d:"Listings by housing type, distance rings, metro lines, district and ward boundaries.",ch2t:"Read the estimates",ch2d:"Distance-ring premiums across eight specifications, with confidence intervals.",ch3t:"Compare with Hanoi",ch3d:"Sample, coefficients and model fit side by side for Lines 2A and 3.",ch4t:"See what drives price",ch4d:"Random forest, boosting and SHAP importance for both cities.",fl_h:"Project",fl_dl:"Download tables",fl_p:"Descriptive research output. Data: asking prices; no pre-opening period.",nav_find:"Findings",nav_pd:"Price vs distance",nav_data:"Data",tag:"Fulbright MPP thesis · Urban economics",
 k1l:"asking-price listings in the analysis sample (Ho Chi Minh City and Hanoi)",k2l:"stations on Metro Line 1, open since 22 Dec 2024",k3l:"baseline premium within 500 m of a station, Ho Chi Minh City (log points, E0)",k4l:"best out-of-sample R², gradient boosting, Ho Chi Minh City",
 cta1:"Explore the map",cta2:"Read the findings",warn_b:"Descriptive evidence only.",
 find_h:"Findings at a glance",find_p:"Six hypotheses from the research proposal and what the data say. Evidence is correlational: asking prices after the line opened, no pre-opening period.",
@@ -35,7 +35,7 @@ stn_h:"Station-level discontinuity at 1,200 m (exploratory)",
 stn_p:"A spatial regression discontinuity for each of the 14 stations. Most stations have too few listings on either side of the cutoff to estimate anything, so the three estimable stations are a diagnostic, not a ranking of station effects.",
 s_stn:"Station",s_spec:"Estimable specs at 1,200 m",s_est:"Mean estimate (Δ ln price)",s_pct:"Approx. %",s_n:"Max listings in a spec",s_sig:"Significant at 5%",yes:"yes",no:"no",ne:"not estimable",
 src:"Sources: the project's reference tables and model results (private repository; aggregated tables are in the downloads below). Asking prices, not transaction prices."
-},vi:{nav_find:"Kết quả chính",nav_pd:"Giá và khoảng cách",nav_data:"Dữ liệu",tag:"Luận văn MPP Fulbright · Kinh tế đô thị",
+},vi:{ch1t:"Khám phá bản đồ",ch1d:"Tin rao theo loại hình, vành khoảng cách, tuyến metro, ranh giới quận và phường.",ch2t:"Đọc kết quả ước lượng",ch2d:"Mức chênh theo vành khoảng cách qua tám đặc tả, kèm khoảng tin cậy.",ch3t:"So sánh với Hà Nội",ch3d:"Mẫu, hệ số và độ khớp cạnh nhau cho Tuyến 2A và 3.",ch4t:"Điều gì quyết định giá",ch4d:"Rừng ngẫu nhiên, boosting và tầm quan trọng SHAP của hai thành phố.",fl_h:"Dự án",fl_dl:"Tải bảng dữ liệu",fl_p:"Kết quả nghiên cứu mô tả. Dữ liệu: giá rao; không có kỳ trước mở tuyến.",nav_find:"Kết quả chính",nav_pd:"Giá và khoảng cách",nav_data:"Dữ liệu",tag:"Luận văn MPP Fulbright · Kinh tế đô thị",
 k1l:"tin rao trong mẫu phân tích (TP.HCM và Hà Nội)",k2l:"ga Metro số 1, khai thác từ 22/12/2024",k3l:"mức chênh cơ sở trong 500 m quanh ga, TP.HCM (điểm log, E0)",k4l:"R² ngoài mẫu cao nhất, tăng cường gradient, TP.HCM",
 cta1:"Khám phá bản đồ",cta2:"Xem kết quả chính",warn_b:"Chỉ là bằng chứng mô tả.",
 find_h:"Kết quả chính",find_p:"Sáu giả thuyết trong đề cương và điều dữ liệu cho thấy. Bằng chứng mang tính tương quan: giá rao sau khi tuyến mở, không có kỳ trước mở tuyến.",
