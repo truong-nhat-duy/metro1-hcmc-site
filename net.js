@@ -26,15 +26,15 @@ ns:"not significant",sig:"significant at 5%",
 hn_cap:"Hanoi: Line 2A and Line 3 stations (orange / purple) and a sample of listings coloured by ring",
 hn_note:"In Hanoi the ring-1 coefficient in the baseline specification is close to zero and not significant, while in Ho Chi Minh City it is positive and significant in the baseline. Different data, station sets and stages of opening mean this is a description of two samples, not a test of why they differ.",
 coefcmp:"Baseline (E0) ring coefficients, both cities",
-shap_h:"Machine learning and SHAP",
+shap_h:"SHAP in detail",
 shap_p:"Random forest and gradient boosting fit the same variables as the hedonic model. SHAP shares show how the fitted forest uses each variable; they do not measure causal effects, and the m_* rows are missing-value indicators.",
 shap_city:"City",shap_top:"Number of variables",shap_group:"Distance variables carry",
 ml_tab:"Out-of-sample style fit (all models)",c_city:"City",c_var:"Variant",c_mod:"Model",c_r2:"R²",c_rmse:"RMSE",c_mae:"MAE",
-mdl:{"Hồi quy tuyến tính":"Linear regression","Rừng ngẫu nhiên":"Random forest","Tăng cường gradient":"Gradient boosting"},
+pst:{"Quy hoạch":"Planned","Khai thác một phần":"Partly operating"},mdl:{"Hồi quy tuyến tính":"Linear regression","Rừng ngẫu nhiên":"Random forest","Tăng cường gradient":"Gradient boosting"},
 stn_h:"Station-level discontinuity at 1,200 m (exploratory)",
 stn_p:"A spatial regression discontinuity for each of the 14 stations. Most stations have too few listings on either side of the cutoff to estimate anything, so the three estimable stations are a diagnostic, not a ranking of station effects.",
-s_stn:"Station",s_spec:"Estimable specs",s_est:"Mean estimate (Δ ln price)",s_pct:"Approx. %",s_n:"Max listings in a spec",s_sig:"Significant at 5%",yes:"yes",no:"no",ne:"not estimable",
-src:"Sources: project reference tables and results in the repository (data/reference, data/results). Asking prices, not transaction prices."
+s_stn:"Station",s_spec:"Estimable specs at 1,200 m",s_est:"Mean estimate (Δ ln price)",s_pct:"Approx. %",s_n:"Max listings in a spec",s_sig:"Significant at 5%",yes:"yes",no:"no",ne:"not estimable",
+src:"Sources: the project's reference tables and model results (private repository; aggregated tables are in the downloads below). Asking prices, not transaction prices."
 },vi:{nav_find:"Kết quả chính",nav_pd:"Giá và khoảng cách",nav_data:"Dữ liệu",tag:"Luận văn MPP Fulbright · Kinh tế đô thị",
 k1l:"tin rao trong mẫu phân tích (TP.HCM và Hà Nội)",k2l:"ga Metro số 1, khai thác từ 22/12/2024",k3l:"mức chênh cơ sở trong 500 m quanh ga, TP.HCM (điểm log, E0)",k4l:"R² ngoài mẫu cao nhất, tăng cường gradient, TP.HCM",
 cta1:"Khám phá bản đồ",cta2:"Xem kết quả chính",warn_b:"Chỉ là bằng chứng mô tả.",
@@ -61,15 +61,15 @@ ns:"không có ý nghĩa",sig:"có ý nghĩa 5%",
 hn_cap:"Hà Nội: ga Tuyến 2A và Tuyến 3 (cam / tím) và mẫu tin rao tô theo vành",
 hn_note:"Ở Hà Nội hệ số vành 1 trong đặc tả cơ sở gần bằng 0 và không có ý nghĩa, còn ở TP.HCM hệ số này dương và có ý nghĩa trong đặc tả cơ sở. Dữ liệu, tập ga và giai đoạn mở tuyến khác nhau, nên đây là mô tả hai mẫu chứ không kiểm định nguyên nhân khác biệt.",
 coefcmp:"Hệ số các vành đặc tả cơ sở (E0), hai thành phố",
-shap_h:"Học máy và SHAP",
+shap_h:"SHAP chi tiết",
 shap_p:"Rừng ngẫu nhiên và tăng cường gradient dùng cùng các biến với mô hình hedonic. Tỷ trọng SHAP cho biết rừng đã khớp sử dụng từng biến ra sao; không đo hiệu ứng nhân quả, và các dòng m_* là biến chỉ báo giá trị thiếu.",
 shap_city:"Thành phố",shap_top:"Số biến hiển thị",shap_group:"Nhóm biến khoảng cách chiếm",
 ml_tab:"Độ khớp của tất cả mô hình",c_city:"Thành phố",c_var:"Biến thể",c_mod:"Mô hình",c_r2:"R²",c_rmse:"RMSE",c_mae:"MAE",
-mdl:{"Hồi quy tuyến tính":"Hồi quy tuyến tính","Rừng ngẫu nhiên":"Rừng ngẫu nhiên","Tăng cường gradient":"Tăng cường gradient"},
+pst:{"Quy hoạch":"Quy hoạch","Khai thác một phần":"Khai thác một phần"},mdl:{"Hồi quy tuyến tính":"Hồi quy tuyến tính","Rừng ngẫu nhiên":"Rừng ngẫu nhiên","Tăng cường gradient":"Tăng cường gradient"},
 stn_h:"Gián đoạn theo từng ga tại 1.200 m (thăm dò)",
 stn_p:"RDD không gian cho từng ga trong 14 ga. Phần lớn ga có quá ít tin ở hai phía ngưỡng nên không ước lượng được, vì vậy ba ga ước lượng được chỉ là chẩn đoán, không phải xếp hạng hiệu ứng ga.",
-s_stn:"Ga",s_spec:"Số đặc tả ước lượng được",s_est:"Ước lượng trung bình (Δ ln giá)",s_pct:"Xấp xỉ %",s_n:"Số tin lớn nhất trong một đặc tả",s_sig:"Có ý nghĩa 5%",yes:"có",no:"không",ne:"không ước lượng được",
-src:"Nguồn: bảng tham chiếu và kết quả của đề tài trong kho mã (data/reference, data/results). Giá rao, không phải giá giao dịch."
+s_stn:"Ga",s_spec:"Số đặc tả ước lượng được ở 1.200 m",s_est:"Ước lượng trung bình (Δ ln giá)",s_pct:"Xấp xỉ %",s_n:"Số tin lớn nhất trong một đặc tả",s_sig:"Có ý nghĩa 5%",yes:"có",no:"không",ne:"không ước lượng được",
+src:"Nguồn: bảng tham chiếu và kết quả mô hình của đề tài (kho riêng tư; bảng tổng hợp có ở mục tải về bên dưới). Giá rao, không phải giá giao dịch."
 }};
 var FEAT={ln_dist_cbd:["ln(distance to centre)","ln(khoảng cách tới trung tâm)"],ln_dist:["ln(distance to station)","ln(khoảng cách tới ga)"]};
 var $=function(i){return document.getElementById(i)},L=document.documentElement.lang==="vi"?"vi":"en";
@@ -92,7 +92,7 @@ function render(){var t=T[L],i;
  document.querySelectorAll("[data-n]").forEach(function(n){var k=n.getAttribute("data-n");if(t[k]!=null)n.textContent=t[k]});
  var l1=N.hcmStations.filter(function(s){return s.line==="L1"});
  tbl("tNet",[t.stn_col,t.line_col,t.st_col,t.cbd_col,t.poi_col,t.nl_col,t.pp_col],N.hcmStations.filter(function(s){return s.line!=="NA"}).map(function(s){return[s.n,t[s.line],t[s.st],nf(s.cbd,1),fi(s.poi),fi(s.nl),nf(s.pp,1)]}));
- tbl("tPlan",[t.plan_l,t.plan_r,t.plan_k,t.plan_n,t.plan_s],N.plan.map(function(p){return[p.name,p.route,nf(p.km,1),p.ns,p.status]}));
+ tbl("tPlan",[t.plan_l,t.plan_r,t.plan_k,t.plan_n,t.plan_s],N.plan.map(function(p){return[p.name,p.route,nf(p.km,1),p.ns,(t.pst[p.status]||p.status)]}));
  var c=N.cmp,h=c.hcm,n=c.hn,ml=function(ci,m){var r=N.mlAll.filter(function(x){return x.city===ci&&x.variant==="A"&&x.model===m})[0];return r?nf(r.r2,3):"–"};
  var cf=function(ci,r){var o=D.coefs&&D.coefs[ci]&&D.coefs[ci].E0;if(!o)return"–";var x=o.rings.filter(function(q){return q.t===r})[0];return x?nf(x.est,3)+" ["+nf(x.lo,3)+", "+nf(x.hi,3)+"] "+(x.p<.05?t.sig:t.ns):"–"};
  tbl("tCmp",[t.c_met,t.c_hcm,t.c_hn],[[t.m_n,fi(h.n),fi(n.n)],[t.m_med,nf(h.med,1),nf(n.med,1)],[t.m_iqr,nf(h.p25,1)+"–"+nf(h.p75,1),nf(n.p25,1)+"–"+nf(n.p75,1)],[t.m_dmed,fi(h.dmed),fi(n.dmed)],[t.m_800,fi(h.within800),fi(n.within800)],[t.m_2000,fi(h.within2000),fi(n.within2000)],
@@ -104,7 +104,7 @@ function render(){var t=T[L],i;
  var tot=d.filter(function(x){return x.f==="ln_dist_cbd"||x.f==="ln_dist"}).reduce(function(a,b){return a+b.sh},0);$("shapGrp").textContent=nf(100*tot,1)+"%";
  d=d.slice(0,top);var lab=function(x){var f=FEAT[x.f];return f?f[L==="vi"?1:0]:(x.f.indexOf("m_")===0?x.f:x.lab)};
  mk("cShap2",{type:"bar",data:{labels:d.map(lab),datasets:[{data:d.map(function(x){return 100*x.sh}),backgroundColor:d.map(function(x){return x.f==="ln_dist"||x.f==="ln_dist_cbd"?css("--acc2"):css("--acc")})}]},options:{indexAxis:"y",maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(q){return nf(q.raw,1)+"% · mean|SHAP| "+nf(d[q.dataIndex].ms,3)}}}},scales:{x:{title:{display:true,text:"% of total mean |SHAP|"},grid:{color:css("--line")}}}}});
- tbl("tMl",[t.c_city,t.c_var,t.c_mod,"n",t.c_r2,t.c_rmse,t.c_mae],N.mlAll.map(function(r){return[r.city,r.variant,t.mdl[r.model],fi(r.n),nf(r.r2,3),nf(r.rmse,3),nf(r.mae,3)]}));
+ tbl("tMl",[t.c_city,t.c_var,t.c_mod,"n",t.c_r2,t.c_rmse,t.c_mae],N.mlAll.map(function(r){return[r.city==="TP.HCM"?t.c_hcm:t.c_hn,r.variant,t.mdl[r.model],fi(r.n),nf(r.r2,3),nf(r.rmse,3),nf(r.mae,3)]}));
  tbl("tStn",[t.s_stn,t.s_spec,t.s_est,t.s_pct,t.s_n,t.s_sig],N.srdd.map(function(s){var e=s.spec>0;return[s.id+" "+(L==="vi"?s.vi:s.en),e?s.spec:"0",e?nf(s.est,3):t.ne,e?nf(s.pct,1)+"%":"–",fi(s.nmax),e?(s.sig?t.yes:t.no):"–"]}));
 }
 
