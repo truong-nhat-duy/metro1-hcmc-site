@@ -214,3 +214,10 @@ footer{background:linear-gradient(180deg,rgba(7,22,40,.9),rgba(7,22,40,.95)),url
 .pipe li::before{content:counter(pp);font:700 .8rem var(--sans);color:#fff;background:var(--acc);width:24px;height:24px;border-radius:50%;display:grid;place-items:center}
 .pipe b{font:600 1rem var(--serif)}.pipe span{font-size:.84rem;color:var(--mute)}
 nav .links a{padding:6px 7px;font-size:.82rem}
+
+.rdm{display:grid;gap:10px;margin:14px 0}
+.rdm details{border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:2px 16px}
+.rdm summary{cursor:pointer;font:600 1rem var(--serif);padding:12px 0;list-style:none;display:flex;justify-content:space-between;gap:10px}
+.rdm summary::after{content:"+";color:var(--acc);font-weight:700}.rdm details[open] summary::after{content:"–"}
+.rdm summary::-webkit-details-marker{display:none}
+.rdm p,.rdm li{font-size:.9rem;color:var(--mute);max-width:80ch;overflow-wrap:anywhere}.rdm ul{margin:0 0 12px;padding-left:1.1rem;display:grid;gap:6px}.rdm p{margin:0 0 10px}
