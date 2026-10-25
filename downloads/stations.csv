@@ -1,0 +1,15 @@
+﻿id,name_vi,name_en,lat,lng,segment,structure
+S01,Bến Thành,Ben Thanh,10.77095,106.69788,center,underground
+S02,Nhà hát Thành phố,Opera House,10.7753,106.70207,center,underground
+S03,Ba Son,Ba Son,10.78179,106.70834,center,underground
+S04,Công viên Văn Thánh,Van Thanh Park,10.79606,106.71549,middle,elevated
+S05,Tân Cảng,Tan Cang,10.79859,106.72324,middle,elevated
+S06,Thảo Điền,Thao Dien,10.80047,106.73365,middle,elevated
+S07,An Phú,An Phu,10.80213,106.74225,middle,elevated
+S08,Rạch Chiếc,Rach Chiec,10.80854,106.75528,outer,elevated
+S09,Phước Long,Phuoc Long,10.82144,106.75819,outer,elevated
+S10,Bình Thái,Binh Thai,10.83265,106.76389,outer,elevated
+S11,Thủ Đức,Thu Duc,10.84641,106.77165,outer,elevated
+S12,Khu Công nghệ cao,High Tech Park,10.85899,106.78884,outer,elevated
+S13,Đại học Quốc gia,National University,10.86632,106.80119,outer,elevated
+S14,Bến xe Suối Tiên,Suoi Tien Terminal,10.87955,106.81409,outer,elevated

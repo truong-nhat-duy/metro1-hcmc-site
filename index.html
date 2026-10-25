@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metro Line 1 and Asking Prices, Ho Chi Minh City</title>
+<meta name="description" content="Interactive companion to a Fulbright MPP thesis on asking prices around Ho Chi Minh City Metro Line 1: map, distance rings, hedonic models, machine learning (SHAP), Hanoi comparison, whole network. Bilingual EN/VI.">
+<meta property="og:title" content="Metro Line 1 and Asking Prices, Ho Chi Minh City">
+<meta property="og:description" content="Interactive map, hedonic estimates, SHAP and Hanoi comparison. Bilingual EN/VI.">
+<meta property="og:image" content="assets/logo_banner.png">
+<meta name="theme-color" content="#0f3a63">
+<link rel="icon" href="assets/logo.png">
+<script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav><div class="wrap in">
+<a class="brand" href="#top"><img src="assets/logo.png" alt=""><span>Metro 1 × TOD</span></a>
+<div class="links">
+<a href="#find-s" data-n="nav_find"></a><a href="#map-s" data-i="nav_map"></a><a href="#pd-s" data-n="nav_pd"></a><a href="#coef-s" data-i="nav_coef"></a><a href="#net-s" data-n="nav_net"></a><a href="#hn-s" data-n="nav_hn"></a><a href="#ml-s" data-i="nav_ml"></a><a href="#ntl-s" data-i="nav_ntl"></a><a href="#stn-s" data-n="nav_stn"></a><a href="#data-s" data-n="nav_data"></a>
+</div>
+<button class="tbtn" id="theme" aria-label="Theme">◐</button><button class="tbtn lang" id="lang" aria-label="Language">VI</button>
+</div></nav>
+<header class="hero" id="top"><div class="wrap">
+<span class="tag" data-n="tag"></span>
+<h1 data-i="title"></h1>
+<p class="lead" data-i="subtitle"></p>
+<div class="kpis">
+<div class="kpi"><b id="k1">–</b><span data-n="k1l"></span></div>
+<div class="kpi"><b id="k2">14</b><span data-n="k2l"></span></div>
+<div class="kpi"><b id="k3">–</b><span data-n="k3l"></span></div>
+<div class="kpi"><b id="k4">–</b><span data-n="k4l"></span></div>
+</div>
+<div class="cta"><a class="btn p" href="#map-s" data-n="cta1"></a><a class="btn" href="#find-s" data-n="cta2"></a></div>
+</div></header>
+<div class="notice"><div class="wrap"><p><b data-n="warn_b"></b> <span data-i="warn"></span></p></div></div>
+<main class="wrap">
+<section class="sec" id="find-s">
+<h2 data-n="find_h"></h2><p data-n="find_p"></p>
+<div class="cards" id="hypcards"></div>
+</section>
+<section class="sec" id="map-s">
+<h2 data-i="map_h"></h2><p data-i="map_p"></p>
+<div class="ctl">
+<label><span data-i="max_d"></span> <input id="rng" type="range" min="500" max="6000" step="100" value="6000"> <b id="rngv">6000 m</b></label>
+<label><span data-i="type"></span> <select id="typ"><option value="all" data-i="t_all"></option><option value="n" data-i="t_house"></option><option value="d" data-i="t_land"></option><option value="c" data-i="t_apt"></option></select></label>
+<label><input type="checkbox" id="rings" checked> <span data-i="rings"></span></label>
+<label><input type="checkbox" id="pts" checked> <span data-i="listings"></span></label>
+<span class="legend"><span data-i="cheap"></span><span class="bar"></span><span data-i="dear"></span></span>
+</div>
+<div class="stats"><span><span data-i="n_l"></span> <b id="sn">–</b></span><span><span data-i="med_l"></span> <b id="sm">–</b></span><span><span data-i="mean_l"></span> <b id="sa">–</b></span></div>
+<div id="map" role="application" aria-label="Map"></div>
+<p id="clickinfo" class="sub" data-i="click_hint"></p>
+</section>
+<section class="sec" id="pd-s">
+<h2 data-n="pd_h"></h2><p data-n="pd_p"></p>
+<div class="ctl"><label><span data-n="pd_city"></span> <select id="pdCity"><option value="hcm">Ho Chi Minh City</option><option value="hn">Hà Nội</option></select></label>
+<label><span data-i="type"></span> <select id="pdType"><option value="all" data-i="t_all"></option><option value="n" data-i="t_house"></option><option value="d" data-i="t_land"></option><option value="c" data-i="t_apt"></option></select></label></div>
+<div class="grid two"><div><h3 data-n="pd_h1"></h3><div class="canvaswrap"><canvas id="cPD"></canvas></div></div>
+<div><h3 data-n="pd_h2"></h3><div class="canvaswrap"><canvas id="cHist"></canvas></div></div></div>
+<p class="sub" data-n="pd_note"></p>
+</section>
+<section class="sec" id="coef-s">
+<h2 data-i="coef_h"></h2><p data-i="coef_p"></p>
+<div class="ctl"><label><span data-i="city"></span> <select id="city"><option value="hcm">Ho Chi Minh City</option><option value="hn">Hà Nội</option></select></label>
+<label><span data-i="spec"></span> <select id="spec"></select></label></div>
+<p id="specdesc" class="sub"></p>
+<div class="canvaswrap"><canvas id="cCoef"></canvas></div>
+<p id="coefnote" class="sub"></p>
+</section>
+<section class="sec" id="net-s">
+<h2 data-n="net_h"></h2><p data-n="net_p"></p><p class="warn" data-n="net_warn"></p>
+<div class="lg"><span><i class="dot" style="background:#0b5ea8"></i>Line 1</span><span><i class="dot" style="background:#dc2626"></i>Line 2</span><span><i class="dot" style="background:#8b95a3"></i>NA</span></div>
+<div id="map2" class="map2"></div>
+<div class="tw"><table id="tNet"></table></div>
+<h3 data-n="plan_h"></h3><div class="tw"><table id="tPlan"></table></div>
+</section>
+<section class="sec" id="hn-s">
+<h2 data-n="hn_h"></h2><p data-n="hn_p"></p>
+<div class="grid two"><div><p class="sub" data-n="hn_cap"></p><div id="map3" class="map2"></div></div>
+<div><p class="sub" data-n="coefcmp"></p><div class="canvaswrap"><canvas id="cCmp"></canvas></div></div></div>
+<h3 data-n="cmp_h"></h3><div class="tw"><table id="tCmp"></table></div>
+<p class="warn" data-n="hn_note"></p>
+</section>
+<section class="sec" id="ml-s">
+<h2 data-i="ml_h"></h2><p data-i="ml_p"></p>
+<div class="grid two"><div><h3 data-i="ml_fit"></h3><div class="canvaswrap"><canvas id="cML"></canvas></div></div>
+<div><h3 data-i="ml_shap"></h3><div class="ctl"><label><span data-i="city"></span> <select id="city2"><option value="TP.HCM">Ho Chi Minh City</option><option value="Hà Nội">Hà Nội</option></select></label></div><div class="canvaswrap"><canvas id="cSHAP"></canvas></div></div></div>
+<p class="sub" data-i="ml_note"></p>
+</section>
+<section class="sec" id="shap-s">
+<h2 data-n="shap_h"></h2><p data-n="shap_p"></p>
+<div class="ctl"><label><span data-n="shap_city"></span> <select id="shapCity"><option value="TP.HCM">Ho Chi Minh City</option><option value="Hà Nội">Hà Nội</option></select></label>
+<label><span data-n="shap_top"></span> <select id="shapTop"><option value="8">8</option><option value="12" selected>12</option><option value="20">20</option><option value="28">28</option></select></label>
+<span><span data-n="shap_group"></span> <b id="shapGrp"></b></span></div>
+<div class="canvaswrap" style="height:460px"><canvas id="cShap2"></canvas></div>
+<h3 data-n="ml_tab"></h3><div class="tw"><table id="tMl"></table></div>
+</section>
+<section class="sec" id="ntl-s">
+<h2 data-i="ntl_h"></h2><p data-i="ntl_p"></p>
+<div class="grid two"><div><h3 data-i="ntl_ev"></h3><div class="canvaswrap"><canvas id="cEv"></canvas></div></div>
+<div><h3 data-i="ntl_ser"></h3><div class="canvaswrap"><canvas id="cSer"></canvas></div></div></div>
+<p class="sub" data-i="ntl_note"></p>
+</section>
+<section class="sec" id="stn-s">
+<h2 data-n="stn_h"></h2><p data-n="stn_p"></p><div class="tw"><table id="tStn"></table></div>
+<p class="sub" data-n="src"></p>
+</section>
+<section class="sec" id="hyp-s">
+<h2 data-i="hyp_h"></h2>
+<table><thead><tr><th data-i="h_hyp"></th><th data-i="h_ev"></th><th data-i="h_as"></th></tr></thead><tbody id="hyptb"></tbody></table>
+</section>
+<section class="sec" id="data-s">
+<h2 data-n="data_h"></h2><p data-n="data_p"></p>
+<h3 data-n="dl_h"></h3><p class="sub" data-n="dl_p"></p>
+<div class="dl">
+<a href="downloads/ring_coefs.csv" download><b>ring_coefs.csv</b><small data-n="f_coef"></small></a>
+<a href="downloads/ml_performance.csv" download><b>ml_performance.csv</b><small data-n="f_ml"></small></a>
+<a href="downloads/shap_importance.csv" download><b>shap_importance.csv</b><small data-n="f_shap"></small></a>
+<a href="downloads/ntl_event_study.csv" download><b>ntl_event_study.csv</b><small data-n="f_ntl1"></small></a>
+<a href="downloads/ntl_ring_year.csv" download><b>ntl_ring_year.csv</b><small data-n="f_ntl2"></small></a>
+<a href="downloads/stations.csv" download><b>stations.csv</b><small data-n="f_st"></small></a>
+<a href="downloads/listings.csv" download><b>listings.csv</b><small data-n="f_ls"></small></a>
+</div>
+<h3 data-n="share_h"></h3>
+<div class="qr"><img src="assets/qr.png" alt="QR code to this website" width="150" height="150"><p class="sub" data-n="share_p" style="max-width:48ch"></p></div>
+<h3 data-i="about_h"></h3><p data-i="about_p"></p>
+<p><span class="pill">Fulbright School of Public Policy and Management</span><span class="pill">MPP 2025–2027</span><span class="pill">GuLand · Chợ Tốt · VIIRS VNP46A3 · WorldPop · OSM</span></p>
+</section>
+</main>
+<footer><div class="wrap"><span data-i="foot"></span></div></footer>
+<script src="vendor/leaflet.js"></script>
+<script src="vendor/chart.umd.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script src="data_net.js"></script>
+<script src="net.js"></script>
+</body></html>
