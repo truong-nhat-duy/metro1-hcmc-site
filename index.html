@@ -13,15 +13,15 @@
 <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
-<link rel="stylesheet" href="vendor/leaflet.css?v=1025173122">
-<link rel="stylesheet" href="style.css?v=1025173122">
+<link rel="stylesheet" href="vendor/leaflet.css?v=1025185023">
+<link rel="stylesheet" href="style.css?v=1025185023">
 </head>
 <body>
 <div id="prog"></div>
 <nav><div class="wrap in">
 <a class="brand" href="#top"><img src="assets/logo.png" alt=""><span>Metro 1 × TOD</span></a>
 <div class="links">
-<a href="#find-s" data-n="nav_find"></a><a href="#map-s" data-i="nav_map"></a><a href="#ring-s" data-x="nav_ring"></a><a href="#net-s" data-n="nav_net"></a><a href="#hn-s" data-n="nav_hn"></a><a href="#coef-s" data-i="nav_coef"></a><a href="#ml-s" data-i="nav_ml"></a><a href="#ntl-s" data-x="nav_ntl"></a><a href="#ctx-s" data-x="nav_ctx"></a><a href="#data-s" data-n="nav_data"></a>
+<a href="#brief-s" data-y="nav_brief"></a><a href="#rq-s" data-y="nav_rq"></a><a href="#meth-s" data-y="nav_meth"></a><a href="#theory-s" data-y="nav_theory"></a><a href="#lit-s" data-y="nav_lit"></a><a href="#map-s" data-i="nav_map"></a><a href="#net-s" data-n="nav_net"></a><a href="#coef-s" data-i="nav_coef"></a><a href="#stage-s" data-y="nav_stage"></a><a href="#ntl-s" data-x="nav_ntl"></a><a href="#pol-s" data-y="nav_pol"></a><a href="#data-s" data-n="nav_data"></a>
 </div>
 <button class="tbtn" id="theme" aria-label="Theme">◐</button><button class="tbtn lang" id="lang" aria-label="Language">VI</button>
 </div></nav>
@@ -45,12 +45,58 @@
 </div>
 <div class="notice" style="margin-top:34px"><div class="wrap"><p><span data-i="warn"></span></p></div></div>
 <main class="wrap">
-<div class="part" id="part-p1"><span data-x="part_p1"></span></div>
+<div class="part pb" id="part-p0" style="--pimg:url(assets/img/tod_smartcity.webp)"><span data-y="part_p0"></span></div>
+<section class="sec" id="brief-s">
+<h2 data-y="br0_h"></h2><p data-y="br0_p"></p>
+<div class="grid two pol2"><div class="polc ok"><b data-y="br0_a"></b><p data-y="br0_ap"></p></div><div class="polc ok"><b data-y="br0_b"></b><p data-y="br0_bp"></p></div>
+<div class="polc no"><b data-y="br0_c"></b><p data-y="br0_cp"></p></div><div class="polc ok"><b data-y="br0_d"></b><p data-y="br0_dp"></p></div></div>
+<p class="sub"><b data-y="br0_k"></b>: <span data-y="br0_kp"></span></p>
+</section>
+<section class="sec" id="rq-s">
+<h2 data-y="rq_h"></h2><p data-y="rq_p"></p>
+<div class="cards tiles"><div class="fc"><h4 data-y="rq_t1"></h4><p data-y="rq_t1l"></p></div><div class="fc"><h4 data-y="rq_t2"></h4><p data-y="rq_t2l"></p></div><div class="fc"><h4 data-y="rq_t3"></h4><p data-y="rq_t3l"></p></div><div class="fc"><h4 data-y="rq_t4"></h4><p data-y="rq_t4l"></p></div></div>
+<ul class="rqf"><li data-y="rq_f1"></li><li data-y="rq_f2"></li><li data-y="rq_f3"></li><li data-y="rq_f4"></li></ul>
+<h3 data-y="rq_qh"></h3>
+<div class="rqs"><div class="rq"><b data-y="rq_q1"></b><small data-y="rq_ans"></small><p data-y="rq_a1"></p></div><div class="rq"><b data-y="rq_q2"></b><small data-y="rq_ans"></small><p data-y="rq_a2"></p></div><div class="rq"><b data-y="rq_q3"></b><small data-y="rq_ans"></small><p data-y="rq_a3"></p></div><div class="rq"><b data-y="rq_q4"></b><small data-y="rq_ans"></small><p data-y="rq_a4"></p></div></div>
+<p class="sub" data-y="rq_hy"></p>
+</section>
+
+<div class="part pb" id="part-pm" style="--pimg:url(assets/img/gis_robot.webp)"><span data-y="part_pm"></span></div>
+<section class="sec" id="meth-s">
+<h2 data-y="me_h"></h2><p data-y="me_p"></p>
+<ol class="pipe"><li><b data-y="me_s1"></b><span data-y="me_s1p"></span></li><li><b data-y="me_s2"></b><span data-y="me_s2p"></span></li><li><b data-y="me_s3"></b><span data-y="me_s3p"></span></li><li><b data-y="me_s4"></b><span data-y="me_s4p"></span></li><li><b data-y="me_s5"></b><span data-y="me_s5p"></span></li></ol>
+<h3 data-y="me_mh"></h3>
+<div class="rqs"><div class="rq"><b data-y="me_m1"></b><p data-y="me_m1p"></p></div><div class="rq"><b data-y="me_m2"></b><p data-y="me_m2p"></p></div><div class="rq"><b data-y="me_m3"></b><p data-y="me_m3p"></p></div><div class="rq"><b data-y="me_m4"></b><p data-y="me_m4p"></p></div></div>
+<h3 data-y="me_ch"></h3>
+<div class="grid two"><p data-y="me_cp"></p><div class="canvaswrap" style="height:280px"><canvas id="cConc"></canvas></div></div>
+</section>
+
+<div class="part pb" id="part-p1" style="--pimg:url(assets/img/quad_panels.webp)"><span data-x="part_p1"></span></div>
 <section class="sec" id="find-s">
 <h2 data-n="find_h"></h2><p data-n="find_p"></p>
 <div class="cards" id="hypcards"></div>
 </section>
-<div class="part" id="part-p2"><span data-x="part_p2"></span></div>
+
+<div class="part pb" id="part-pt" style="--pimg:url(assets/img/tod_campus.webp)"><span data-y="part_pt"></span></div>
+<section class="sec" id="theory-s">
+<h2 data-y="th_h"></h2><p data-y="th_p"></p>
+<div class="fwrap"><div id="fw" class="fw"></div><aside id="fwInfo" class="fwinfo"></aside></div>
+<h3 data-y="br_h"></h3><p data-y="br_p"></p>
+<div class="ctl"><label><span data-y="br_peak"></span> <input id="brPk" type="range" min="20" max="100" step="1" value="60"> <b id="brPkv"></b></label>
+<label><span data-y="br_dec"></span> <input id="brDc" type="range" min="0.4" max="2.5" step="0.05" value="1"> <b id="brDcv"></b></label>
+<label><span data-y="br_pos"></span> <input id="brPs" type="range" min="1" max="6" step="0.1" value="3.2"> <b id="brPsv"></b></label>
+<label><span data-y="br_cen"></span> <input id="brCd" type="range" min="0.1" max="0.6" step="0.02" value="0.3"> <b id="brCdv"></b></label></div>
+<div class="canvaswrap" style="height:360px"><canvas id="cBid"></canvas></div>
+<p class="sub"><span class="vb c-l" data-y="ill"></span> <span data-y="br_note"></span></p>
+</section>
+<section class="sec" id="lit-s">
+<h2 data-y="lit_h"></h2><p data-y="lit_p"></p>
+<div class="chips" id="litChips"><button data-f="all"></button><button data-f="meta"></button><button data-f="id"></button><button data-f="asia"></button><button data-f="vn"></button><button data-f="fis"></button></div>
+<div class="tw lit"><table id="litTb"></table></div>
+<h3 data-y="lit_chart"></h3><div class="canvaswrap" style="height:430px"><canvas id="cLit"></canvas></div>
+<p class="sub" data-y="lit_note"></p>
+</section>
+<div class="part pb" id="part-p2" style="--pimg:url(assets/img/hcmc_banner.webp)"><span data-x="part_p2"></span></div>
 <section class="sec" id="map-s">
 <h2 data-i="map_h"></h2><p data-i="map_p"></p>
 <div class="ctl">
@@ -88,14 +134,14 @@
 <div class="tw"><table id="tNet"></table></div>
 <h3 data-n="plan_h"></h3><div class="tw"><table id="tPlan"></table></div>
 </section>
-<section class="sec" id="hn-s">
+<section class="sec im" id="hn-s">
 <h2 data-n="hn_h"></h2><p data-n="hn_p"></p>
 <div class="grid two"><div><p class="sub" data-n="hn_cap"></p><div id="map3" class="map2"></div></div>
 <div><p class="sub" data-n="coefcmp"></p><div class="canvaswrap"><canvas id="cCmp"></canvas></div></div></div>
 <h3 data-n="cmp_h"></h3><div class="tw"><table id="tCmp"></table></div>
 <p class="warn" data-n="hn_note"></p>
 </section>
-<div class="part" id="part-p3"><span data-x="part_p3"></span></div>
+<div class="part pb" id="part-p3" style="--pimg:url(assets/img/gis_robot.webp)"><span data-x="part_p3"></span></div>
 <section class="sec" id="coef-s">
 <h2 data-i="coef_h"></h2><p data-i="coef_p"></p>
 <div class="ctl"><label><span data-i="city"></span> <select id="city"><option value="hcm">Ho Chi Minh City</option><option value="hn">Hà Nội</option></select></label>
@@ -118,7 +164,14 @@
 <div class="canvaswrap" style="height:460px"><canvas id="cShap2"></canvas></div>
 <h3 data-n="ml_tab"></h3><div class="tw"><table id="tMl"></table></div>
 </section>
-<div class="part" id="part-p4"><span data-x="part_p4"></span></div>
+<section class="sec" id="stage-s">
+<h2 data-y="stage_h"></h2><p data-y="stage_p"></p>
+<div class="grid two"><div><h3 data-y="stage_c1"></h3><div class="canvaswrap" style="height:340px"><canvas id="cStage"></canvas></div></div>
+<div><h3 data-y="stage_c2"></h3><div class="canvaswrap" style="height:340px"><canvas id="cWalk"></canvas></div></div></div>
+<ul class="facts"><li data-y="stage_f1"></li><li data-y="stage_f2"></li><li data-y="stage_f3"></li><li data-y="stage_f4"></li></ul>
+<p class="warn" data-y="stage_note"></p>
+</section>
+<div class="part pb" id="part-p4" style="--pimg:url(assets/img/tod_wide.webp)"><span data-x="part_p4"></span></div>
 <section class="sec" id="ntl-s">
 <h2 data-i="ntl_h"></h2><p data-i="ntl_p"></p>
 <h3 data-x="ntlm_h"></h3><p data-x="ntlm_p"></p>
@@ -128,10 +181,39 @@
 <label><span data-x="ntlm_op"></span> <input id="ntlOp" type="range" min="20" max="100" value="85"></label>
 <label><input type="checkbox" id="ntlSt" checked> <span data-x="ntlm_st"></span></label><label><input type="checkbox" id="ntlRg" checked> <span data-x="ntlm_rg"></span></label></div>
 <div class="mapcard"><div id="mapNtl" class="map2"></div><aside id="ntlInfo" class="ntlinfo"></aside></div>
-<div id="ntlLg" class="mlg2"></div><p class="sub" data-x="ntlm_note"></p>
+<div id="ntlLg" class="mlg2"></div>
+<p class="sub" data-x="ntlm_ln"></p><p class="sub" data-x="ntlm_note"></p>
 <div class="grid two"><div><h3 data-i="ntl_ev"></h3><div class="canvaswrap"><canvas id="cEv"></canvas></div></div>
 <div><h3 data-i="ntl_ser"></h3><div class="canvaswrap"><canvas id="cSer"></canvas></div></div></div>
 <p class="sub" data-i="ntl_note"></p>
+</section>
+<section class="sec" id="pop-s">
+<h2 data-y="pop_h"></h2><p data-y="pop_p"></p>
+<div class="ctl"><label><span data-y="pop_year"></span> <input id="popYr" type="range" step="1"> <b id="popYv"></b></label>
+<button type="button" class="btn2" id="popPlay" data-y="pop_play"></button>
+<label><span data-y="pop_lyr"></span> <select id="popMode"><option value="year" data-y="pop_l1"></option><option value="change" data-y="pop_l2"></option></select></label>
+<label><span data-y="pop_op"></span> <input id="popOp" type="range" min="20" max="100" value="80"></label>
+<label><input type="checkbox" id="popSt" checked> <span data-y="pop_st"></span></label><label><input type="checkbox" id="popRg" checked> <span data-y="pop_rg"></span></label></div>
+<div class="mapcard"><div id="mapPop" class="map2"></div><aside id="popInfo" class="ntlinfo"></aside></div>
+<div id="popLg" class="mlg2"></div>
+<p class="sub" data-y="pop_ln"></p>
+<div class="grid two"><div><h3 data-y="pop_c1"></h3><div class="canvaswrap" style="height:460px"><canvas id="cPopSt"></canvas></div></div>
+<div><h3 data-y="pop_c2"></h3><div class="canvaswrap" style="height:460px"><canvas id="cPopRing"></canvas></div></div></div>
+<p class="warn" data-y="pop_note"></p>
+</section>
+<section class="sec" id="pop-hn-s">
+<h2 data-y="pop_hn_h"></h2><p data-y="pop_hn_p"></p>
+<div class="ctl"><label><span data-y="pop_year"></span> <input id="popYrH" type="range" step="1"> <b id="popYvH"></b></label>
+<button type="button" class="btn2" id="popPlayH" data-y="pop_play"></button>
+<label><span data-y="pop_lyr"></span> <select id="popModeH"><option value="year" data-y="pop_l1"></option><option value="change" data-y="pop_l2"></option></select></label>
+<label><span data-y="pop_op"></span> <input id="popOpH" type="range" min="20" max="100" value="80"></label>
+<label><input type="checkbox" id="popStH" checked> <span data-y="pop_st"></span></label><label><input type="checkbox" id="popRgH" checked> <span data-y="pop_rg"></span></label></div>
+<div class="mapcard"><div id="mapPopH" class="map2"></div><aside id="popInfoH" class="ntlinfo"></aside></div>
+<div id="popLgH" class="mlg2"></div>
+<p class="sub" data-y="pop_ln"></p>
+<div class="grid two"><div><h3 data-y="pop_c1"></h3><div class="canvaswrap" style="height:640px"><canvas id="cPopStH"></canvas></div></div>
+<div><h3 data-y="pop_c2"></h3><div class="canvaswrap" style="height:640px"><canvas id="cPopRingH"></canvas></div></div></div>
+<p class="warn" data-y="pop_hn_note"></p>
 </section>
 <section class="sec" id="ctx-s">
 <h2 data-x="ctx_h"></h2><p data-x="ctx_p"></p>
@@ -140,7 +222,14 @@
 <div><h3 data-x="ctx_c2"></h3><div class="canvaswrap" style="height:440px"><canvas id="cMlu"></canvas></div></div></div>
 <p class="warn" data-x="ctx_cov"></p>
 </section>
-<div class="part" id="part-p5"><span data-x="part_p5"></span></div>
+<div class="part pb" id="part-p5" style="--pimg:url(assets/img/fulbright_campus.webp)"><span data-x="part_p5"></span></div>
+<section class="sec" id="extra-s">
+<h2 data-y="ex_h"></h2><p class="warn" data-y="ex_p"></p>
+<div class="rqs"><div class="rq"><b data-y="ex_c1"></b><p data-y="ex_c1p"></p></div><div class="rq"><b data-y="ex_c2"></b><p data-y="ex_c2p"></p></div><div class="rq"><b data-y="ex_c3"></b><p data-y="ex_c3p"></p></div><div class="rq"><b data-y="ex_c4"></b><p data-y="ex_c4p"></p></div></div>
+<div class="grid two"><div><h3 data-y="ex_ch1"></h3><div class="canvaswrap" style="height:280px"><canvas id="cSeg"></canvas></div></div><div><h3 data-y="ex_ch2"></h3><div class="canvaswrap" style="height:280px"><canvas id="cApt"></canvas></div></div></div>
+<p class="sub" data-y="ex_sum"></p>
+</section>
+
 <section class="sec" id="stn-s">
 <h2 data-n="stn_h"></h2><p data-n="stn_p"></p><div class="tw"><table id="tStn"></table></div>
 <p class="sub" data-n="src"></p>
@@ -148,6 +237,20 @@
 <section class="sec" id="hyp-s">
 <h2 data-i="hyp_h"></h2>
 <table><thead><tr><th data-i="h_hyp"></th><th data-i="h_ev"></th><th data-i="h_as"></th></tr></thead><tbody id="hyptb"></tbody></table>
+</section>
+<section class="sec" id="pol-s">
+<h2 data-y="pol_h"></h2>
+<div class="grid two pol2"><div class="polc ok"><b data-y="pol_a"></b><p data-y="pol_ap"></p></div><div class="polc no"><b data-y="pol_b"></b><p data-y="pol_bp"></p></div></div>
+<h3 data-y="lvc_h"></h3><p data-y="lvc_p"></p>
+<div class="ctl"><label><span data-y="lvc_th"></span> <input id="lvTh" type="range" min="0" max="40" step="0.1" value="10"> <b id="lvThv"></b></label>
+<label><span data-y="lvc_ta"></span> <input id="lvTa" type="range" min="0" max="60" step="1" value="30"> <b id="lvTav"></b></label>
+<label><span data-y="lvc_k"></span> <input id="lvK" type="range" min="1" max="15" step="0.5" value="5"> <b id="lvKv"></b></label>
+<label><span data-y="lvc_cap"></span> <input id="lvCap" type="range" min="10000" max="80000" step="500" value="43757"> <b id="lvCapv"></b></label>
+<button type="button" class="btn2" id="lvPlan" data-y="lvc_plan"></button></div>
+<div id="lvcOut" class="lvc"></div><p class="sub"><span class="vb c-l" data-y="ill"></span> <span data-y="lvc_note"></span></p>
+<h3 data-y="rec_h"></h3><div class="tw lit"><table id="recTb"></table></div><p class="sub" data-y="rec_note"></p>
+<h3 data-y="lim_h"></h3>
+<ol class="lims"><li><b data-y="lim1"></b><span data-y="lim1p"></span></li><li><b data-y="lim2"></b><span data-y="lim2p"></span></li><li><b data-y="lim3"></b><span data-y="lim3p"></span></li><li><b data-y="lim4"></b><span data-y="lim4p"></span></li></ol>
 </section>
 <section class="sec" id="data-s">
 <h2 data-n="data_h"></h2><p data-n="data_p"></p>
@@ -163,19 +266,21 @@
 </div>
 <h3 data-n="share_h"></h3>
 <div class="qr"><img src="assets/qr.png" alt="QR code to this website" width="150" height="150"><p class="sub" data-n="share_p" style="max-width:48ch"></p></div>
-<h3 data-i="about_h"></h3><p data-i="about_p"></p>
+<div class="about"><img class="emb" src="assets/img/emblem.webp" alt="Public investment growth and real estate development: economic impact of Metro Line 1 and urbanization" width="180" height="180" loading="lazy"><div><h3 data-i="about_h"></h3><p data-i="about_p"></p></div></div>
 <p><span class="pill">Fulbright School of Public Policy and Management</span><span class="pill">MPP 2025–2027</span><span class="pill">GuLand · Chợ Tốt · VIIRS VNP46A3 · WorldPop · OpenStreetMap · ESA WorldCover 2021 · Esri basemaps</span></p>
 </section>
 </main>
 <footer><div class="wrap fgrid"><div><img src="assets/logo.png" alt="" width="44" height="44" style="border-radius:10px"><p data-i="foot"></p></div><div><b data-n="fl_h"></b><p><a href="https://github.com/truong-nhat-duy/metro1-hcmc-site">GitHub</a> · <a href="downloads/ring_coefs.csv" data-n="fl_dl"></a></p><p class="sub" data-n="fl_p"></p></div></div></footer>
-<script src="vendor/leaflet.js?v=1025173122"></script>
-<script src="data_geo.js?v=1025173122"></script>
-<script src="maps.js?v=1025173122"></script>
-<script src="vendor/chart.umd.js?v=1025173122"></script>
-<script src="data.js?v=1025173122"></script>
-<script src="data_amen.js?v=1025173122"></script>
-<script src="app.js?v=1025173122"></script>
-<script src="data_net.js?v=1025173122"></script>
-<script src="net.js?v=1025173122"></script>
-<script src="x.js?v=1025173122"></script>
+<script src="vendor/leaflet.js?v=1025185023"></script>
+<script src="data_geo.js?v=1025185023"></script>
+<script src="data_bnd.js?v=1025185023"></script>
+<script src="maps.js?v=1025185023"></script>
+<script src="vendor/chart.umd.js?v=1025185023"></script>
+<script src="data.js?v=1025185023"></script>
+<script src="data_amen.js?v=1025185023"></script>
+<script src="app.js?v=1025185023"></script>
+<script src="data_net.js?v=1025185023"></script>
+<script src="net.js?v=1025185023"></script>
+<script src="x.js?v=1025185023"></script>
+<script src="x2.js?v=1025185023"></script>
 </body></html>

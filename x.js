@@ -11,7 +11,7 @@ var T={en:{
  ring_note:"Premiums are descriptive associations with asking prices after opening, relative to the reference zone (more than 2,000 m). They are not causal effects.",
  ring_click:"Click a ring or a listing for details.",ring_leg:"Premium β (Δ ln price)",ring_ref:"Reference zone: more than 2,000 m",
  ntlm_h:"Night-light maps by year",ntlm_p:"Annual mean of monthly VIIRS Black Marble radiance (VNP46A3) for Ho Chi Minh City, 2019–2026, on one colour scale. Move the slider or press play to see how the city lights up; switch to the change layer to compare 2026 with 2019.",
- ntlm_year:"Year:",ntlm_play:"Play",ntlm_pause:"Pause",ntlm_lyr:"Layer:",ntlm_l1:"Radiance",ntlm_l2:"Change 2019 → 2026",ntlm_op:"Opacity:",ntlm_st:"Line 1 and stations",ntlm_rg:"800 m rings",
+ ntlm_ln:"Metro lines: solid blue = operating; red dashed = under construction; grey dotted = planned.",ntlm_year:"Year:",ntlm_play:"Play",ntlm_pause:"Pause",ntlm_lyr:"Layer:",ntlm_l1:"Radiance",ntlm_l2:"Change 2019 → 2026",ntlm_op:"Opacity:",ntlm_st:"Line 1 and stations",ntlm_rg:"800 m rings",
  ntlm_mean:"Study-area mean radiance",ntlm_months:"months in composite",ntlm_ringidx:"Ring index (2023 = 100)",ntlm_part:"2026 covers January–August only.",
  ntlm_note:"Colour scale is shared across years (square-root stretch, top of scale ≈ 145 nW·cm⁻²·sr⁻¹); 2026 has eight months. These maps are descriptive. The pre-opening gap between near and far pixels is not flat, so differences here are not evidence of a station effect.",
  ntlm_dark:"Low",ntlm_hi:"High",ntlm_neg:"Dimmer",ntlm_pos:"Brighter",
@@ -29,7 +29,7 @@ vi:{
  ring_note:"Mức chênh là tương quan mô tả với giá rao sau mở tuyến, so với vùng đối chiếu (hơn 2.000 m). Không phải hiệu ứng nhân quả.",
  ring_click:"Bấm vào vành hoặc một tin để xem chi tiết.",ring_leg:"Mức chênh β (Δ ln giá)",ring_ref:"Vùng đối chiếu: hơn 2.000 m",
  ntlm_h:"Bản đồ ánh sáng đêm theo năm",ntlm_p:"Trung bình năm của bức xạ VIIRS Black Marble hằng tháng (VNP46A3) cho TP.HCM, 2019–2026, trên cùng một thang màu. Kéo thanh trượt hoặc bấm phát để xem thành phố sáng lên thế nào; chuyển sang lớp thay đổi để so 2026 với 2019.",
- ntlm_year:"Năm:",ntlm_play:"Phát",ntlm_pause:"Dừng",ntlm_lyr:"Lớp:",ntlm_l1:"Bức xạ",ntlm_l2:"Thay đổi 2019 → 2026",ntlm_op:"Độ mờ:",ntlm_st:"Tuyến 1 và các ga",ntlm_rg:"Vành 800 m",
+ ntlm_ln:"Tuyến metro: xanh liền = đang vận hành; đỏ nét đứt = đang xây; xám chấm = quy hoạch.",ntlm_year:"Năm:",ntlm_play:"Phát",ntlm_pause:"Dừng",ntlm_lyr:"Lớp:",ntlm_l1:"Bức xạ",ntlm_l2:"Thay đổi 2019 → 2026",ntlm_op:"Độ mờ:",ntlm_st:"Tuyến 1 và các ga",ntlm_rg:"Vành 800 m",
  ntlm_mean:"Bức xạ trung bình toàn vùng",ntlm_months:"tháng trong ảnh tổng hợp",ntlm_ringidx:"Chỉ số theo vành (2023 = 100)",ntlm_part:"Năm 2026 chỉ có tháng 1–8.",
  ntlm_note:"Thang màu dùng chung cho mọi năm (kéo giãn căn bậc hai, đỉnh thang ≈ 145 nW·cm⁻²·sr⁻¹); năm 2026 có tám tháng. Các bản đồ chỉ mang tính mô tả. Chênh lệch giữa điểm ảnh gần và xa ga trước khi mở tuyến không phẳng, nên khác biệt ở đây không phải bằng chứng về hiệu ứng ga.",
  ntlm_dark:"Thấp",ntlm_hi:"Cao",ntlm_neg:"Tối hơn",ntlm_pos:"Sáng hơn",
@@ -99,7 +99,7 @@ function ntlMap(){var el=$("mapNtl");if(!el||NS)return;
    if(cur>=yrs[yrs.length-1])cur=yrs[0]-1;tm=setInterval(function(){cur++;if(cur>yrs[yrs.length-1]){clearInterval(tm);tm=null;b.textContent=T[L].ntlm_play;cur=yrs[yrs.length-1];return}sl.value=cur;$("ntlYv").textContent=cur;set();legend()},900)});
   function overlays(){st.clearLayers();rg.clearLayers();D.stations.forEach(function(s){Lf.circleMarker([s.lat,s.lng],{radius:4,color:"#fff",weight:2,fillColor:"#38bdf8",fillOpacity:1,pane:"markerPane"}).bindTooltip(L==="vi"?s.vi:s.en,{className:"stl",direction:"right",offset:[6,0]}).addTo(st);
     Lf.circle([s.lat,s.lng],{radius:800,color:"#fde68a",weight:1,fill:false,opacity:.8,interactive:false}).addTo(rg)});
-   (GEO.hcm.lines||[]).filter(function(x){return x.st==="op"}).forEach(function(x){Lf.polyline(x.ls,{color:"#38bdf8",weight:3,opacity:.95,interactive:false}).addTo(st)})}
+   (GEO.hcm.lines||[]).forEach(function(x){var o=x.st==="op";Lf.polyline(x.ls,{color:o?"#38bdf8":x.st==="uc"?"#fb7185":"#cbd5e1",weight:o?3.5:x.st==="uc"?2.5:2,opacity:o?.95:.85,dashArray:o?null:x.st==="uc"?"7 5":"2 5",interactive:false}).addTo(st)})}
   overlays();$("ntlSt").addEventListener("change",function(){this.checked?st.addTo(map):map.removeLayer(st)});$("ntlRg").addEventListener("change",function(){this.checked?rg.addTo(map):map.removeLayer(rg)});
   st.addTo(map);rg.addTo(map);NS.set=set;NS.legend=legend;NS.info=info;NS.overlays=overlays;set();legend()})}
 // ---------- context: MLU and amenities

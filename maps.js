@@ -19,6 +19,8 @@ var TX={en:{b1:"Light map",b2:"Street map",b3:"Satellite",b4:"Dark map",dist:"Di
  rn:{r1:"≤500 m",r2:"500–800 m",r3:"800–1.200 m",r4:"1.200–2.000 m",ref:">2.000 m"},
  pk_price:"Giá rao",pk_unit:"triệu đồng/m²",pk_type:"Loại hình",pk_dist:"Khoảng cách tới ga gần nhất",pk_stn:"Ga gần nhất",pk_ring:"Vành khoảng cách",pk_e0:"Chênh lệch theo vành (hedonic E0)",pk_area:"Vị trí",pk_vs:"So với trung vị cùng vành",pk_near:"Tin trong bán kính 500 m",pk_pct:"Phân vị giá trong mẫu thành phố",pk_note:"Giá rao, không phải giá giao dịch.",pk_none:"không có ước lượng",pk_med:"trung vị",
  tb_type:"Loại hình",t_all:"Tất cả",tb_pmax:"Giá tối đa",tb_view:"Trong khung nhìn",tb_n:"tin",tb_med:"trung vị",tb_reset:"Đặt lại khung nhìn",tb_tog:"Hiển thị",tb_list:"Tin đăng",tb_band:"Vành khoảng cách",tb_amen:"Tiện ích",tb_mlu:"Sử dụng đất hỗn hợp"}};
+TX.en.dist="District boundaries (before 1 Jul 2025)";TX.en.ward="Ward boundaries (before 1 Jul 2025)";TX.en.cur="Current provincial boundary (from 1 Jul 2025)";TX.en.curW="Current wards and communes (HCMC, 2025)";TX.en.cat="800 m catchment of every station";TX.en.cor="Named metro corridors (approximate)";TX.en.lgcur="Current boundary";TX.en.lgcat="800 m catchment";
+TX.vi.dist="Ranh giới quận/huyện (trước 1/7/2025)";TX.vi.ward="Ranh giới phường/xã (trước 1/7/2025)";TX.vi.cur="Ranh giới tỉnh/thành hiện hành (từ 1/7/2025)";TX.vi.curW="Phường, xã hiện hành (TP.HCM, 2025)";TX.vi.cat="Vùng 800 m quanh mọi ga";TX.vi.cor="Hành lang metro có tên (xấp xỉ)";TX.vi.lgcur="Ranh giới hiện hành";TX.vi.lgcat="Vùng 800 m";
 var LC={hcm:{op:"#0079b8",uc:"#dc2626",pl:"#7c8795"},hn:{op:"#c2410c",uc:"#c2410c",pl:"#7c8795"}};
 var AC=["#7c3aed","#e11d48","#16a34a","#d97706","#475569"],AE=["🎓","✚","🌳","🛍","🚌"];
 var RING_R=[500,800,1200,2000],RING_C={r1:"#0b5ea8",r2:"#2e86c1",r3:"#6fb4e0",r4:"#b5d8f0"};
@@ -136,10 +138,23 @@ function init(map,city,opt){opt=opt||{};var o={map:map,city:city},ctl=null,lgEl=
  var dist=boundary(G[city].dist,"d","#334155",1.6,.02).addTo(map),ward=boundary(G[city].ward,"w","#64748b",.8,0),lines=alignments(city).addTo(map);
  var ZL=function(){var z=map.getZoom(),c=map.getContainer().classList;c.toggle("zl-d",z>=10&&z<=14);c.toggle("zl-w",z>=14);c.toggle("zl-s",z>=13)};map.on("zoomend",ZL);ZL();
  o.dist=dist;o.ward=ward;o.lines=lines;
+ var B=window.BND&&BND[city];
+ if(B){o.cur=Lf.featureGroup();Lf.geoJSON({type:"Feature",geometry:B.o},{style:{color:"#0d9488",weight:3,opacity:.95,fillColor:"#14b8a6",fillOpacity:.035,dashArray:"11 6"},interactive:false}).addTo(o.cur);o.cur.addTo(map);
+  if(B.w)o.curW=boundary(B.w,"w","#0f766e",1,.03)}
+ (function(){var NT=window.NET,list=city==="hcm"?(NT&&NT.hcmStations||(window.DATA&&window.DATA.stations||[]).map(function(x){return{lat:x.lat,lng:x.lng,st:"op"}})):(NT&&NT.hnStations||[]).map(function(x){return{lat:x.lat,lng:x.lng,st:"op"}});
+  var cc={op:city==="hcm"?"#0079b8":"#c2410c",uc:"#dc2626",pl:"#7c8795"};o.cat=Lf.featureGroup();
+  list.forEach(function(x){var st=x.st||"op";Lf.circle([x.lat,x.lng],{radius:800,color:cc[st],weight:1.2,opacity:.9,fillColor:cc[st],fillOpacity:st==="pl"?.04:.09,dashArray:st==="op"?null:st==="uc"?"6 4":"2 4",interactive:false}).addTo(o.cat)});
+  if(opt.cat)o.cat.addTo(map)})();
+ if(opt.cor&&window.NET&&NET.hcmLines){var pal=["#0079b8","#dc2626","#7c3aed","#ea580c","#0d9488","#be185d","#4d7c0f","#b45309","#1d4ed8","#9333ea","#0e7490","#a16207","#be123c","#15803d","#6d28d9","#c2410c"];o.cor=Lf.featureGroup();
+  NET.hcmLines.forEach(function(l,k){var p=(NET.plan||[]).filter(function(q){return q.name===l.name})[0],c=pal[k%pal.length];
+   var pl=Lf.polyline(l.pts,{color:c,weight:4,opacity:.85,dashArray:l.name==="Tuyến metro số 1"?null:"9 6",lineCap:"round"}).addTo(o.cor);
+   pl.bindTooltip(l.name,{sticky:true,className:"stl"});pl.bindPopup("<b>"+esc(l.name)+"</b>"+(p?"<br>"+esc(p.route)+"<br>"+p.km+" km · "+p.ns+" "+(L==="vi"?"ga":"stations")+"<br>"+esc(p.status):""));
+   pl.on("mouseover",function(){pl.setStyle({weight:7,opacity:1})});pl.on("mouseout",function(){pl.setStyle({weight:4,opacity:.85})})});
+  if(opt.cor==="on")o.cor.addTo(map)}
  if(opt.bands){o.bands=bands(stationsOf(city),{map:map});}
  if(opt.amen){o.amen=new AmenLayer()}
  if(opt.mlu){o.mlu=mluGroup()}
- function controls(){if(ctl)map.removeControl(ctl);var t=TX[L],b={},ov={};["b1","b2","b3","b4"].forEach(function(k){b[t[k]]=bs[k]});ov[t.dist]=dist;ov[t.ward]=ward;ov[t.lines]=lines;
+ function controls(){if(ctl)map.removeControl(ctl);var t=TX[L],b={},ov={};["b1","b2","b3","b4"].forEach(function(k){b[t[k]]=bs[k]});ov[t.dist]=dist;ov[t.ward]=ward;ov[t.lines]=lines;if(o.cur)ov[t.cur]=o.cur;if(o.curW)ov[t.curW]=o.curW;if(o.cat)ov[t.cat]=o.cat;if(o.cor)ov[t.cor]=o.cor;
   if(o.bands)ov[t.bands]=o.bands;if(o.mlu)ov[t.mlu]=o.mlu.layer;if(o.amen)ov[t.amen]=o.amen;
   ctl=Lf.control.layers(b,ov,{collapsed:true,position:"topright"}).addTo(map);legend()}
  function legend(){if(opt.nolegend)return;var t=TX[L],C=LC[city],el=lgEl;if(!el){el=lgEl=document.createElement("div");el.className="mlg";map.getContainer().insertAdjacentElement("afterend",el)}
@@ -150,7 +165,7 @@ function init(map,city,opt){opt=opt||{};var o={map:map,city:city},ctl=null,lgEl=
   if(opt.bands){h+="<div class='lgc'><b>"+t.lgr+"</b>"+["r1","r2","r3","r4"].map(function(k){return "<span><svg width='18' height='14'><rect x='1' y='1' width='16' height='12' rx='3' fill='"+RING_C[k]+"' fill-opacity='.55' stroke='"+RING_C[k]+"'/></svg>"+t.rn[k]+"</span>"}).join("")+"</div>"}
   if(opt.amen){h+="<div class='lgc'><b>"+t.lga+"</b>"+t.am.map(function(a,i){return "<label><input type='checkbox' data-am='"+i+"'"+(o.amen&&o.amen._cats[i]?" checked":"")+"><svg width='14' height='14'><circle cx='7' cy='7' r='6' fill='"+AC[i]+"' stroke='#fff'/></svg>"+a+"</label>"}).join("")+"</div>"}
   if(opt.mlu){h+="<div class='lgc'><b>"+t.mlu+"</b><select data-mv>"+t.mv.map(function(a,i){return "<option value='"+i+"'"+(o.mlu&&o.mlu.cur()===i?" selected":"")+">"+a+"</option>"}).join("")+"</select><span class='ramp v'><i></i></span><span class='rl'><em>0</em><em>"+(o.mlu&&o.mlu.cur()===4?"150+":"1")+"</em></span></div>"}
-  h+="<div class='lgc'><b>"+t.lgb+"</b><span><svg width='34' height='10'><line x1='1' y1='5' x2='33' y2='5' stroke='#334155' stroke-width='1.8'/></svg>"+t.bd+"</span><span><svg width='34' height='10'><line x1='1' y1='5' x2='33' y2='5' stroke='#64748b' stroke-width='1' stroke-dasharray='3 3'/></svg>"+t.bw+"</span></div><small>"+t.note+"</small>";
+  h+="<div class='lgc'><b>"+t.lgb+"</b><span><svg width='34' height='10'><line x1='1' y1='5' x2='33' y2='5' stroke='#334155' stroke-width='1.8'/></svg>"+t.bd+"</span><span><svg width='34' height='10'><line x1='1' y1='5' x2='33' y2='5' stroke='#64748b' stroke-width='1' stroke-dasharray='3 3'/></svg>"+t.bw+"</span><span><svg width='34' height='10'><line x1='1' y1='5' x2='33' y2='5' stroke='#0d9488' stroke-width='3' stroke-dasharray='8 4'/></svg>"+t.lgcur+"</span>"+(o.cat?"<span><svg width='34' height='14'><circle cx='17' cy='7' r='6' fill='"+C.op+"' fill-opacity='.12' stroke='"+C.op+"'/></svg>"+t.lgcat+"</span>":"")+"</div><small>"+t.note+"</small>";
   el.innerHTML=h;
   el.querySelectorAll("[data-am]").forEach(function(i){i.addEventListener("change",function(){var on={};el.querySelectorAll("[data-am]").forEach(function(q){on[q.getAttribute("data-am")]=q.checked});o.amen.setCats(on);if(on[0]||on[1]||on[2]||on[3]||on[4]){if(!map.hasLayer(o.amen))map.addLayer(o.amen)}})});
   var sel=el.querySelector("[data-mv]");if(sel)sel.addEventListener("change",function(){o.mlu.set(+sel.value);if(!map.hasLayer(o.mlu.layer))map.addLayer(o.mlu.layer);legend()})}
