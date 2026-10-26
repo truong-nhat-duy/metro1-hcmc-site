@@ -265,3 +265,11 @@ nav .links{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000
 .devlg{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 4px;font-size:.84rem;color:var(--mute)}.devlg i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:1.5px solid #fff;box-shadow:0 0 0 1px var(--line)}
 #dev-s .tw table th[scope=row]{text-align:left;font-weight:600}
 #devMap{border-radius:12px;border:1px solid var(--line);overflow:hidden}
+/* population 3-D */
+#pyr-s{--sa:#c2410c}
+#pyRoot .vzc{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px 22px;margin:20px 0}
+#pyRoot .ctl{display:flex;flex-wrap:wrap;gap:10px 22px;margin:8px 0 12px;align-items:center}#pyRoot .ctl label{display:flex;gap:8px;align-items:center;font-size:.88rem}
+#pyRoot .chips button{cursor:pointer}#pyRoot .chips button[aria-pressed=true]{background:var(--acc);color:#fff;border-color:var(--acc)}
+#pyRoot .pyc{position:relative;height:auto;touch-action:pan-y}#pyRoot #pyCv{display:block;width:100%;cursor:grab;touch-action:pan-y}#pyRoot #pyCv:active{cursor:grabbing}
+#pyRoot .pytip{position:absolute;pointer-events:none;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:.8rem;box-shadow:var(--shadow);max-width:230px}
+#pyRoot .pyf{margin:12px 0 6px;padding-left:20px;font-size:.9rem}#pyRoot .pyf li{margin:3px 0}
