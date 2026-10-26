@@ -243,3 +243,20 @@ nav .links{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000
 .stm{position:absolute}.stm::after{content:"";position:absolute;inset:-7px}
 .tw table th[scope=row]{text-align:left;font-weight:600}
 @media print{nav,.totop,.skip,#prog,.leaflet-control-container,.tbar,.mlg{display:none!important}.sec{break-inside:avoid-page}.leaflet-container{height:320px!important}body{background:#fff}}
+
+/* ---- theory in pictures ---- */
+#vzRoot .vzc{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px 22px;margin:20px 0}
+#vzRoot .vzc h3{margin:0 0 4px}#vzRoot .vzc h4{margin:0 0 6px;font:600 .82rem var(--sans);color:var(--mute)}
+.vzs{width:100%;height:auto;display:block}.vzt{font:12px var(--sans);fill:var(--ink)}.vzt.m{fill:var(--mute);font-size:11px}.vzt.b{font-weight:700}.vzt.w{fill:#fff;font-weight:800;font-size:10px}
+.vzt.rl{font-size:11px;font-weight:700;paint-order:stroke;stroke:var(--card);stroke-width:3px;stroke-linejoin:round}
+.vzr{cursor:pointer;outline:none;transition:fill-opacity .15s}.vzr:focus{stroke:var(--acc2)!important;stroke-width:3.5!important}
+.vzrow{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:center}@media(max-width:760px){.vzrow{grid-template-columns:minmax(0,1fr)}}
+.vztabs{display:inline-flex;gap:4px;background:var(--chip);padding:3px;border-radius:999px;margin:8px 0 12px}
+.vztabs button{border:0;background:none;padding:7px 16px;border-radius:999px;font:600 .82rem var(--sans);color:var(--mute);cursor:pointer;min-height:36px}
+.vztabs button[aria-selected=true]{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.vzdef,.vzdesc{min-height:3.4em;margin:10px 0 0;font-size:.92rem}
+.vzeq{font:600 1.3rem/2 var(--serif);display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.vzq{font:inherit;border:1px dashed var(--line);background:var(--chip);color:var(--ink);padding:2px 12px;border-radius:10px;cursor:pointer}
+.vzq.on,.vzq:hover{border-color:var(--acc2);background:color-mix(in srgb,var(--acc2) 14%,var(--card))}
+.vzcalc{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}.vzres{margin:8px 0 0}.vzres b{font-size:1.5rem;color:var(--acc2);font-family:var(--serif)}.vzf{color:var(--mute);font-size:.85rem;margin-left:8px}
+#vzRoot .ctl{display:flex;flex-wrap:wrap;gap:10px 22px;margin:8px 0 12px}#vzRoot .ctl label{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.88rem}#vzRoot .ctl input[type=range]{min-width:140px}

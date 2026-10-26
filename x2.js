@@ -3,7 +3,7 @@
 var Lf=window.L,D=window.DATA,Geo=window.Geo,$=function(i){return document.getElementById(i)},L=document.documentElement.lang==="vi"?"vi":"en";
 try{var s0=localStorage.getItem("lang");if(s0==="vi"||s0==="en")L=s0}catch(e){}
 var T={en:{
- part_pt:"Theory and prior evidence",nav_theory:"Framework",nav_lit:"Prior studies",nav_stage:"Line stage",nav_pop:"Population",nav_pol:"Policy",
+ part_pt:"Theory and prior evidence",nav_viz:"Theory in pictures",nav_theory:"Framework",nav_lit:"Prior studies",nav_stage:"Line stage",nav_pop:"Population",nav_pol:"Policy",
  th_h:"Analytical framework",
  th_p:"The thesis starts from the monocentric bid-rent model. A station lowers travel cost for nearby households, so the rent curve around it should shift up. The asking price we observe is the upper envelope of the rent curves, so the expected pattern is a smooth gradient, not a step at 500 m or 800 m. Click a box to see what it means and what the data can say about it.",
  fw_hint:"Blue boxes: the capitalisation mechanism. Orange boxes: factors that also move asking prices.",
@@ -67,7 +67,7 @@ var T={en:{
  lim4:"Optional now, needed before recommending a rate",lim4p:"Multimodal accessibility, distributional and affordability variables, and cadastral data.",
  ill:"Illustration"
 },vi:{
- part_pt:"Lý thuyết và bằng chứng trước đây",nav_theory:"Khung lý thuyết",nav_lit:"Nghiên cứu trước",nav_stage:"Giai đoạn tuyến",nav_pop:"Dân số",nav_pol:"Chính sách",
+ part_pt:"Lý thuyết và bằng chứng trước đây",nav_viz:"Lý thuyết bằng hình",nav_theory:"Khung lý thuyết",nav_lit:"Nghiên cứu trước",nav_stage:"Giai đoạn tuyến",nav_pop:"Dân số",nav_pol:"Chính sách",
  th_h:"Khung phân tích",
  th_p:"Luận văn xuất phát từ mô hình tiền tô đơn tâm. Ga metro hạ chi phí đi lại của hộ ở gần, nên đường tiền tô quanh ga phải dịch lên. Giá rao quan sát được là đường bao trên của các đường tiền tô, vì vậy kỳ vọng là một gradient liên tục, không phải bậc thang tại 500 m hay 800 m. Bấm vào từng ô để xem ý nghĩa và điều dữ liệu cho phép nói.",
  fw_hint:"Ô xanh: cơ chế vốn hóa. Ô cam: các yếu tố cũng làm giá rao thay đổi.",

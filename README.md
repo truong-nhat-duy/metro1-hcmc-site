@@ -21,6 +21,7 @@ Status: work in progress. Everything shown is descriptive. The data are asking p
 - Current provincial boundaries (from 1 July 2025), 800 m catchments of every station, and a land value capture arithmetic calculator marked as an illustration.
 - Heterogeneity and rents: price-percentile gradient, seller-stated rents by distance ring and a heterogeneity summary. No market rent series exists in the data.
 - Maps use one station symbol (an “M” badge: filled = operating, red = under construction, dashed = planned) and draw the planned east and west extensions of Line 1 as a dashed, schematic layer that can be switched off.
+- Theory in pictures: concentric rings at city and station scale, an adjustable illustration of how a station is capitalised into land value, a timeline of the expectation and operation phases against the data window, and an interactive reading of the regression equation. All are illustrations; only the ring bars are estimates.
 
 ## What the data are, and are not
 
