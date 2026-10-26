@@ -79,12 +79,12 @@ var css=function(v){return getComputedStyle(document.documentElement).getPropert
 var COL={L1:"#0b5ea8",L2:"#dc2626",NA:"#8b95a3",a2:"#ea580c",a3:"#7c3aed"},RC={r1:"#b91c1c",r2:"#f59e0b",r3:"#65a30d",r4:"#0891b2",ref:"#94a3b8"};
 var tile=function(m){Lf.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"}).addTo(m)};
 var m1=Lf.map("map2").setView([10.8,106.7],11),G1=Geo.init(m1,"hcm",{types:true,bands:true,amen:true,mlu:true,cat:true,cor:true}),LCOL={L1:"#0079b8",L2:"#dc2626",NA:"#7c8795"};
-N.hcmStations.forEach(function(s){var c=LCOL[s.line],k=Lf.circleMarker([s.lat,s.lng],{radius:s.st==="op"?6:5,color:c,weight:3,fillColor:"#fff",fillOpacity:s.st==="pl"?.5:1});
- if(s.line!=="NA")k.bindTooltip(s.n,{permanent:true,direction:"right",offset:[7,0],className:"stl"});else k.bindTooltip(s.n,{direction:"right",offset:[7,0],className:"stl"});k.bindPopup("<b>"+s.n+"</b><br>"+s.line+" · "+s.st+"<br>"+s.lat.toFixed(5)+", "+s.lng.toFixed(5)+(s.conf?" · "+s.conf:"")+(s.pp!=null?"<br>~"+nf(s.pp,1)+" mn/m² (1 km)":"")).addTo(m1)});
+N.hcmStations.forEach(function(s){var c=LCOL[s.line],k=Geo.stMarker(s.lat,s.lng,{st:s.st==="op"?"op":s.st==="uc"?"uc":"pl",color:c,big:!!s.ix&&s.st==="op",sm:s.st==="pl"});
+ if(s.line!=="NA")k.bindTooltip(s.n,{permanent:true,direction:"right",offset:[0,0],className:"stl"});else k.bindTooltip(s.n,{direction:"right",offset:[0,0],className:"stl"});k.bindPopup("<b>"+s.n+"</b><br>"+s.line+" · "+s.st+"<br>"+s.lat.toFixed(5)+", "+s.lng.toFixed(5)+(s.conf?" · "+s.conf:"")+(s.pp!=null?"<br>~"+nf(s.pp,1)+" mn/m² (1 km)":"")).addTo(m1)});
 Geo.toolbar(G1,function(o){return new Geo.TypeLayer(window.DATA.points,o)},{});
 var m2=Lf.map("map3").setView([21.0,105.8],11),G2=Geo.init(m2,"hn",{types:true,bands:true,cat:true});
 Geo.toolbar(G2,function(o){return new Geo.TypeLayer(N.hnPts,o)},{});
-N.hnStations.forEach(function(s){Lf.circleMarker([s.lat,s.lng],{radius:6,color:"#c2410c",weight:3,fillColor:"#fff",fillOpacity:1}).bindTooltip(s.n,{permanent:true,direction:"right",offset:[7,0],className:"stl"}).bindPopup("<b>"+s.n+"</b><br>"+(s.line==="2A"?"Line 2A":"Line 3")+" (OSM, unverified)<br>"+s.lat.toFixed(5)+", "+s.lng.toFixed(5)).addTo(m2)});
+N.hnStations.forEach(function(s){Geo.stMarker(s.lat,s.lng,{color:"#c2410c"}).bindTooltip(s.n,{permanent:true,direction:"right",offset:[0,0],className:"stl"}).bindPopup("<b>"+s.n+"</b><br>"+(s.line==="2A"?"Line 2A":"Line 3")+" (OSM, unverified)<br>"+s.lat.toFixed(5)+", "+s.lng.toFixed(5)).addTo(m2)});
 var ch={};function mk(id,cfg){if(ch[id])ch[id].destroy();ch[id]=new Chart($(id).getContext("2d"),cfg)}
 var D=window.DATA||{};
 function tbl(id,head,rows){$(id).innerHTML="<thead><tr>"+head.map(function(h){return"<th>"+h+"</th>"}).join("")+"</tr></thead><tbody>"+rows.map(function(r){return"<tr>"+r.map(function(c){return"<td>"+c+"</td>"}).join("")+"</tr>"}).join("")+"</tbody>"}

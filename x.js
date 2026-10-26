@@ -62,7 +62,7 @@ function ringDraw(recenter){if(!RS)return;var t=T[L],st=RS.st,city=st.city,map=R
    var c=Lf.circle([s.lat,s.lng],{pane:pn,radius:rad,stroke:false,fillColor:r?divColor(r.est):"#cbd5e1",fillOpacity:1});
    c.on("click",function(e){if(RS.layer._map&&RS.layer.hit(e.containerPoint))return;Lf.popup({className:"pkp"}).setLatLng(e.latlng).setContent(ringPopup(k,byR[k],city)).openOn(map)});
    c.addTo(RS.band)})})}
- stns.forEach(function(s){Lf.circleMarker([s.lat,s.lng],{radius:5,color:city==="hcm"?"#0079b8":"#c2410c",weight:3,fillColor:"#fff",fillOpacity:1}).bindTooltip(s.n,{className:"stl",direction:"right",offset:[7,0],permanent:true}).addTo(RS.stn)});
+ stns.forEach(function(s){Geo.stMarker(s.lat,s.lng,{color:city==="hcm"?"#0079b8":"#c2410c",sm:true}).bindTooltip(s.n,{className:"stl",direction:"right",offset:[0,0],permanent:true}).addTo(RS.stn)});
  if(RS.layer._map)map.removeLayer(RS.layer);
  RS.layer=new Geo.TypeLayer(Geo.pointsOf(city),{city:city,filter:function(p){return true}});if(st.pts)RS.layer.addTo(map);
  ringTable();ringLegend()}
@@ -97,7 +97,7 @@ function ntlMap(){var el=$("mapNtl");if(!el||NS)return;
   $("ntlOp").addEventListener("input",function(){op=+this.value/100;if(img)img.setOpacity(op)});
   $("ntlPlay").addEventListener("click",function(){var b=this,t=T[L];if(tm){clearInterval(tm);tm=null;b.textContent=t.ntlm_play;return}mode="year";$("ntlMode").value="year";sl.disabled=false;b.textContent=t.ntlm_pause;
    if(cur>=yrs[yrs.length-1])cur=yrs[0]-1;tm=setInterval(function(){cur++;if(cur>yrs[yrs.length-1]){clearInterval(tm);tm=null;b.textContent=T[L].ntlm_play;cur=yrs[yrs.length-1];return}sl.value=cur;$("ntlYv").textContent=cur;set();legend()},900)});
-  function overlays(){st.clearLayers();rg.clearLayers();D.stations.forEach(function(s){Lf.circleMarker([s.lat,s.lng],{radius:4,color:"#fff",weight:2,fillColor:"#38bdf8",fillOpacity:1,pane:"markerPane"}).bindTooltip(L==="vi"?s.vi:s.en,{className:"stl",direction:"right",offset:[6,0]}).addTo(st);
+  function overlays(){st.clearLayers();rg.clearLayers();D.stations.forEach(function(s){Geo.stMarker(s.lat,s.lng,{color:"#38bdf8",sm:true}).bindTooltip(L==="vi"?s.vi:s.en,{className:"stl",direction:"right",offset:[0,0]}).addTo(st);
     Lf.circle([s.lat,s.lng],{radius:800,color:"#fde68a",weight:1,fill:false,opacity:.8,interactive:false}).addTo(rg)});
    (GEO.hcm.lines||[]).forEach(function(x){var o=x.st==="op";Lf.polyline(x.ls,{color:o?"#38bdf8":x.st==="uc"?"#fb7185":"#cbd5e1",weight:o?3.5:x.st==="uc"?2.5:2,opacity:o?.95:.85,dashArray:o?null:x.st==="uc"?"7 5":"2 5",interactive:false}).addTo(st)})}
   overlays();$("ntlSt").addEventListener("change",function(){this.checked?st.addTo(map):map.removeLayer(st)});$("ntlRg").addEventListener("change",function(){this.checked?rg.addTo(map):map.removeLayer(rg)});

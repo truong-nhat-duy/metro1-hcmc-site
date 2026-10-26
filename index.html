@@ -7,21 +7,25 @@
 <meta name="description" content="Interactive companion to a Fulbright MPP thesis on asking prices around Ho Chi Minh City Metro Line 1: map, distance rings, hedonic models, machine learning (SHAP), Hanoi comparison, whole network. Bilingual EN/VI.">
 <meta property="og:title" content="Metro Line 1 and Asking Prices, Ho Chi Minh City">
 <meta property="og:description" content="Interactive map, hedonic estimates, SHAP and Hanoi comparison. Bilingual EN/VI.">
-<meta property="og:image" content="assets/logo_banner.png">
+<meta property="og:image" content="https://truong-nhat-duy.github.io/metro1-hcmc-site/assets/logo_banner.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://truong-nhat-duy.github.io/metro1-hcmc-site/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://truong-nhat-duy.github.io/metro1-hcmc-site/">
 <meta name="theme-color" content="#0f3a63">
 <link rel="icon" href="assets/logo.png">
 <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
-<link rel="stylesheet" href="vendor/leaflet.css?v=1025190428">
-<link rel="stylesheet" href="style.css?v=1025190428">
+<link rel="stylesheet" href="vendor/leaflet.css?v=1026041120">
+<link rel="stylesheet" href="style.css?v=1026041120">
 </head>
 <body>
 <div id="prog"></div>
 <nav><div class="wrap in">
 <a class="brand" href="#top"><img src="assets/logo.png" alt=""><span>Metro 1 × TOD</span></a>
 <div class="links">
-<a href="#brief-s" data-y="nav_brief"></a><a href="#rq-s" data-y="nav_rq"></a><a href="#meth-s" data-y="nav_meth"></a><a href="#theory-s" data-y="nav_theory"></a><a href="#lit-s" data-y="nav_lit"></a><a href="#map-s" data-i="nav_map"></a><a href="#net-s" data-n="nav_net"></a><a href="#coef-s" data-i="nav_coef"></a><a href="#stage-s" data-y="nav_stage"></a><a href="#ntl-s" data-x="nav_ntl"></a><a href="#pol-s" data-y="nav_pol"></a><a href="#data-s" data-n="nav_data"></a><a href="#readme-s" data-y="nav_readme"></a>
+<a href="#brief-s" data-y="nav_brief"></a><a href="#rq-s" data-y="nav_rq"></a><a href="#meth-s" data-y="nav_meth"></a><a href="#theory-s" data-y="nav_theory"></a><a href="#lit-s" data-y="nav_lit"></a><a href="#map-s" data-i="nav_map"></a><a href="#net-s" data-n="nav_net"></a><a href="#coef-s" data-i="nav_coef"></a><a href="#stage-s" data-y="nav_stage"></a><a href="#ntl-s" data-x="nav_ntl"></a><a href="#het-s" data-y="nav_het"></a><a href="#pol-s" data-y="nav_pol"></a><a href="#data-s" data-n="nav_data"></a><a href="#readme-s" data-y="nav_readme"></a>
 </div>
 <button class="tbtn" id="theme" aria-label="Theme">◐</button><button class="tbtn lang" id="lang" aria-label="Language">VI</button>
 </div></nav>
@@ -230,6 +234,16 @@
 <p class="sub" data-y="ex_sum"></p>
 </section>
 
+<section class="sec" id="het-s">
+<h2 data-y="het_h"></h2><p class="warn" data-y="het_p"></p>
+<h3 data-y="het_qh"></h3><div class="grid two"><div><div class="canvaswrap" style="height:300px"><canvas id="cQ"></canvas></div><p class="sub" data-y="het_qc"></p></div><div><p data-y="het_qp"></p></div></div>
+<h3 data-y="het_rh"></h3><p data-y="het_rp"></p>
+<div class="grid two"><div><div class="canvaswrap" style="height:300px"><canvas id="cR"></canvas></div><p class="sub" data-y="het_rc"></p></div><div class="tw"><table id="tRent"></table></div></div>
+<p data-y="het_rr"></p><p class="sub" data-y="het_rn"></p>
+<h3 data-y="het_sh"></h3><div class="tw"><table id="tHet"></table></div>
+<p class="sub" data-y="het_src"></p>
+</section>
+
 <section class="sec" id="stn-s">
 <h2 data-n="stn_h"></h2><p data-n="stn_p"></p><div class="tw"><table id="tStn"></table></div>
 <p class="sub" data-n="src"></p>
@@ -277,16 +291,17 @@
 
 </main>
 <footer><div class="wrap fgrid"><div><img src="assets/logo.png" alt="" width="44" height="44" style="border-radius:10px"><p data-i="foot"></p></div><div><b data-n="fl_h"></b><p><a href="https://github.com/truong-nhat-duy/metro1-hcmc-site">GitHub</a> · <a href="downloads/ring_coefs.csv" data-n="fl_dl"></a></p><p class="sub" data-n="fl_p"></p></div></div></footer>
-<script src="vendor/leaflet.js?v=1025190428"></script>
-<script src="data_geo.js?v=1025190428"></script>
-<script src="data_bnd.js?v=1025190428"></script>
-<script src="maps.js?v=1025190428"></script>
-<script src="vendor/chart.umd.js?v=1025190428"></script>
-<script src="data.js?v=1025190428"></script>
-<script src="data_amen.js?v=1025190428"></script>
-<script src="app.js?v=1025190428"></script>
-<script src="data_net.js?v=1025190428"></script>
-<script src="net.js?v=1025190428"></script>
-<script src="x.js?v=1025190428"></script>
-<script src="x2.js?v=1025190428"></script>
+<script src="vendor/leaflet.js?v=1026041120"></script>
+<script src="data_geo.js?v=1026041120"></script>
+<script src="data_bnd.js?v=1026041120"></script>
+<script src="maps.js?v=1026041120"></script>
+<script src="vendor/chart.umd.js?v=1026041120"></script>
+<script src="data.js?v=1026041120"></script>
+<script src="data_amen.js?v=1026041120"></script>
+<script src="app.js?v=1026041120"></script>
+<script src="data_net.js?v=1026041120"></script>
+<script src="net.js?v=1026041120"></script>
+<script src="x.js?v=1026041120"></script>
+<script src="x2.js?v=1026041120"></script>
+<script src="ux.js?v=1026041120"></script>
 </body></html>

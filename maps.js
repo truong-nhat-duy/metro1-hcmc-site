@@ -21,6 +21,7 @@ var TX={en:{b1:"Light map",b2:"Street map",b3:"Satellite",b4:"Dark map",dist:"Di
  tb_type:"Loại hình",t_all:"Tất cả",tb_pmax:"Giá tối đa",tb_view:"Trong khung nhìn",tb_n:"tin",tb_med:"trung vị",tb_reset:"Đặt lại khung nhìn",tb_tog:"Hiển thị",tb_list:"Tin đăng",tb_band:"Vành khoảng cách",tb_amen:"Tiện ích",tb_mlu:"Sử dụng đất hỗn hợp"}};
 TX.en.dist="District boundaries (before 1 Jul 2025)";TX.en.ward="Ward boundaries (before 1 Jul 2025)";TX.en.cur="Current provincial boundary (from 1 Jul 2025)";TX.en.curW="Current wards and communes (HCMC, 2025)";TX.en.cat="800 m catchment of every station";TX.en.cor="Named metro corridors (approximate)";TX.en.lgcur="Current boundary";TX.en.lgcat="800 m catchment";
 TX.vi.dist="Ranh giới quận/huyện (trước 1/7/2025)";TX.vi.ward="Ranh giới phường/xã (trước 1/7/2025)";TX.vi.cur="Ranh giới tỉnh/thành hiện hành (từ 1/7/2025)";TX.vi.curW="Phường, xã hiện hành (TP.HCM, 2025)";TX.vi.cat="Vùng 800 m quanh mọi ga";TX.vi.cor="Hành lang metro có tên (xấp xỉ)";TX.vi.lgcur="Ranh giới hiện hành";TX.vi.lgcat="Vùng 800 m";
+TX.en.ext="Planned Line 1 extensions (schematic)";TX.vi.ext="Tuyến 1 kéo dài dự kiến (sơ họa)";TX.en.lgext="Planned Line 1 extension";TX.vi.lgext="Tuyến 1 kéo dài dự kiến";TX.en.lgst="Station (M)";TX.vi.lgst="Ga (M)";TX.en.lgse="Planned extension station";TX.vi.lgse="Ga dự kiến (kéo dài)";TX.en.x_e="East: Suối Tiên – Biên Hòa – Long Thành";TX.vi.x_e="Phía đông: Suối Tiên – Biên Hòa – Long Thành";TX.en.x_w="West: Bến Thành – An Hạ";TX.vi.x_w="Phía tây: Bến Thành – An Hạ";TX.en.x_n="Planned station %n of 14 on the extension. Position taken from the project's plan table; name not verified.";TX.vi.x_n="Ga dự kiến thứ %n trong 14 ga của đoạn kéo dài. Vị trí lấy từ bảng quy hoạch của dự án; tên ga chưa xác minh.";TX.en.x_a="Western terminus (An Hạ). The number and sites of intermediate stations are not verified.";TX.vi.x_a="Điểm cuối phía tây (An Hạ). Số lượng và vị trí ga trung gian chưa xác minh.";TX.en.x_s="Schematic line joining the plan table's vertices, not a surveyed alignment.";TX.vi.x_s="Đường sơ họa nối các đỉnh trong bảng quy hoạch, không phải tim tuyến đã khảo sát.";
 var LC={hcm:{op:"#0079b8",uc:"#dc2626",pl:"#7c8795"},hn:{op:"#c2410c",uc:"#c2410c",pl:"#7c8795"}};
 var AC=["#7c3aed","#e11d48","#16a34a","#d97706","#475569"],AE=["🎓","✚","🌳","🛍","🚌"];
 var RING_R=[500,800,1200,2000],RING_C={r1:"#0b5ea8",r2:"#2e86c1",r3:"#6fb4e0",r4:"#b5d8f0"};
@@ -121,6 +122,16 @@ function bands(stations,cfg){cfg=cfg||{};var g=Lf.layerGroup(),keys=["r4","r3","
 function labelIcon(name,cls){return Lf.divIcon({className:"lbl "+cls,html:"<span>"+esc(name)+"</span>",iconSize:[0,0]})}
 function boundary(set,kind,color,w,fillop){var fg=Lf.featureGroup();set.forEach(function(f){Lf.geoJSON({type:"Feature",geometry:f.g},{style:{color:color,weight:w,opacity:.85,fillColor:color,fillOpacity:fillop,dashArray:kind==="w"?"3 3":null},interactive:false}).addTo(fg);
   Lf.marker(f.c,{icon:labelIcon(f.n,kind),interactive:false,keyboard:false}).addTo(fg)});return fg}
+var EXT={s:[10.87955,106.81409],b:[10.77095,106.69788],e:[[10.905,106.8311],[10.9056,106.8477],[10.9121,106.8543],[10.9186,106.861],[10.9143,106.8681],[10.8952,106.8804],[10.8832,106.8908],[10.8737,106.901],[10.858,106.9108],[10.8494,106.9139],[10.8357,106.9152],[10.806,106.9227],[10.7851,106.9275],[10.7614,106.9449]],w:[[10.7673,106.6894],[10.7677,106.6744],[10.763,106.6508],[10.7668,106.6421],[10.7934,106.5227]]};
+function stMarker(lat,lng,c){c=c||{};var st=c.st||"op",col=c.color||(st==="op"?"#0079b8":st==="uc"?"#dc2626":"#7c8795"),z=c.sm?16:c.big?27:22;
+ return Lf.marker([lat,lng],{icon:Lf.divIcon({className:"stm stm-"+st+(c.sm?" sm":"")+(c.big?" big":""),html:"<i style='--c:"+col+"'>M</i>",iconSize:[z,z],iconAnchor:[z/2,z/2],tooltipAnchor:[z/2+2,0],popupAnchor:[0,-z/2]}),riseOnHover:true,zIndexOffset:st==="op"?400:st==="uc"?300:200})}
+function extLayer(){var t=TX[L],fg=Lf.featureGroup(),col="#0079b8";
+ function route(pts,tip){Lf.polyline(pts,{color:"#fff",weight:8,opacity:.9,interactive:false}).addTo(fg);
+  var l=Lf.polyline(pts,{color:col,weight:4,opacity:1,dashArray:"10 7",lineCap:"butt"}).addTo(fg);l.bindTooltip(tip,{sticky:true,className:"stl2"});l.bindPopup("<b>"+esc(tip)+"</b><br>"+esc(t.x_s));return l}
+ route([EXT.s].concat(EXT.e),t.x_e);route([EXT.b].concat(EXT.w),t.x_w);
+ EXT.e.forEach(function(p,i){stMarker(p[0],p[1],{st:"ext",color:col,sm:true}).bindPopup("<b>"+esc(t.x_e)+"</b><br>"+esc(t.x_n.replace("%n",i+1))+"<br>"+p[0].toFixed(4)+", "+p[1].toFixed(4)).addTo(fg)});
+ var a=EXT.w[EXT.w.length-1];stMarker(a[0],a[1],{st:"ext",color:col}).bindPopup("<b>An Hạ</b><br>"+esc(t.x_a)+"<br>"+a[0].toFixed(4)+", "+a[1].toFixed(4)).bindTooltip("An Hạ",{className:"stl2"}).addTo(fg);
+ return fg}
 function alignments(city){var fg=Lf.featureGroup(),C=LC[city],d=(G[city]&&G[city].lines)||[];
  ["pl","uc","op"].forEach(function(s){d.filter(function(x){return x.st===s}).forEach(function(x){
   if(s==="op")Lf.polyline(x.ls,{color:"#fff",weight:8,opacity:.95,interactive:false}).addTo(fg);
@@ -151,15 +162,16 @@ function init(map,city,opt){opt=opt||{};var o={map:map,city:city},ctl=null,lgEl=
    pl.bindTooltip(l.name,{sticky:true,className:"stl"});pl.bindPopup("<b>"+esc(l.name)+"</b>"+(p?"<br>"+esc(p.route)+"<br>"+p.km+" km · "+p.ns+" "+(L==="vi"?"ga":"stations")+"<br>"+esc(p.status):""));
    pl.on("mouseover",function(){pl.setStyle({weight:7,opacity:1})});pl.on("mouseout",function(){pl.setStyle({weight:4,opacity:.85})})});
   if(opt.cor==="on")o.cor.addTo(map)}
+ if(city==="hcm"&&opt.ext!==false){o.ext=extLayer();o.ext.addTo(map)}
  if(opt.bands){o.bands=bands(stationsOf(city),{map:map});}
  if(opt.amen){o.amen=new AmenLayer()}
  if(opt.mlu){o.mlu=mluGroup()}
- function controls(){if(ctl)map.removeControl(ctl);var t=TX[L],b={},ov={};["b1","b2","b3","b4"].forEach(function(k){b[t[k]]=bs[k]});ov[t.dist]=dist;ov[t.ward]=ward;ov[t.lines]=lines;if(o.cur)ov[t.cur]=o.cur;if(o.curW)ov[t.curW]=o.curW;if(o.cat)ov[t.cat]=o.cat;if(o.cor)ov[t.cor]=o.cor;
+ function controls(){if(ctl)map.removeControl(ctl);var t=TX[L],b={},ov={};["b1","b2","b3","b4"].forEach(function(k){b[t[k]]=bs[k]});ov[t.dist]=dist;ov[t.ward]=ward;ov[t.lines]=lines;if(o.cur)ov[t.cur]=o.cur;if(o.curW)ov[t.curW]=o.curW;if(o.cat)ov[t.cat]=o.cat;if(o.cor)ov[t.cor]=o.cor;if(o.ext)ov[t.ext]=o.ext;
   if(o.bands)ov[t.bands]=o.bands;if(o.mlu)ov[t.mlu]=o.mlu.layer;if(o.amen)ov[t.amen]=o.amen;
   ctl=Lf.control.layers(b,ov,{collapsed:true,position:"topright"}).addTo(map);legend()}
  function legend(){if(opt.nolegend)return;var t=TX[L],C=LC[city],el=lgEl;if(!el){el=lgEl=document.createElement("div");el.className="mlg";map.getContainer().insertAdjacentElement("afterend",el)}
   var line=function(c,dash,w){return "<svg width='34' height='10'><line x1='1' y1='5' x2='33' y2='5' stroke='"+c+"' stroke-width='"+w+"' "+(dash?"stroke-dasharray='"+dash+"'":"")+" stroke-linecap='round'/></svg>"};
-  var h="<div class='lgc'><b>"+t.lgm+"</b><span>"+line(C.op,"",5)+t.op+"</span><span>"+line(C.uc,"6 4",4)+t.uc+"</span><span>"+line(C.pl,"2 4",2.5)+t.pl+"</span><span><svg width='34' height='14'><circle cx='17' cy='7' r='5' fill='#fff' stroke='"+C.op+"' stroke-width='2.5'/></svg>"+t.stn+"</span></div>";
+  var h="<div class='lgc'><b>"+t.lgm+"</b><span>"+line(C.op,"",5)+t.op+"</span><span>"+line(C.uc,"6 4",4)+t.uc+"</span><span>"+line(C.pl,"2 4",2.5)+t.pl+"</span><span><i class='stm-lg' style='--c:"+C.op+"'>M</i>"+t.lgst+"</span>"+(o.ext?"<span>"+line('#0079b8','10 7',4)+t.lgext+"</span><span><i class='stm-lg ext' style='--c:#0079b8'>M</i>"+t.lgse+"</span>":"")+"</div>";
   if(opt.types){h+="<div class='lgc'><b>"+t.lgh+"</b><span><svg width='34' height='14'><circle cx='17' cy='7' r='5' fill='#94a3b8' stroke='#fff'/></svg>"+t.n+"</span><span><svg width='34' height='14'><path d='M17 1L23 7L17 13L11 7Z' fill='#94a3b8' stroke='#fff'/></svg>"+t.d+"</span><span><svg width='34' height='14'><path d='M17 1L23.5 12.5L10.5 12.5Z' fill='#94a3b8' stroke='#fff'/></svg>"+t.c+"</span></div>";
    h+="<div class='lgc'><b>"+t.lgp+"</b><span class='ramp'><i></i></span><span class='rl'><em>20</em><em>100</em><em>400+</em></span></div>"}
   if(opt.bands){h+="<div class='lgc'><b>"+t.lgr+"</b>"+["r1","r2","r3","r4"].map(function(k){return "<span><svg width='18' height='14'><rect x='1' y='1' width='16' height='12' rx='3' fill='"+RING_C[k]+"' fill-opacity='.55' stroke='"+RING_C[k]+"'/></svg>"+t.rn[k]+"</span>"}).join("")+"</div>"}
@@ -170,8 +182,8 @@ function init(map,city,opt){opt=opt||{};var o={map:map,city:city},ctl=null,lgEl=
   el.querySelectorAll("[data-am]").forEach(function(i){i.addEventListener("change",function(){var on={};el.querySelectorAll("[data-am]").forEach(function(q){on[q.getAttribute("data-am")]=q.checked});o.amen.setCats(on);if(on[0]||on[1]||on[2]||on[3]||on[4]){if(!map.hasLayer(o.amen))map.addLayer(o.amen)}})});
   var sel=el.querySelector("[data-mv]");if(sel)sel.addEventListener("change",function(){o.mlu.set(+sel.value);if(!map.hasLayer(o.mlu.layer))map.addLayer(o.mlu.layer);legend()})}
  o.setLang=function(l){L=l;controls();if(o.mlu)o.mlu.repaint();if(o.toolbarRefresh)o.toolbarRefresh()};controls();
- o.station=function(s,cfg){cfg=cfg||{};var c=cfg.color||LC[city].op,m=Lf.circleMarker([s.lat,s.lng],{radius:cfg.ix?8:6,color:c,weight:3,fillColor:"#fff",fillOpacity:1});
-  if(cfg.label){m.bindTooltip(cfg.label,{permanent:true,direction:"right",offset:[8,0],className:"stl"})}return m};
+ o.station=function(s,cfg){cfg=cfg||{};var c=cfg.color||LC[city].op,m=stMarker(s.lat,s.lng,{color:c,big:cfg.ix});
+  if(cfg.label){m.bindTooltip(cfg.label,{permanent:true,direction:"right",offset:[2,0],className:"stl"})}return m};
  REG.push(o);return o}
 // ---------- toolbar: type + price cap + in-view statistics (used by maps with listings)
 function toolbar(o,layerFactory,cfg){cfg=cfg||{};var st={type:"all",pmax:400},host=o.map.getContainer(),bar=document.createElement("div");bar.className="ctl tbar";host.insertAdjacentElement("beforebegin",bar);
@@ -185,6 +197,6 @@ function toolbar(o,layerFactory,cfg){cfg=cfg||{};var st={type:"all",pmax:400},ho
   r.addEventListener("input",function(e){st.pmax=+e.target.value;bar.querySelector("[data-pv]").textContent=st.pmax>=400?"400+":st.pmax;layer.redraw()});
   if(cfg.bind)cfg.bind(bar,layer);paint()}
  o.toolbarRefresh=build;build();layer.addTo(o.map);o.layer=layer;o.state=st;return layer}
-return {init:init,TypeLayer:TypeLayer,toolbar:toolbar,bands:bands,bpane:bpane,popupHTML:popupHTML,locate:locate,ramp:ramp,vir:vir,hav:hav,med:med,stationsOf:stationsOf,pointsOf:pointsOf,RING_C:RING_C,AC:AC,
+return {init:init,stMarker:stMarker,TypeLayer:TypeLayer,toolbar:toolbar,bands:bands,bpane:bpane,popupHTML:popupHTML,locate:locate,ramp:ramp,vir:vir,hav:hav,med:med,stationsOf:stationsOf,pointsOf:pointsOf,RING_C:RING_C,AC:AC,
  setLang:function(l){L=l;REG.forEach(function(o){o.setLang(l)})},TX:TX,reg:REG,tx:function(){return TX[L]}}
 })();
