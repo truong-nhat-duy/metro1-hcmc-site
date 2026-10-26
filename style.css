@@ -260,3 +260,8 @@ nav .links{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000
 .vzq.on,.vzq:hover{border-color:var(--acc2);background:color-mix(in srgb,var(--acc2) 14%,var(--card))}
 .vzcalc{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}.vzres{margin:8px 0 0}.vzres b{font-size:1.5rem;color:var(--acc2);font-family:var(--serif)}.vzf{color:var(--mute);font-size:.85rem;margin-left:8px}
 #vzRoot .ctl{display:flex;flex-wrap:wrap;gap:10px 22px;margin:8px 0 12px}#vzRoot .ctl label{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.88rem}#vzRoot .ctl input[type=range]{min-width:140px}
+
+/* developers section */
+.devlg{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 4px;font-size:.84rem;color:var(--mute)}.devlg i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:1.5px solid #fff;box-shadow:0 0 0 1px var(--line)}
+#dev-s .tw table th[scope=row]{text-align:left;font-weight:600}
+#devMap{border-radius:12px;border:1px solid var(--line);overflow:hidden}

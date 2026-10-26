@@ -17,15 +17,15 @@
 <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
-<link rel="stylesheet" href="vendor/leaflet.css?v=1026043951">
-<link rel="stylesheet" href="style.css?v=1026043951">
+<link rel="stylesheet" href="vendor/leaflet.css?v=1026044312">
+<link rel="stylesheet" href="style.css?v=1026044312">
 </head>
 <body>
 <div id="prog"></div>
 <nav><div class="wrap in">
 <a class="brand" href="#top"><img src="assets/logo.png" alt=""><span>Metro 1 × TOD</span></a>
 <div class="links">
-<a href="#brief-s" data-y="nav_brief"></a><a href="#rq-s" data-y="nav_rq"></a><a href="#meth-s" data-y="nav_meth"></a><a href="#theory-s" data-y="nav_theory"></a><a href="#viz-s" data-y="nav_viz"></a><a href="#lit-s" data-y="nav_lit"></a><a href="#map-s" data-i="nav_map"></a><a href="#net-s" data-n="nav_net"></a><a href="#coef-s" data-i="nav_coef"></a><a href="#stage-s" data-y="nav_stage"></a><a href="#ntl-s" data-x="nav_ntl"></a><a href="#het-s" data-y="nav_het"></a><a href="#pol-s" data-y="nav_pol"></a><a href="#data-s" data-n="nav_data"></a><a href="#readme-s" data-y="nav_readme"></a>
+<a href="#brief-s" data-y="nav_brief"></a><a href="#rq-s" data-y="nav_rq"></a><a href="#meth-s" data-y="nav_meth"></a><a href="#theory-s" data-y="nav_theory"></a><a href="#viz-s" data-y="nav_viz"></a><a href="#lit-s" data-y="nav_lit"></a><a href="#map-s" data-i="nav_map"></a><a href="#net-s" data-n="nav_net"></a><a href="#coef-s" data-i="nav_coef"></a><a href="#stage-s" data-y="nav_stage"></a><a href="#ntl-s" data-x="nav_ntl"></a><a href="#het-s" data-y="nav_het"></a><a href="#dev-s" data-y="nav_dev"></a><a href="#pol-s" data-y="nav_pol"></a><a href="#data-s" data-n="nav_data"></a><a href="#readme-s" data-y="nav_readme"></a>
 </div>
 <button class="tbtn" id="theme" aria-label="Theme">◐</button><button class="tbtn lang" id="lang" aria-label="Language">VI</button>
 </div></nav>
@@ -249,6 +249,22 @@
 <p class="sub" data-y="het_src"></p>
 </section>
 
+<div id="devRoot" hidden></div>
+<section class="sec" id="dev-s">
+<h2 data-d="h"></h2><p data-d="p"></p><p class="warn" data-d="warn"></p>
+<h3 data-d="c1"></h3><div class="canvaswrap" style="height:520px"><canvas id="cDev"></canvas></div>
+<div class="tw"><table id="tDev"></table></div>
+<div class="ctl"><label id="devBetaL"> <input id="devBeta" type="range" min="0" max="0.3" step="0.001" value="0.121"> <b id="devBv"></b></label></div>
+<p class="sub" data-d="betaN"></p><p class="sub" data-d="res"></p>
+<h3 data-d="mh"></h3><p data-d="mp"></p>
+<div class="ctl"><label><span data-d="gl"></span> <select id="devSel"></select></label></div>
+<div id="devMap" class="map" style="height:520px"></div><div id="devLg" class="devlg"></div>
+<h3 data-d="th"></h3><div class="tw"><table id="tDevTop"></table></div>
+<h3 data-d="rh"></h3><ul class="facts" id="devFacts"></ul>
+<h3 data-d="lim"></h3><ul class="facts" id="devLim"></ul>
+<p class="sub" data-d="src"></p>
+</section>
+
 <section class="sec" id="stn-s">
 <h2 data-n="stn_h"></h2><p data-n="stn_p"></p><div class="tw"><table id="tStn"></table></div>
 <p class="sub" data-n="src"></p>
@@ -296,18 +312,20 @@
 
 </main>
 <footer><div class="wrap fgrid"><div><img src="assets/logo.png" alt="" width="44" height="44" style="border-radius:10px"><p data-i="foot"></p></div><div><b data-n="fl_h"></b><p><a href="https://github.com/truong-nhat-duy/metro1-hcmc-site">GitHub</a> · <a href="downloads/ring_coefs.csv" data-n="fl_dl"></a></p><p class="sub" data-n="fl_p"></p></div></div></footer>
-<script src="vendor/leaflet.js?v=1026043951"></script>
-<script src="data_geo.js?v=1026043951"></script>
-<script src="data_bnd.js?v=1026043951"></script>
-<script src="maps.js?v=1026043951"></script>
-<script src="vendor/chart.umd.js?v=1026043951"></script>
-<script src="data.js?v=1026043951"></script>
-<script src="data_amen.js?v=1026043951"></script>
-<script src="app.js?v=1026043951"></script>
-<script src="data_net.js?v=1026043951"></script>
-<script src="net.js?v=1026043951"></script>
-<script src="x.js?v=1026043951"></script>
-<script src="x2.js?v=1026043951"></script>
-<script src="viz.js?v=1026043951"></script>
-<script src="ux.js?v=1026043951"></script>
+<script src="vendor/leaflet.js?v=1026044312"></script>
+<script src="data_geo.js?v=1026044312"></script>
+<script src="data_bnd.js?v=1026044312"></script>
+<script src="maps.js?v=1026044312"></script>
+<script src="vendor/chart.umd.js?v=1026044312"></script>
+<script src="data.js?v=1026044312"></script>
+<script src="data_amen.js?v=1026044312"></script>
+<script src="app.js?v=1026044312"></script>
+<script src="data_net.js?v=1026044312"></script>
+<script src="net.js?v=1026044312"></script>
+<script src="x.js?v=1026044312"></script>
+<script src="x2.js?v=1026044312"></script>
+<script src="data_dev.js?v=1026044312"></script>
+<script src="dev.js?v=1026044312"></script>
+<script src="viz.js?v=1026044312"></script>
+<script src="ux.js?v=1026044312"></script>
 </body></html>

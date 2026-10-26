@@ -22,6 +22,7 @@ Status: work in progress. Everything shown is descriptive. The data are asking p
 - Heterogeneity and rents: price-percentile gradient, seller-stated rents by distance ring and a heterogeneity summary. No market rent series exists in the data.
 - Maps use one station symbol (an “M” badge: filled = operating, red = under construction, dashed = planned) and draw the planned east and west extensions of Line 1 as a dashed, schematic layer that can be switched off.
 - Theory in pictures: concentric rings at city and station scale, an adjustable illustration of how a station is capitalised into land value, a timeline of the expectation and operation phases against the data window, and an interactive reading of the regression equation. All are illustrations; only the ring bars are estimates.
+- Developers and projects: exposure of apartment developers to operating, under-construction and planned stations (800 m), a project map with a developer filter, and a scenario calculator. Exposure is not benefit; the data are a tracking run limited to the former city area.
 
 ## What the data are, and are not
 
