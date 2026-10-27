@@ -9,7 +9,7 @@ This repository's own content is licensed under CC BY-NC 4.0 (see `LICENSE`). Th
 | NASA / VIIRS Black Marble VNP46A3 | Night-light overlays | NASA open data; cite the product |
 | WorldPop R2025A | Population-density overlays | CC BY 4.0 |
 | ESA WorldCover 2021 | Land-cover context | CC BY 4.0 |
-| OpenStreetMap contributors (extract of 10 Oct 2026) | Provinces after the 2025 merger, ring roads, expressways, railways, metro alignments, bus routes (with headway and opening-hours tags) and stops, walking-distance grid, key facilities (`data/*.json`, simplified derived copies) | ODbL 1.0. Attribution: © OpenStreetMap contributors. Derived database; share-alike applies to the derived files. |
+| OpenStreetMap contributors (extract of 10 Oct 2026) | Provinces after the 2025 merger, ring roads, expressways, railways, metro alignments, bus routes (with headway and opening-hours tags), amenity tiles for Vietnam, walking-distance grid, key facilities (`data/*.json`, simplified derived copies) | ODbL 1.0. Attribution: © OpenStreetMap contributors. Derived database; share-alike applies to the derived files. |
 | GADM 4.1 | Administrative outlines (simplified, derived) | **Academic and other non-commercial use only; no redistribution or commercial use without GADM's permission.** Download the original from https://gadm.org and follow its terms. The derived outlines here are for non-commercial academic visualisation only. |
 | Leaflet 1.9.4 | Interactive maps | BSD-2-Clause |
 | Chart.js 4.4.1 | Charts | MIT |

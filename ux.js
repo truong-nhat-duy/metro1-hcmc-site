@@ -3,7 +3,7 @@
 var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 var vi=function(){return document.documentElement.lang==="vi"};
 // skip link
-var sk=document.createElement("a");sk.className="skip";sk.href="#brief-s";sk.textContent=vi()?"Bỏ qua điều hướng":"Skip to content";document.body.insertBefore(sk,document.body.firstChild);
+var sk=document.createElement("a");sk.className="skip";sk.href="#find-s";sk.textContent=vi()?"Bỏ qua điều hướng":"Skip to content";document.body.insertBefore(sk,document.body.firstChild);
 // back to top
 var bt=document.createElement("button");bt.className="totop";bt.type="button";bt.setAttribute("aria-label",vi()?"Lên đầu trang":"Back to top");bt.innerHTML="↑";
 bt.addEventListener("click",function(){window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"})});document.body.appendChild(bt);
