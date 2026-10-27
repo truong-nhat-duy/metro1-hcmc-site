@@ -22,6 +22,7 @@ Status: work in progress. Everything shown is descriptive. The data are asking p
 - Heterogeneity and rents: price-percentile gradient, seller-stated rents by distance ring and a heterogeneity summary. No market rent series exists in the data.
 - Maps use one station symbol (an “M” badge: filled = operating, red = under construction, dashed = planned) and draw the planned east and west extensions of Line 1 as a dashed, schematic layer that can be switched off.
 - Theory in pictures: concentric rings at city and station scale, an adjustable illustration of how a station is capitalised into land value, a timeline of the expectation and operation phases against the data window, and an interactive reading of the regression equation. All are illustrations; only the ring bars are estimates.
+- Connectivity explorer: share your location or click the map to see the nearest metro stations, the distance ring, an assumed-detour walking estimate, OpenStreetMap bus routes that run from a stop near you to a stop near a Line 1 station, and amenities within 800 m. Layers: 34 provinces after the 1 July 2025 merger, 63 GADM provinces, ring roads and expressways, railways and metro alignments, bus routes and stops (HCMC region) and key facilities across Vietnam (OpenStreetMap). A table maps each step of the Fulbright bus–metro accessibility thesis (Nguyễn An Ninh, 2025) to what the page does and does not reproduce.
 - Developers and projects: exposure of apartment developers to operating, under-construction and planned stations (800 m), a project map with a developer filter, and a scenario calculator. Exposure is not benefit; the data are a tracking run limited to the former city area.
 
 ## What the data are, and are not
@@ -37,7 +38,7 @@ Status: work in progress. Everything shown is descriptive. The data are asking p
 - The repository contains no seller names, phone numbers, accounts, listing text, listing URLs or listing IDs. Raw scraped files are not published.
 - The published listing sample (4,782 Ho Chi Minh City points, 5,582 Hanoi points) holds only rounded coordinates (4 decimals, about 11 m), price per m², property type, distance to the nearest station and distance ring.
 - Cleaned data and analysis code are kept in a separate private repository and are not part of this site.
-- Visitors: the site sets no cookies, runs no analytics, tracking or forms, and stores only your language and theme choice in your browser (localStorage).
+- Visitors: the site sets no cookies, runs no analytics, tracking or forms, and stores only your language and theme choice in your browser (localStorage). The connectivity explorer asks your browser for your location only when you press the button; the position is used in the page and is never sent or stored by this site.
 - If you are a rights holder or a person affected and want a record removed, open a GitHub issue without personal data in it and it will be reviewed promptly.
 
 ## Security and third-party requests
@@ -75,6 +76,7 @@ Status: work in progress. Everything shown is descriptive. The data are asking p
 
 - README.md, LICENSE (CC BY-NC 4.0) and THIRD_PARTY_NOTICES.md: documentation, licence and third-party terms.
 - index.html, style.css, app.js, x.js, x2.js, maps.js, net.js: page and interactive code.
+- conn.js and data/*.json: connectivity explorer and its lazily loaded layers (prov34, gadm1, roads, rail, bus_routes, bus_stops, poi_vn), derived from OpenStreetMap (10 Oct 2026 extract) and GADM 4.1; bus data are incomplete and have no timetables.
 - data*.js: embedded data (listing sample, results, boundaries, station network). assets/: images, night-light and population overlays (webp) with metadata. vendor/: Leaflet and Chart.js.
 - downloads/listings.csv: lat, lng (rounded), price_mvnd_m2 (million VND per m²), type (n house, d land, c apartment), dist_station_m, ring (r1 to r4, distance rings).
 - downloads/stations.csv: Line 1 stations (id, names, coordinates, segment, structure). ring_coefs.csv: ring coefficients with confidence intervals. ml_performance.csv and shap_importance.csv: model fit and SHAP shares. ntl_event_study.csv and ntl_ring_year.csv: night-light series.
@@ -101,7 +103,7 @@ Status: work in progress. Everything shown is descriptive. The data are asking p
 
 - This is academic research in progress, not an official product of any government body. It is not financial, legal, tax or investment advice, and must not be used to set taxes, fees or valuations. Provided as is, without warranty.
 - Please cite: Truong, N. D. (2026). Metro Line 1 and asking prices in Ho Chi Minh City: interactive evidence site (work in progress). https://truong-nhat-duy.github.io/metro1-hcmc-site/
-- Fulbright School of Public Policy and Management, MPP 2025–2027. Last updated 26 October 2026.
+- Fulbright School of Public Policy and Management, MPP 2025–2027. Last updated 27 October 2026.
 
 ## Image index
 
