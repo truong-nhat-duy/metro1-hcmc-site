@@ -9,6 +9,7 @@ This repository's own content is licensed under CC BY-NC 4.0 (see `LICENSE`). Th
 | NASA / VIIRS Black Marble VNP46A3 | Night-light overlays | NASA open data; cite the product |
 | Guland map markers (collected 25–27 Oct 2026) | For-sale asking-price points (lat, lng, price per m², type only) in data/sale_*.json | Terms of use not yet checked; remove if the owner objects |
 | Chợ Tốt rentals (25 Oct 2026) and Guland rental list (27 Oct 2026) | Asking-rent points (lat, lng, rent per m², type, monthly rent only) in data/rent_*.json | Terms of use not yet checked; remove if the owner objects |
+| Guland project directory (28 Oct 2026) | Project markers (name, status, type, developer, handover) in data/projects.json | Public project information; terms of use not yet checked |
 | WorldPop R2025A | Population-density overlays | CC BY 4.0 |
 | ESA WorldCover 2021 | Land-cover context | CC BY 4.0 |
 | OpenStreetMap contributors (extract of 10 Oct 2026) | Provinces after the 2025 merger, ring roads, expressways, railways, metro alignments, bus routes (with headway and opening-hours tags), amenity tiles for Vietnam, walking-distance grid, key facilities (`data/*.json`, simplified derived copies) | ODbL 1.0. Attribution: © OpenStreetMap contributors. Derived database; share-alike applies to the derived files. |
