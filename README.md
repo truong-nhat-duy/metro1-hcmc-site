@@ -86,6 +86,7 @@ Status: work in progress. Everything shown is descriptive. The data are asking p
 - assets/img/hanoi_scene.webp (1024×559): Hanoi section background. emblem.webp (720×720): About block. p_hcmc.webp, p_hanoi.webp, p_park.webp, p_emblem.webp (256×559 portrait crops) and assets/banner_photo.png are currently unused.
 - assets/hero.jpg (1200×670) and assets/hero_scene.jpg (1375×596): hero backgrounds. assets/logo.png (256×256) and assets/logo_banner.png (1408×768): logo. assets/qr.png (546×546): QR code to the live site.
 - assets/ntl/ntl_2019.webp to ntl_2026.webp, ntl_change.webp and meta.json: night-light overlays (VIIRS VNP46A3) with the bounds and statistics used on the map.
+- assets/ntl_hn/ and ntl_hn.js: Hanoi night-light overlays (VIIRS VNP46A3, 2019–2026) and ring index (2023 = 100) around 22 operating stations from OpenStreetMap (unverified); descriptive only.
 - assets/pop/pop_2015.webp to pop_2026.webp, pop_change.webp and meta.json: Ho Chi Minh City population density overlays (WorldPop R2025A). assets/pop_hn/ holds the same for Hanoi.
 - Overlays are transparent and drawn over the base map on the site, so on GitHub they look pale; the live site shows them as intended.
 - Source and rights of the photographs and illustrations under assets/img are not yet documented in this repository.
