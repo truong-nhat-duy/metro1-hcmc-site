@@ -7,10 +7,10 @@
 var Lf=window.L,N=window.NET;if(!Lf||!N||!document.getElementById("mapConn"))return;
 var L="en";try{var s0=localStorage.getItem("lang");if(s0==="vi"||s0==="en")L=s0;else if((navigator.language||"").slice(0,2)==="vi")L="vi"}catch(e){}
 var T={en:{
-nav_conn:"Check a place",h:"Check any place: how it connects to the metro",
-p:"Pick a place in Vietnam and see the nearest metro station, the walk to it, a bus that links to it, and the everyday amenities within a short walk. Use the menus to move to any province, so you can compare neighbouring areas.",
+nav_conn:"Where to go",h:"Where do you want to go? See what connects you there",
+p:"Choose a destination anywhere in Vietnam. In seconds you see the nearest metro station, the walk to it, the bus that links to it and the everyday amenities within walking distance.",chipsT:"Try a destination",
 warn:"Illustration, not a timetable. Walking: shortest path on the OpenStreetMap walking network, snapped to a 120 m grid (about ±100 m) and limited to 3 km from a station; beyond that, straight line × a detour factor. Bus: ride time = distance along the route’s stops ÷ an assumed speed; waiting = half the OSM “interval” tag where it exists (completeness not verified). No GTFS exists, so transfers, congestion and real departure times are not modelled. Metro headways are not in OSM and are not included. Amenities come from OpenStreetMap and are incomplete, especially outside big cities. Your position stays in your browser.",
-s1:"Pick a place",s1h:"Or click anywhere on the map.",s2:"Walking time to check",s3:"Read the result",s3h:"Results appear beside the map.",
+s1:"Choose where you want to go",s1h:"Pick a suggestion, a province or station from the menus, use your location, or click the map.",s2:"Walking time to check",s3:"Read the result",s3h:"Results appear beside the map.",
 locate:"Use my location",clear:"Clear",goprov:"Go to a province…",gostn:"Go to a metro station…",min:" min",
 adv:"Map layers and advanced settings",lay:"Map layers",g_metro:"Metro and rail",g_road:"Roads",g_bnd:"Boundaries",g_bus:"Bus",g_am:"Amenities (zoom in to see)",g_poi:"Key facilities",set:"Settings",
 l_stn:"Metro stations",l_rail:"Railways and metro lines",l_road:"Ring roads and expressways",l_prov:"34 provinces (from 1 Jul 2025)",l_gadm:"63 provinces (GADM, before merger)",l_bus:"Bus routes",l_poi:"Airports, universities, hospitals, malls",a0:"Schools",a1:"Health care",a2:"Parks",a3:"Shops and markets",a4:"Bus stops",
@@ -34,10 +34,10 @@ op:"Operating",uc:"Under construction",pl:"Planned / unassigned",
 hub:{air:"Airport",rail:"Railway station",metro:"Metro station",busst:"Bus terminal",uni:"University",hosp:"Hospital",attr:"Attraction",mall:"Mall"},
 src:"Sources: OpenStreetMap contributors (ODbL; extract of 10 Oct 2026), GADM 4.1 (non-commercial use), the project’s station table. Walking grid, bus headways and amenities are derived from OpenStreetMap."},
 vi:{
-nav_conn:"Kiểm tra một nơi",h:"Kiểm tra một nơi bất kỳ: nối với metro ra sao",
-p:"Chọn một nơi ở Việt Nam để xem ga metro gần nhất, quãng đi bộ tới ga, tuyến buýt nối với ga và các tiện ích hằng ngày trong tầm đi bộ. Dùng các danh sách để chuyển sang bất kỳ tỉnh nào, so sánh các khu vực lân cận.",
+nav_conn:"Nơi muốn đến",h:"Hãy chọn nơi bạn muốn đến: có những tiện ích kết nối nào?",
+p:"Chọn một nơi bất kỳ ở Việt Nam. Bạn sẽ thấy ga metro gần nhất, quãng đi bộ tới ga, tuyến buýt nối với ga và các tiện ích hằng ngày trong tầm đi bộ.",chipsT:"Thử một điểm đến",
 warn:"Chỉ để minh họa, không phải lịch chạy. Đi bộ: đường ngắn nhất trên mạng đi bộ OpenStreetMap, gán vào lưới 120 m (sai số khoảng ±100 m) và giới hạn 3 km quanh ga; xa hơn thì dùng đường chim bay × hệ số đường vòng. Buýt: thời gian đi xe = chiều dài dọc các trạm của tuyến ÷ tốc độ giả định; thời gian chờ = một nửa thẻ “interval” của OSM nếu có (chưa kiểm tra độ đầy đủ). Không có GTFS nên chưa mô hình hóa chuyển tuyến, kẹt xe và giờ xuất bến thực. Giãn cách metro không có trong OSM nên không tính. Tiện ích lấy từ OpenStreetMap, chưa đầy đủ, nhất là ngoài các thành phố lớn. Vị trí của bạn chỉ nằm trong trình duyệt.",
-s1:"Chọn một nơi",s1h:"Hoặc bấm vào bất kỳ điểm nào trên bản đồ.",s2:"Thời gian đi bộ cần kiểm tra",s3:"Đọc kết quả",s3h:"Kết quả hiện bên cạnh bản đồ.",
+s1:"Chọn nơi bạn muốn đến",s1h:"Chọn gợi ý, tỉnh hoặc ga trong danh sách, dùng vị trí của bạn, hoặc bấm vào bản đồ.",s2:"Thời gian đi bộ cần kiểm tra",s3:"Đọc kết quả",s3h:"Kết quả hiện bên cạnh bản đồ.",
 locate:"Dùng vị trí của tôi",clear:"Xóa",goprov:"Đến một tỉnh/thành…",gostn:"Đến một ga metro…",min:" phút",
 adv:"Lớp bản đồ và thiết lập nâng cao",lay:"Lớp bản đồ",g_metro:"Metro và đường sắt",g_road:"Đường bộ",g_bnd:"Ranh giới",g_bus:"Buýt",g_am:"Tiện ích (phóng to để xem)",g_poi:"Công trình chính",set:"Thiết lập",
 l_stn:"Ga metro",l_rail:"Đường sắt và tuyến metro",l_road:"Vành đai và cao tốc",l_prov:"34 tỉnh/thành (từ 1/7/2025)",l_gadm:"63 tỉnh (GADM, trước sáp nhập)",l_bus:"Tuyến buýt",l_poi:"Sân bay, đại học, bệnh viện, trung tâm thương mại",a0:"Trường học",a1:"Y tế",a2:"Công viên",a3:"Cửa hàng và chợ",a4:"Trạm buýt",
@@ -190,10 +190,13 @@ $("cProvSel").addEventListener("change",function(){var v=$("cProvSel").value;if(
 $("cStnSel").addEventListener("change",function(){var v=$("cStnSel").value;if(v==="")return;var s=ALL[+v].s;setPoint(s.lat,s.lng)});
 load("prov").then(fillMenus).catch(function(){});
 
+var CH=[{en:"Ben Thanh Market",vi:"Chợ Bến Thành",a:10.7725,b:106.6980},{en:"Tan Son Nhat Airport",vi:"Sân bay Tân Sơn Nhất",a:10.8188,b:106.6520},{en:"Landmark 81",vi:"Landmark 81",a:10.7951,b:106.7218},{en:"Thu Duc (Suoi Tien)",vi:"Thủ Đức (Suối Tiên)",a:10.8689,b:106.8029},{en:"Hoan Kiem Lake",vi:"Hồ Hoàn Kiếm",a:21.0288,b:105.8522},{en:"My Dinh",vi:"Mỹ Đình",a:21.0286,b:105.7640},{en:"Noi Bai Airport",vi:"Sân bay Nội Bài",a:21.2212,b:105.8072},{en:"Thu Dau Mot (Binh Duong)",vi:"Thủ Dầu Một (Bình Dương)",a:10.9804,b:106.6519},{en:"Back Beach, Vung Tau",vi:"Bãi Sau, Vũng Tàu",a:10.3350,b:107.0950}];
+function chips(){var t=T[L],el=$("cChips");if(!el)return;el.innerHTML="<span class='ct'>"+t.chipsT+"</span>"+CH.map(function(c,i){return"<button type='button' data-ch='"+i+"'>"+esc(L==="vi"?c.vi:c.en)+"</button>"}).join("");
+ el.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){var c=CH[+b.getAttribute("data-ch")];setPoint(c.a,c.b);map.setView([c.a,c.b],14)})})}
 /* ---- text ---- */
 function render(){var t=T[L];
  document.querySelectorAll("[data-c]").forEach(function(n){var k=n.getAttribute("data-c");if(t[k]!=null)n.textContent=t[k]});
- $("cLL").placeholder=t.latlng;fillMenus();
+ $("cLL").placeholder=t.latlng;fillMenus();chips();
  document.querySelectorAll("#cMin button").forEach(function(b){b.textContent=b.getAttribute("data-m")+t.min});
  if(PIN)analyse(PIN[0],PIN[1]);else $("connOut").innerHTML="<p class='sub'>"+t.pick+"</p>"}
 var lb=$("lang");if(lb)lb.addEventListener("click",function(){setTimeout(function(){L=document.documentElement.lang==="vi"?"vi":"en";render()},60)});

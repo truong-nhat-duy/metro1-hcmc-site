@@ -307,3 +307,27 @@ details.adv{margin-top:14px}.advg{display:grid;grid-template-columns:repeat(auto
 .advg fieldset{border:1px solid var(--line);border-radius:12px;padding:10px 14px;display:flex;flex-direction:column;gap:6px;font-size:.9rem;min-width:0}
 .advg legend{font-weight:600;padding:0 6px}.advg label{display:flex;gap:8px;align-items:center}.advg .gl{font-size:.74rem;color:var(--mute);letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
 .advg .dot{margin:0}
+
+/* ---- full-screen maps ---- */
+.fsbtn{position:absolute;top:84px;left:10px;z-index:1000;width:36px;height:36px;border-radius:8px;border:1px solid rgba(15,23,42,.28);background:#fff;color:#0f172a;display:grid;place-items:center;cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.3);padding:0}
+.fsbtn:hover{background:#f1f5f9}.fsbtn:focus-visible{outline:2px solid #0ea5e9;outline-offset:2px}
+html.fs-open{overflow:hidden}
+.fsx{position:fixed!important;inset:0;z-index:3500;width:100vw;height:100vh;height:100dvh;margin:0;border-radius:0;background:var(--bg,#fff)}
+.fsx.leaflet-container{height:100dvh!important;border:0}
+.mapcard.fsx{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:0}
+.mapcard.fsx .map2{height:100%!important;border-radius:0;border:0}
+.mapcard.fsx aside{overflow:auto;max-height:100dvh;border-radius:0}
+@media(max-width:720px){.mapcard.fsx{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}.mapcard.fsx aside{max-height:36dvh}}
+
+/* ---- "where do you want to go" block at the top ---- */
+.conn-top{margin-top:30px;padding:26px clamp(14px,3vw,30px);border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,color-mix(in srgb,#0ea5e9 9%,var(--bg)),color-mix(in srgb,#6366f1 7%,var(--bg)));box-shadow:var(--shadow)}
+.conn-top>h2{font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.15;margin:0 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px;align-items:center}
+.chips .ct{font:600 .72rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.chips button{border:1px solid var(--line);background:var(--bg);color:var(--fg,inherit);border-radius:999px;padding:7px 13px;font:500 .86rem var(--sans);cursor:pointer}
+.chips button:hover,.chips button:focus-visible{border-color:#0ea5e9;background:color-mix(in srgb,#0ea5e9 10%,var(--bg))}
+
+/* ---- asking-price points map ---- */
+.salewrap{position:relative}
+.salelg{display:flex;flex-wrap:wrap;gap:4px 14px;margin:8px 0;font-size:.82rem}.salelg i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+#mapSale{cursor:crosshair}
