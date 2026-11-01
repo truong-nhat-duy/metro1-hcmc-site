@@ -13,7 +13,7 @@ warn:"Illustration, not a timetable. Walking: shortest path on the OpenStreetMap
 s1:"Choose where you want to go",s1h:"Pick a suggestion, a province or station from the menus, use your location, or click the map.",s2:"Walking time to check",s3:"Read the result",s3h:"Results appear beside the map.",
 locate:"Use my location",clear:"Clear",goprov:"Go to a province…",gostn:"Go to a metro station…",min:" min",
 adv:"Map layers and advanced settings",lay:"Map layers",g_metro:"Metro and rail",g_road:"Roads",g_bnd:"Boundaries",g_bus:"Bus",g_am:"Amenities (zoom in to see)",g_poi:"Key facilities",set:"Settings",
-l_stn:"Metro stations",l_rail:"Railways and metro lines",l_road:"Ring roads and expressways",l_prov:"34 provinces (from 1 Jul 2025)",l_gadm:"63 provinces (GADM, before merger)",l_bus:"Bus routes",l_poi:"Airports, universities, hospitals, malls",a0:"Schools",a1:"Health care",a2:"Parks",a3:"Shops and markets",a4:"Bus stops",
+l_stn:"Metro stations",l_rail:"Railways and metro lines",l_tod:"TOD rings 500/800/1000 m (research convention, not official boundaries)",l_road:"Ring roads and expressways",l_prov:"34 provinces (from 1 Jul 2025)",l_gadm:"63 provinces (GADM, before merger)",l_bus:"Bus routes",l_poi:"Airports, universities, hospitals, malls",a0:"Schools",a1:"Health care",a2:"Parks",a3:"Shops and markets",a4:"Bus stops",
 speed:"Walking speed (km/h)",detour:"Detour factor",bspd:"Bus speed (km/h)",busr:"Bus stop within",latlng:"Latitude, longitude (e.g. 10.8412, 106.8098)",go:"Go",
 loading:"Loading…",err:"Could not load this layer. Serve the folder over http(s).",zoomin:"Zoom in to see amenities.",
 geo_off:"Your browser has no location service.",geo_deny:"Location was not shared. Click the map or use a menu instead.",geo_wait:"Waiting for your browser…",
@@ -40,7 +40,7 @@ warn:"Chỉ để minh họa, không phải lịch chạy. Đi bộ: đường n
 s1:"Chọn nơi bạn muốn đến",s1h:"Chọn gợi ý, tỉnh hoặc ga trong danh sách, dùng vị trí của bạn, hoặc bấm vào bản đồ.",s2:"Thời gian đi bộ cần kiểm tra",s3:"Đọc kết quả",s3h:"Kết quả hiện bên cạnh bản đồ.",
 locate:"Dùng vị trí của tôi",clear:"Xóa",goprov:"Đến một tỉnh/thành…",gostn:"Đến một ga metro…",min:" phút",
 adv:"Lớp bản đồ và thiết lập nâng cao",lay:"Lớp bản đồ",g_metro:"Metro và đường sắt",g_road:"Đường bộ",g_bnd:"Ranh giới",g_bus:"Buýt",g_am:"Tiện ích (phóng to để xem)",g_poi:"Công trình chính",set:"Thiết lập",
-l_stn:"Ga metro",l_rail:"Đường sắt và tuyến metro",l_road:"Vành đai và cao tốc",l_prov:"34 tỉnh/thành (từ 1/7/2025)",l_gadm:"63 tỉnh (GADM, trước sáp nhập)",l_bus:"Tuyến buýt",l_poi:"Sân bay, đại học, bệnh viện, trung tâm thương mại",a0:"Trường học",a1:"Y tế",a2:"Công viên",a3:"Cửa hàng và chợ",a4:"Trạm buýt",
+l_stn:"Ga metro",l_rail:"Đường sắt và tuyến metro",l_tod:"Vành TOD 500/800/1000 m (quy ước nghiên cứu, không phải ranh chính thức)",l_road:"Vành đai và cao tốc",l_prov:"34 tỉnh/thành (từ 1/7/2025)",l_gadm:"63 tỉnh (GADM, trước sáp nhập)",l_bus:"Tuyến buýt",l_poi:"Sân bay, đại học, bệnh viện, trung tâm thương mại",a0:"Trường học",a1:"Y tế",a2:"Công viên",a3:"Cửa hàng và chợ",a4:"Trạm buýt",
 speed:"Tốc độ đi bộ (km/h)",detour:"Hệ số đường vòng",bspd:"Tốc độ buýt (km/h)",busr:"Trạm buýt trong vòng",latlng:"Vĩ độ, kinh độ (ví dụ 10.8412, 106.8098)",go:"Đến",
 loading:"Đang tải…",err:"Không tải được lớp này. Hãy chạy thư mục qua http(s).",zoomin:"Hãy phóng to để xem tiện ích.",
 geo_off:"Trình duyệt không có dịch vụ định vị.",geo_deny:"Bạn chưa chia sẻ vị trí. Hãy bấm vào bản đồ hoặc dùng danh sách.",geo_wait:"Đang chờ trình duyệt…",
@@ -69,7 +69,7 @@ var map=Lf.map("mapConn",{preferCanvas:true}).setView([16.2,106.2],6);
 Lf.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"}).addTo(map);
 var cv=Lf.canvas({padding:.3});
 var LAY={},DAT={},PEND={};
-var FILES={prov:"data/prov34.json",gadm:"data/gadm1.json",road:"data/roads.json",rail:"data/rail.json",bus:"data/bus_routes.json",poi:"data/poi_vn.json",wg:"data/walkgrid.json",ai:"data/amen_index.json"};
+var FILES={prov:"data/prov34.json",gadm:"data/gadm1.json",road:"data/roads.json",rail:"data/rail.json",tod:"data/tod_layers.json",bus:"data/bus_routes.json",poi:"data/poi_vn.json",wg:"data/walkgrid.json",ai:"data/amen_index.json"};
 function load(k){if(DAT[k])return Promise.resolve(DAT[k]);if(PEND[k])return PEND[k];
  PEND[k]=fetch(FILES[k]).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(j){DAT[k]=j;return j});return PEND[k]}
 /* amenity tiles: 0.5 degree cells, rows [lat,lng,category,sub,name?] */
@@ -84,6 +84,8 @@ function build(k){var g=Lf.featureGroup(),d=DAT[k];
  if(k==="prov"||k==="gadm")d.forEach(function(p){gj(p.g,STY[k]).bindTooltip(esc(p.n),{sticky:true}).addTo(g)});
  if(k==="road")d.forEach(function(r){gj(r.g,STY.rd[r.c]).bindTooltip(esc(r.r),{sticky:true}).addTo(g)});
  if(k==="rail")d.forEach(function(r){gj(r.g,STY.rl[r.k]||STY.rl.train).bindTooltip(esc(r.n||r.ref||r.k),{sticky:true}).addTo(g)});
+ if(k==="tod"){var RC={"500":"#b45309","800":"#d97706","1000":"#f59e0b"};
+  [["hcm","rings_ops"],["hcm","rings_con"],["hn","rings"]].forEach(function(p){var o=d[p[0]][p[1]],cn=p[1]==="rings_con";["1000","800","500"].forEach(function(r){gj(o[r],{color:cn?"#7b241c":RC[r],weight:1,fill:true,fillOpacity:cn?.05:.12,opacity:.6}).bindTooltip(r+" m").addTo(g)})})}
  if(k==="bus")d.forEach(function(r){if(r.g)gj(r.g,{color:"#16a34a",weight:1.2,opacity:.55}).bindTooltip(esc((r.ref?r.ref+" · ":"")+(r.n||"")),{sticky:true}).addTo(g)});
  if(k==="poi"){var col={air:"#0ea5e9",rail:"#475569",metro:"#0079b8",busst:"#16a34a",uni:"#7c3aed",hosp:"#e11d48",attr:"#d97706",mall:"#db2777"};
   d.forEach(function(p){Lf.circleMarker([p[1],p[0]],{radius:3,color:col[p[2]]||"#334155",weight:1,fillOpacity:.7,renderer:cv}).bindTooltip(esc(p[3]||"")+" · "+(T[L].hub[p[2]]||p[2])).addTo(g)})}
@@ -102,7 +104,7 @@ function refreshAm(){var z=map.getZoom(),st=$("connLoad");AMG.forEach(function(g
    var m=Lf.circleMarker([r[0],r[1]],{radius:3,color:AMC[r[2]],weight:1,fillOpacity:.75,renderer:cv});if(r[4])m.bindTooltip(esc(r[4]));m.addTo(AMG[r[2]])})});
   st.textContent=n>=9000?"9,000+":""}).catch(function(){st.textContent=T[L].err})}
 map.on("moveend",function(){if(AMON.some(Boolean))refreshAm()});
-var CHK={prov:"cProv",gadm:"cGadm",road:"cRoad",rail:"cRail",bus:"cBus",poi:"cPoi"};
+var CHK={prov:"cProv",gadm:"cGadm",road:"cRoad",rail:"cRail",tod:"cTod",bus:"cBus",poi:"cPoi"};
 function toggle(k){var on=$(CHK[k]).checked,st=$("connLoad");
  if(!on){if(LAY[k])map.removeLayer(LAY[k]);return}
  st.textContent=T[L].loading;
