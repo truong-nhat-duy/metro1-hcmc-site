@@ -155,7 +155,7 @@
 <div class="ctl">
 <label><span data-s="mode"></span> <select id="saleMode"><option value="sale"></option><option value="rent"></option></select></label>
 <label><span data-s="city"></span> <select id="saleCity"><option value="hcm"></option><option value="ext"></option><option value="bd"></option><option value="brvt"></option><option value="hn"></option></select></label>
-<label><span data-s="type"></span> <select id="saleType"><option value="all"></option><option value="n"></option><option value="d"></option><option value="c"></option><option value="o"></option></select></label>
+<label><span data-s="type"></span> <select id="saleType"><option value="all"></option><option value="n"></option><option value="d"></option><option value="c"></option><option value="v"></option><option value="k"></option><option value="t"></option><option value="h"></option><option value="o"></option></select></label>
 <label><input type="checkbox" id="saleStn" checked> <span data-s="stn"></span></label>
 <label><input type="checkbox" id="saleProj" checked> <span data-s="proj"></span></label>
 <span class="sub" id="saleLoad" aria-live="polite"></span>
@@ -165,6 +165,19 @@
 <div id="saleProjLg" class="salelg"></div>
 <p class="sub" id="saleNote" data-s="note"></p>
 <p class="sub" data-s="projnote"></p>
+</section>
+<section class="sec" id="proj-s">
+<h2 data-pj="h"></h2><p data-pj="p"></p>
+<div class="ctl">
+<label><span data-pj="city"></span> <select id="pjCity"><option value="hcm"></option><option value="ext"></option><option value="bd"></option><option value="brvt"></option><option value="hn"></option></select></label>
+<label><span data-pj="status"></span> <select id="pjSt"><option value="all"></option><option value="a"></option><option value="u"></option><option value="l"></option><option value="s"></option></select></label>
+<label><span data-pj="find"></span> <input id="pjQ" type="search" autocomplete="off"></label>
+<label><input type="checkbox" id="pjStn" checked> <span data-pj="stn"></span></label>
+<span class="sub" id="pjLoad" aria-live="polite"></span>
+</div>
+<div class="mapcard"><div id="mapProj" class="map2" role="application" aria-label="Map"></div><aside id="pjInfo" class="ntlinfo"></aside></div>
+<div id="pjLg" class="salelg"></div>
+<p class="sub" data-pj="note"></p>
 </section>
 <section class="sec" id="ring-s">
 <h2 data-x="ring_h"></h2><p data-x="ring_p"></p>
@@ -380,7 +393,7 @@
 <script src="x.js?v=1027133000"></script>
 <script src="x2.js?v=1027133000"></script>
 <script src="ntl_hn.js?v=1028000000"></script>
-<script src="sale.js?v=1028400000"></script>
+<script src="sale.js?v=1101000000"></script><script src="proj.js?v=1101000000"></script>
 <script src="data_dev.js?v=1027133000"></script>
 <script src="dev.js?v=1027133000"></script>
 <script src="data_pyr.js?v=1027133000"></script>

@@ -331,3 +331,6 @@ html.fs-open{overflow:hidden}
 .salewrap{position:relative}
 .salelg{display:flex;flex-wrap:wrap;gap:4px 14px;margin:8px 0;font-size:.82rem}.salelg i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}
 #mapSale{cursor:crosshair}
+
+.pjd{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;border:1px solid #0f172a}
+#pjQ{padding:4px 8px;border:1px solid var(--line,#cbd5e1);border-radius:8px;background:transparent;color:inherit;font:inherit}
