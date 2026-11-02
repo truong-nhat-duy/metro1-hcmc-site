@@ -50,7 +50,7 @@ var RMED={};function ringMed(city,r){var k=city+r;if(RMED[k]==null){RMED[k]=med(
 function popupHTML(city,p){var t=TX[L],ss=stationsOf(city),best=null,bd=1e12;ss.forEach(function(s){var d=hav(p[0],p[1],s.lat,s.lng);if(d<bd){bd=d;best=s}});
  var r=p[5]||ringOf(bd),nm={n:t.n,d:t.d,c:t.c}[p[3]],ar=locate(city,p[0],p[1]),pts=pointsOf(city),near=[];
  for(var i=0;i<pts.length;i++){if(Math.abs(pts[i][0]-p[0])<.0046&&Math.abs(pts[i][1]-p[1])<.0050&&hav(p[0],p[1],pts[i][0],pts[i][1])<=500)near.push(pts[i][2])}
- var c=window.DATA&&window.DATA.coefs&&window.DATA.coefs[city]&&window.DATA.coefs[city].E0,cf=c&&c.rings.filter(function(x){return x.t===r})[0];
+ var c=window.DATA&&window.DATA.coefs&&window.DATA.coefs[city]&&window.DATA.coefs[city].M1,cf=c&&c.rings.filter(function(x){return x.t===r})[0];
  var rm=ringMed(city,r),vs=isFinite(rm)&&rm>0?100*(p[2]/rm-1):null;
  var h="<div class='pk'><div class='pk-h'><span class='pk-s pk-"+p[3]+"'></span><div><small>"+nm+"</small><b>"+nf(p[2],1)+" <i>"+t.pk_unit+"</i></b></div></div><table>";
  h+="<tr><th>"+t.pk_stn+"</th><td>"+esc(best?best.n:"–")+"</td></tr>";

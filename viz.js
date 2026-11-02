@@ -2,7 +2,7 @@
 (function(){
 var $=function(i){return document.getElementById(i)},root=$("vzRoot");if(!root)return;
 var L=document.documentElement.lang==="vi"?"vi":"en";
-var S={scale:"station",ring:null,phase:"all",t:25,m:2,leak:30,beta:0.274};
+var S={scale:"station",ring:null,phase:"all",t:25,m:2,leak:30,beta:0.162};
 var T={en:{
 h:"The theory in pictures",p:"Four figures connect the framework chapter to the estimates: where the rings come from, how a station can raise land value, when that value is capitalised, and how a ring coefficient reads. All four are illustrations of the theory; only the bars in figure 1 are estimates.",
 a_h:"1 · Concentric rings",a_p:"The monocentric city sets rents by distance to the centre; a station adds a second, local access point. The model measures that local effect with rings around each station.",
@@ -29,7 +29,7 @@ c_l2:"Line 2 groundbreaking, 15 Jan 2026",c_y:"Expected price level",
 d_h:"4 · How to read a ring coefficient",d_p:"Hover a term of the equation. The calculator turns a coefficient in log points into a percentage difference.",
 d_terms:[["ln Pᵢ","Log of the asking price per m² of listing i."],["Σ βₖ·Ringᵢₖ","Indicators for the rings around the nearest station. βₖ is the log-point gap against listings more than 2 km away."],["γ′Xᵢ","Property controls: area, type, alley access, frontage, and in later specifications floors, rooms, road width, age, legal status, distance to the centre, land-use mix, night lights."],["δ₍g₎","Fixed effect of the 2 km grid cell: compares listings that share a neighbourhood."],["εᵢ","Error term; standard errors are clustered on 5 km cells."]],
 d_calc:"Coefficient β (ln points)",d_res:"Asking price higher by",d_f:"= exp(β) − 1",
-d_ex:"Example: E0, ≤ 500 m ring: 0.274 gives 31.5%; E2: 0.121 gives 12.9%; E6a: 0.067 gives 6.9% (not significant).",
+d_ex:"Example, ≤ 500 m ring: no location fixed effects 0.413 gives 51.1%; main model (2-km cells) 0.162 gives 17.6%; trimming price tails 0.069 gives 7.1% (not significant).",
 d_n:"Log points are not percentages: the two agree only for small values. A coefficient is a descriptive gap in asking prices, not the price effect of Metro."
 },vi:{
 h:"Lý thuyết bằng hình",p:"Bốn hình nối chương khung lý thuyết với các ước lượng: vành khoảng cách đến từ đâu, một ga có thể nâng giá đất ra sao, khi nào giá trị được vốn hóa, và cách đọc một hệ số vành. Cả bốn là hình minh họa lý thuyết; chỉ các cột ở hình 1 là ước lượng.",
@@ -57,7 +57,7 @@ c_l2:"Khởi công tuyến 2, 15/1/2026",c_y:"Mức giá kỳ vọng",
 d_h:"4 · Cách đọc một hệ số vành",d_p:"Rê chuột vào từng số hạng của phương trình. Máy tính đổi hệ số theo điểm ln sang chênh lệch phần trăm.",
 d_terms:[["ln Pᵢ","Logarit giá rao trên m² của tin i."],["Σ βₖ·Ringᵢₖ","Biến chỉ báo các vành quanh ga gần nhất. βₖ là chênh lệch điểm ln so với tin cách ga trên 2 km."],["γ′Xᵢ","Biến kiểm soát nhà: diện tích, loại hình, hẻm, mặt tiền; ở các đặc tả sau có thêm tầng, phòng, lộ giới, tuổi, pháp lý, khoảng cách đến trung tâm, hỗn hợp sử dụng đất, ánh sáng đêm."],["δ₍g₎","Hiệu ứng cố định ô lưới 2 km: so sánh các tin cùng khu."],["εᵢ","Sai số; sai số chuẩn gom cụm theo ô 5 km."]],
 d_calc:"Hệ số β (điểm ln)",d_res:"Giá rao cao hơn",d_f:"= exp(β) − 1",
-d_ex:"Ví dụ: E0, vành ≤ 500 m: 0,274 ứng với 31,5%; E2: 0,121 ứng với 12,9%; E6a: 0,067 ứng với 6,9% (không có ý nghĩa).",
+d_ex:"Ví dụ, vành ≤ 500 m: không có hiệu ứng cố định vị trí 0,413 ứng với 51,1%; mô hình chính (ô 2 km) 0,162 ứng với 17,6%; cắt đuôi giá 0,069 ứng với 7,1% (không có ý nghĩa).",
 d_n:"Điểm ln không phải phần trăm: chỉ gần bằng nhau khi giá trị nhỏ. Hệ số là chênh lệch mô tả trong giá rao, không phải tác động giá của Metro."}};
 var nf=function(x,k){var s=(+x).toFixed(k==null?1:k);return L==="vi"?s.replace(".",","):s};
 var RC=["#0b5ea8","#2e86c1","#6fb4e0","#b5d8f0"],RR=[500,800,1200,2000];

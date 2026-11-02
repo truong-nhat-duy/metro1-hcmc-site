@@ -46,7 +46,7 @@ function txt(){var t=T[L];document.querySelectorAll("[data-x]").forEach(function
 var RS=null;
 function divColor(v){var m=.5,t=Math.max(-1,Math.min(1,v/m)),a=t<0?[37,99,235]:[220,38,38],w=[250,250,250],k=Math.abs(t);return "rgb("+[0,1,2].map(function(i){return Math.round(w[i]+(a[i]-w[i])*k)}).join(",")+")"}
 function ringMap(city,keep){var mapEl=$("mapRing");if(!mapEl||RS)return;city=city||"hcm";
- var map=Lf.map(mapEl).setView(city==="hcm"?[10.8,106.72]:[21.0,105.82],12),G=Geo.init(map,city,{types:true}),st=keep||{city:city,spec:"E0",bands:true,pts:true};
+ var map=Lf.map(mapEl).setView(city==="hcm"?[10.8,106.72]:[21.0,105.82],12),G=Geo.init(map,city,{types:true}),st=keep||{city:city,spec:"M1",bands:true,pts:true};
  RS={map:map,G:G,st:st,band:Lf.layerGroup().addTo(map),stn:Lf.layerGroup().addTo(map)};
  RS.layer=new Geo.TypeLayer([],{city:"hcm",filter:function(){return true}});
  var cs=$("rCity"),sp=$("rSpec");
@@ -54,7 +54,7 @@ function ringMap(city,keep){var mapEl=$("mapRing");if(!mapEl||RS)return;city=cit
  $("rPts").addEventListener("change",function(){st.pts=this.checked;ringDraw(false)});$("rBands").addEventListener("change",function(){st.bands=this.checked;ringDraw(false)});
  $("rCity").value=st.city;ringDraw(true)}
 function ringDraw(recenter){if(!RS)return;var t=T[L],st=RS.st,city=st.city,map=RS.map,coefs=D.coefs[city],sp=$("rSpec");
- if(recenter||!sp.options.length){var cur=sp.value;sp.innerHTML="";["E0","E1","E2","E3","E4","E5","E6a","E6b"].forEach(function(k){if(coefs[k]){var o=document.createElement("option");o.value=k;o.textContent=k;sp.appendChild(o)}});sp.value=coefs[cur]?cur:"E0";st.spec=sp.value}
+ if(recenter||!sp.options.length){var cur=sp.value;sp.innerHTML="";["M1","M0","M2","R1","R2","R3","R4","R5","T1","T2"].forEach(function(k){if(coefs[k]){var o=document.createElement("option");o.value=k;o.textContent=k;sp.appendChild(o)}});sp.value=coefs[cur]?cur:"M1";st.spec=sp.value}
  var stns=Geo.stationsOf(city),cf=coefs[st.spec].rings,byR={};cf.forEach(function(r){byR[r.t]=r});
  RS.band.clearLayers();RS.stn.clearLayers();
  if(recenter){map.setView(city==="hcm"?[10.8,106.72]:[21.0,105.82],city==="hcm"?12:12)}
