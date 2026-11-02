@@ -148,7 +148,7 @@ var LIT=[
  {t:"id",c:"Gibbons & Machin (2005)",j:"Journal of Urban Economics",v:"abs",
   set:{en:"New stations in London that changed some households’ distance to a station and not others’.",vi:"Các ga mới ở London đổi khoảng cách đến ga của một số hộ mà không đổi của hộ khác."},
   f:{en:"Standard for identification: exploit a transport shock and compare the same area before and after.",vi:"Tiêu chuẩn nhận dạng: khai thác một cú sốc giao thông và so sánh cùng khu vực trước và sau."},
-  m:{en:"Needs a pre-opening period, which this thesis does not have; hence no difference-in-differences yet.",vi:"Cần kỳ trước mở tuyến, điều luận văn không có; vì vậy chưa có khác biệt trong khác biệt."}},
+  m:{en:"The thesis adds a ward-level difference-in-differences with 2019–2024 Wayback listings: no increase in the near-station gap after opening (−0.081, SE 0.082), consistent with anticipation.",vi:"Luận văn bổ sung khác biệt trong khác biệt theo phường với tin Wayback 2019–2024: chênh lệch gần ga không tăng sau vận hành (−0,081, SE 0,082), nhất quán với hiệu ứng kỳ vọng."}},
  {t:"id",c:"Keele & Titiunik (2015); Hidano et al. (2015)",j:"Political Analysis; Reg. Sci. & Urban Econ.",v:"abs",
   set:{en:"Geographic boundaries as regression discontinuities (two running variables); applied to property prices in Tokyo.",vi:"Ranh giới địa lý như hồi quy gián đoạn (hai biến chạy); áp dụng cho giá bất động sản ở Tokyo."},
   f:{en:"Continuity must be checked with predetermined covariates.",vi:"Giả định liên tục phải được kiểm chứng bằng đặc điểm xác định từ trước."},

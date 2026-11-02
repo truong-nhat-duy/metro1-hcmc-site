@@ -334,3 +334,12 @@ html.fs-open{overflow:hidden}
 
 .pjd{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;border:1px solid #0f172a}
 #pjQ{padding:4px 8px;border:1px solid var(--line,#cbd5e1);border-radius:8px;background:transparent;color:inherit;font:inherit}
+
+/* final results 02/11/2026 */
+html[lang="en"] #final-s .vi{display:none} html[lang="vi"] #final-s .en{display:none}
+#final-s .fcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:18px 0}
+#final-s .fcards h4{margin:8px 0 6px;font-size:1.25rem}
+#final-s .ffig{margin:18px 0;text-align:center} #final-s .ffig img{max-width:100%;height:auto;background:#fff;border-radius:6px;padding:6px}
+#final-s .ffig figcaption{font-size:.88rem;opacity:.8;margin-top:6px}
+#final-s .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+#final-s .fnote{font-size:.92rem;opacity:.85}

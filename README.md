@@ -48,6 +48,12 @@ Status: work in progress. Everything shown is descriptive. The data are asking p
 - Your browser does contact third parties when you open the page: Esri and OpenStreetMap tile servers for base maps, and Google Fonts for typefaces. Those providers can see your IP address under their own policies.
 - To report a security problem, open a GitHub issue without exploit details or personal data, or use GitHub’s private vulnerability reporting if it is enabled for this repository.
 
+## Final results (thesis submitted 2 November 2026)
+
+- HCMC: asking price per m² within 500 m of a Line 1 station is about 18% higher than beyond 2 km in the same 2-km cell (0.162, SE 0.037); flat to about 1.5 km; concentrated in land plots and eastern-corridor stations; about zero in Hanoi.
+- Before–after: ward difference-in-differences with 2019–2024 Wayback listings gives −0.081 (SE 0.082); the gap was already priced in before opening. Pre-trends are not flat.
+- The `final-s` section of the site shows these results; older panels come from preliminary runs.
+
 ## Method and main numbers in brief
 
 - Hedonic regressions of ln asking price per m² on ln distance to the nearest station, with property attributes, distance to the centre and location fixed effects; local-linear spatial discontinuity checks at 500 m and 800 m as diagnostics only; spatial lag, error and Durbin models; geographically weighted regression and random forest with SHAP for exploration.
@@ -57,7 +63,7 @@ Status: work in progress. Everything shown is descriptive. The data are asking p
 
 ## Limitations
 
-- No pre-opening period and no transaction prices: difference-in-differences, event studies and any causal reading are not possible with the current data.
+- No transaction prices, and the pre-opening period (2019–2024 Wayback listings) is thin and falls within the construction phase: the ward-level difference-in-differences tests the operation effect against anticipation, not the total effect of the Metro. Original note: causal readings were not possible with the current data.
 - Results are sensitive to the fineness of location fixed effects and to the spatial weight matrix.
 - WorldPop is a modelled estimate, so year-to-year change is smooth by construction; night-light, land-use and amenity layers are context, not outcomes of the metro.
 - OpenStreetMap land-use polygons cover roughly a third of the area.
