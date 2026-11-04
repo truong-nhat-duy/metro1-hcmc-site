@@ -376,3 +376,14 @@ html[lang="en"] .vi-only{display:none} html[lang="vi"] .en-only{display:none}
 .pintro{margin-bottom:6px}.hbox{border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:12px;padding:12px 16px;margin:14px 0;background:var(--card)}.hbox h4{margin:0 0 6px}.hbox ul{margin:6px 0 6px 18px}.nexth{margin:18px 0 6px}
 #legal-s .tw{overflow-x:auto}#legal-s td,#viz-s .littab td{vertical-align:top}
 .ctl label{max-width:100%}.ctl select{max-width:100%;min-width:0;text-overflow:ellipsis}
+/* research design, equations, variables, sources (meth.js) */
+#methx h3{margin-top:34px}
+.eqs{display:grid;gap:14px;margin-top:12px}
+.eqc{border:1px solid var(--line);border-left:5px solid var(--acc2);border-radius:14px;padding:14px 18px;background:var(--chip);min-width:0}
+.eqh{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;margin-bottom:6px}
+.eqh b{font:600 1rem/1.35 var(--serif)}.eqh small{text-transform:uppercase;letter-spacing:.07em;color:var(--acc2);font-weight:700;font-size:.68rem}
+.eq{font:1.02rem/2 var(--serif);overflow-x:auto;white-space:nowrap;padding:4px 2px;max-width:100%}
+.eq sub,.eq sup{font-size:.7em;line-height:0}
+.eqc p{margin:6px 0 0;font-size:.88rem;color:var(--mute)}
+.vt table{min-width:820px}.vt td.sg{white-space:nowrap;text-align:center}
+.vt td a{overflow-wrap:anywhere}
