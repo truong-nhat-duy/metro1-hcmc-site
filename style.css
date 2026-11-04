@@ -405,3 +405,7 @@ html[lang="en"] .vi-only{display:none} html[lang="vi"] .en-only{display:none}
 #methx .rdt{font-size:.82rem}
 #methx .rdn{margin:8px 0 0;font-size:.86rem}
 #methx .rdn.src{color:var(--mute);font-size:.78rem}
+
+.mapmsg{display:none;margin:8px 0;padding:8px 12px;border:1px solid #d97706;border-radius:10px;background:var(--card);font-size:.88rem}
+.advg .sublab{margin-left:22px;font-size:.86rem}
+#cMin{flex-wrap:wrap}

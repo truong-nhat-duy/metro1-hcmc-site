@@ -7,7 +7,7 @@
 var Lf=window.L,N=window.NET;if(!Lf||!N||!document.getElementById("mapConn"))return;
 var L="en";try{var s0=localStorage.getItem("lang");if(s0==="vi"||s0==="en")L=s0;else if((navigator.language||"").slice(0,2)==="vi")L="vi"}catch(e){}
 var T={en:{
-nav_conn:"Where to go",h:"What connects the place where you live? See what this study shows",
+nav_conn:"Where to go",bm:"Base map",bm1:"OpenStreetMap",bm2:"Light (CARTO)",bm3:"Satellite (Esri)",tilefail:"The base map tiles could not be loaded on this network. Layers and results still work; try another base map in the advanced settings.",ar:"Amenity radius",ar0:"Use walking time (step 2)",g_st:"Station status",st_op:"Operating",st_uc:"Under construction",st_pl:"Planned",near_h:"Nearest amenity of each type",c_cat:"Type",c_what:"Nearest",c_cnt:"Count",none:"none within radius",share:"Copy link to this place",copied:"Link copied",csv:"Download result (CSV)",h:"What connects the place where you live? See what this study shows",
 p:"Choose a destination anywhere in Vietnam. In seconds you see the nearest metro station, the walk to it, the bus that links to it and the everyday amenities within walking distance.",chipsT:"Try a destination",
 warn:"Illustration, not a timetable. Walking: shortest path on the OpenStreetMap walking network, snapped to a 120 m grid (about ±100 m) and limited to 3 km from a station; beyond that, straight line × a detour factor. Bus: ride time = distance along the route’s stops ÷ an assumed speed; waiting = half the OSM “interval” tag where it exists (completeness not verified). No GTFS exists, so transfers, congestion and real departure times are not modelled. Metro headways are not in OSM and are not included. Amenities come from OpenStreetMap and are incomplete, especially outside big cities. Your position stays in your browser.",
 s1:"Choose where you want to go",s1h:"Pick a suggestion, a province or station from the menus, use your location, or click the map.",s2:"Walking time to check",s3:"Read the result",s3h:"Results appear beside the map.",
@@ -34,7 +34,7 @@ op:"Operating",uc:"Under construction",pl:"Planned / unassigned",
 hub:{air:"Airport",rail:"Railway station",metro:"Metro station",busst:"Bus terminal",uni:"University",hosp:"Hospital",attr:"Attraction",mall:"Mall"},
 src:"Sources: OpenStreetMap contributors (ODbL; extract of 10 Oct 2026), GADM 4.1 (non-commercial use), the project’s station table. Walking grid, bus headways and amenities are derived from OpenStreetMap."},
 vi:{
-nav_conn:"Nơi muốn đến",h:"Nơi bạn ở có những tiện ích kết nối nào theo nghiên cứu này?",
+nav_conn:"Nơi muốn đến",bm:"Bản đồ nền",bm1:"OpenStreetMap",bm2:"Nền sáng (CARTO)",bm3:"Ảnh vệ tinh (Esri)",tilefail:"Không tải được ô bản đồ nền trên mạng này. Các lớp và kết quả vẫn dùng được; thử bản đồ nền khác trong thiết lập nâng cao.",ar:"Bán kính tiện ích",ar0:"Theo thời gian đi bộ (bước 2)",g_st:"Trạng thái ga",st_op:"Đang khai thác",st_uc:"Đang xây dựng",st_pl:"Quy hoạch",near_h:"Tiện ích gần nhất theo loại",c_cat:"Loại",c_what:"Gần nhất",c_cnt:"Số lượng",none:"không có trong bán kính",share:"Sao chép liên kết nơi này",copied:"Đã sao chép liên kết",csv:"Tải kết quả (CSV)",h:"Nơi bạn ở có những tiện ích kết nối nào theo nghiên cứu này?",
 p:"Chọn một nơi bất kỳ ở Việt Nam. Bạn sẽ thấy ga metro gần nhất, quãng đi bộ tới ga, tuyến buýt nối với ga và các tiện ích hằng ngày trong tầm đi bộ.",chipsT:"Thử một điểm đến",
 warn:"Chỉ để minh họa, không phải lịch chạy. Đi bộ: đường ngắn nhất trên mạng đi bộ OpenStreetMap, gán vào lưới 120 m (sai số khoảng ±100 m) và giới hạn 3 km quanh ga; xa hơn thì dùng đường chim bay × hệ số đường vòng. Buýt: thời gian đi xe = chiều dài dọc các trạm của tuyến ÷ tốc độ giả định; thời gian chờ = một nửa thẻ “interval” của OSM nếu có (chưa kiểm tra độ đầy đủ). Không có GTFS nên chưa mô hình hóa chuyển tuyến, kẹt xe và giờ xuất bến thực. Giãn cách metro không có trong OSM nên không tính. Tiện ích lấy từ OpenStreetMap, chưa đầy đủ, nhất là ngoài các thành phố lớn. Vị trí của bạn chỉ nằm trong trình duyệt.",
 s1:"Chọn nơi bạn muốn đến",s1h:"Chọn gợi ý, tỉnh hoặc ga trong danh sách, dùng vị trí của bạn, hoặc bấm vào bản đồ.",s2:"Thời gian đi bộ cần kiểm tra",s3:"Đọc kết quả",s3h:"Kết quả hiện bên cạnh bản đồ.",
@@ -65,8 +65,23 @@ function nf(x,k){var s=(+x).toFixed(k==null?0:k);return L==="vi"?s.replace(".","
 function fi(x){return Math.round(x).toLocaleString(L==="vi"?"vi-VN":"en-US")}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function hav(a,b,c,d){var R=6371008.8,p=Math.PI/180,x=Math.sin((c-a)*p/2),y=Math.sin((d-b)*p/2),h=x*x+Math.cos(a*p)*Math.cos(c*p)*y*y;return 2*R*Math.asin(Math.sqrt(h))}
-var map=Lf.map("mapConn",{preferCanvas:true}).setView([16.2,106.2],6);
-Lf.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"}).addTo(map);
+var map=Lf.map("mapConn",{preferCanvas:true});map.fitBounds([[8.3,102.0],[23.5,109.6]]);
+var BASES={osm:["https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"}],
+ carto:["https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:19,subdomains:"abcd",attribution:"© OpenStreetMap contributors © CARTO"}],
+ sat:["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:18,attribution:"Tiles © Esri"}]};
+var BASE=null,BK="osm",TOK=0,TERR=0,FELL=false;
+function msg(k){var m=$("connMapMsg");if(!m){m=document.createElement("div");m.id="connMapMsg";m.className="mapmsg";m.setAttribute("role","status");$("mapConn").parentNode.insertBefore(m,$("mapConn").nextSibling)}m.textContent=k?T[L][k]:"";m.style.display=k?"block":"none"}
+function setBase(k,auto){if(BASE)map.removeLayer(BASE);BK=k;TOK=0;TERR=0;var b=BASES[k];BASE=Lf.tileLayer(b[0],b[1]);
+ BASE.on("tileload",function(){TOK++;if(TOK===1)msg(null)});
+ BASE.on("tileerror",function(){TERR++;if(TERR>=4&&TOK===0){var nx=k==="osm"?"carto":k==="carto"?"sat":null;if(nx){FELL=true;$("cBase").value=nx;setBase(nx,true)}else msg("tilefail")}});
+ BASE.addTo(map);BASE.bringToBack()}
+$("cBase").addEventListener("change",function(){FELL=false;msg(null);setBase($("cBase").value)});
+setBase("osm");
+function fixSize(){map.invalidateSize()}
+window.addEventListener("resize",fixSize);window.addEventListener("load",function(){setTimeout(fixSize,200)});
+if(window.ResizeObserver)new ResizeObserver(fixSize).observe($("mapConn"));
+if(window.IntersectionObserver)new IntersectionObserver(function(e){if(e[0].isIntersecting)fixSize()}).observe($("mapConn"));
+setTimeout(fixSize,300);setTimeout(fixSize,1500);
 var cv=Lf.canvas({padding:.3});
 var LAY={},DAT={},PEND={};
 var FILES={prov:"data/prov34.json",gadm:"data/gadm1.json",road:"data/roads.json",rail:"data/rail.json",tod:"data/tod_layers.json",plan:"data/plan_hcm.json",bus:"data/bus_routes.json",poi:"data/poi_vn.json",wg:"data/walkgrid.json",ai:"data/amen_index.json"};
@@ -92,8 +107,9 @@ function build(k){var g=Lf.featureGroup(),d=DAT[k];
  return g}
 /* stations: Ho Chi Minh City table plus Hanoi table */
 var ALL=N.hcmStations.map(function(s,i){return{s:s,c:"hcm",i:i}}).filter(function(x){return x.s.line!=="NA"||!N.hcmStations.some(function(q){return q!==x.s&&q.line!=="NA"&&hav(q.lat,q.lng,x.s.lat,x.s.lng)<150})}).filter(function(x,k,arr){return!arr.slice(0,k).some(function(y){return y.s.n===x.s.n&&y.s.line===x.s.line&&hav(y.s.lat,y.s.lng,x.s.lat,x.s.lng)<150})}).concat((N.hnStations||[]).map(function(s,i){return{s:s,c:"hn",i:i}}));
-var STNG=Lf.featureGroup(),SC={op:"#0079b8",uc:"#dc2626",pl:"#7c8795"};
-ALL.forEach(function(x){var s=x.s;Lf.circleMarker([s.lat,s.lng],{radius:s.st==="op"?5:3.5,color:"#fff",weight:1,fillColor:SC[s.st]||"#0079b8",fillOpacity:1,renderer:cv}).bindTooltip(esc(s.n)+" ("+s.line+")").addTo(STNG)});
+var STNG=Lf.featureGroup(),SC={op:"#0079b8",uc:"#dc2626",pl:"#7c8795"},STS={op:Lf.featureGroup(),uc:Lf.featureGroup(),pl:Lf.featureGroup()};
+ALL.forEach(function(x){var s=x.s;Lf.circleMarker([s.lat,s.lng],{radius:s.st==="op"?5:3.5,color:"#fff",weight:1,fillColor:SC[s.st]||"#0079b8",fillOpacity:1,renderer:cv}).bindTooltip(esc(s.n)+" ("+s.line+")").addTo(STS[SC[s.st]?s.st:"pl"])});
+["op","uc","pl"].forEach(function(k){STNG.addLayer(STS[k])});
 /* amenity layers by category, filled from the tiles in view */
 var AMC=["#7c3aed","#e11d48","#16a34a","#d97706","#475569"],AMG=[0,1,2,3,4].map(function(){return Lf.featureGroup()}),AMON=[false,false,false,false,false];
 function refreshAm(){var z=map.getZoom(),st=$("connLoad");AMG.forEach(function(g){g.clearLayers()});
@@ -111,12 +127,13 @@ function toggle(k){var on=$(CHK[k]).checked,st=$("connLoad");
  load(k).then(function(){if(!LAY[k])LAY[k]=build(k);if($(CHK[k]).checked)LAY[k].addTo(map);st.textContent=""}).catch(function(){st.textContent=T[L].err;$(CHK[k]).checked=false})}
 Object.keys(CHK).forEach(function(k){$(CHK[k]).addEventListener("change",function(){toggle(k)})});
 $("cStn").addEventListener("change",function(){if($("cStn").checked)STNG.addTo(map);else map.removeLayer(STNG)});
+[["cSo","op"],["cSu","uc"],["cSp","pl"]].forEach(function(q){$(q[0]).addEventListener("change",function(){if($(q[0]).checked)STNG.addLayer(STS[q[1]]);else STNG.removeLayer(STS[q[1]])})});
 ["cA0","cA1","cA2","cA3","cA4"].forEach(function(id,i){$(id).addEventListener("change",function(){AMON[i]=$(id).checked;refreshAm()})});
 AMG.forEach(function(g){g.addTo(map)});
 STNG.addTo(map);
 
 /* ---- analysis ---- */
-var PIN=null,RG=Lf.featureGroup().addTo(map),HL=null,MIN=10,SEQ=0;
+var LAST={},PIN=null,RG=Lf.featureGroup().addTo(map),HL=null,MIN=10,SEQ=0;
 function ringIdx(d){return d<=500?0:d<=800?1:d<=1200?2:d<=2000?3:4}
 function inRing(pt,ring){var x=pt[0],y=pt[1],c=false;for(var i=0,j=ring.length-1;i<ring.length;j=i++){var xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))c=!c}return c}
 function inGeom(pt,g){var P=g.type==="Polygon"?[g.coordinates]:g.coordinates;for(var k=0;k<P.length;k++){if(inRing(pt,P[k][0])){var hole=false;for(var h=1;h<P[k].length;h++)if(inRing(pt,P[k][h]))hole=true;if(!hole)return true}}return false}
@@ -134,6 +151,7 @@ function analyse(lat,lng){PIN=[lat,lng];var my=++SEQ,t=T[L],p=prm();
  var st=ALL.map(function(x){var d=hav(lat,lng,x.s.lat,x.s.lng),w=wmet(WG,x.c,x.i,lat,lng);return{s:x.s,c:x.c,d:d,net:w!=null,wm:w!=null?w:d*p.f}}).sort(function(a,b){return a.d-b.d});
  var near=st.slice(0,6),ops=st.filter(function(x){return(x.s.st==="op"||x.c==="hn")&&x.d<100000}),n1=ops[0];
  var l1=st.filter(function(x){return x.c==="hcm"&&x.s.line==="L1"&&x.s.st==="op"&&x.d<100000})[0];
+ LAST={lat:lat,lng:lng,stn:n1?n1.s.n:"",line:n1?n1.s.line:"",wm:n1?Math.round(n1.wm):"",wmin:n1?Math.round(walkMin(n1.wm,p)):"",straight:n1?Math.round(n1.d):"",ring:l1?T.en.ring_n[ringIdx(l1.d)]:"",spd:p.v,det:p.f,cnt:null,near:null};
  var pr=DAT.prov?which(DAT.prov,lat,lng):null,gd=DAT.gadm?which(DAT.gadm,lat,lng):null;
  var h="<p class='where'><b>"+nf(lat,5)+", "+nf(lng,5)+"</b>"+(DAT.prov?" · "+esc(pr||t.r_out):"")+(DAT.gadm&&gd&&gd!==pr?" · <span class='sub'>"+t.r_old+": "+esc(gd)+"</span>":"")+"</p>";
  var c1;
@@ -143,11 +161,11 @@ function analyse(lat,lng){PIN=[lat,lng];var my=++SEQ,t=T[L],p=prm();
  else if(n1)c1="<div>"+t.near_far+" <b>"+esc(n1.s.n)+"</b> ("+fi(n1.d/1000)+" km "+t.away+")</div>";
  else c1="<div class='sub'>"+t.no_stn+"</div>";
  if(l1&&l1.d<6000)[500,800,1200,2000].forEach(function(r,i){Lf.circle([l1.s.lat,l1.s.lng],{radius:r,color:"#0b5ea8",weight:1,fill:false,dashArray:"4 4",opacity:.7-.1*i}).addTo(RG)});
- var rc=MIN*p.v*1000/60/p.f;
+ var ar=+$("cAr").value||0,rc=ar>0?ar:MIN*p.v*1000/60/p.f;
  Lf.circle([lat,lng],{radius:rc,color:"#16a34a",weight:1.5,fillOpacity:.05,dashArray:"3 5"}).addTo(RG);
  $("connOut").innerHTML=h+"<div class='cards3'>"+card("m","k_metro",c1)+"<div id='cBusCard'></div><div id='cAmCard'></div></div><details class='det'><summary>"+t.det_st+"</summary>"+tbl([t.c_stn,t.c_line,t.c_st,t.c_d,t.c_w,t.c_t,t.c_src,t.c_ring],near.map(function(x){return[esc(x.s.n),esc(x.s.line),t[x.s.st]||"–",fi(x.d),fi(x.wm),nf(walkMin(x.wm,p),0),x.net?t.net:t.est,t.ring_n[ringIdx(x.d)].split(" (")[0]]}))+"</details>";
  $("cBusCard").innerHTML=card("b","k_bus","<div class='sub'>"+t.loading+"</div>");$("cAmCard").innerHTML=card("a","k_am","<div class='sub'>"+t.loading+"</div>");
- $("connBus").innerHTML="";
+ $("connBus").innerHTML="";$("connNear").innerHTML="";
  load("bus").catch(function(){return null}).then(function(routes){if(my!==SEQ)return;var bc="",cand=[];
   var tgt=ops.filter(function(x){return x.d<30000});
   if(routes&&tgt.length){
@@ -167,9 +185,12 @@ function analyse(lat,lng){PIN=[lat,lng];var my=++SEQ,t=T[L],p=prm();
      Lf.circleMarker([c.rt.s[c.bi][1],c.rt.s[c.bi][0]],{radius:7,color:"#16a34a",fillColor:"#fff",fillOpacity:1,weight:3}).addTo(HL);Lf.circleMarker([c.rt.s[c.j][1],c.rt.s[c.j][0]],{radius:7,color:"#dc2626",fillColor:"#fff",fillOpacity:1,weight:3}).addTo(HL);HL.addTo(map);map.fitBounds(HL.getBounds().pad(.2))})})}});
  var dl=rc/111000,dg=rc/(111000*Math.cos(lat*Math.PI/180));
  load("ai").then(function(){return loadTiles(tileKeys(lat-dl,lng-dg,lat+dl,lng+dg))}).then(function(ts){if(my!==SEQ)return;var cn=[0,0,0,0,0];
-  ts.forEach(function(rows){rows.forEach(function(r){if(hav(lat,lng,r[0],r[1])<=rc)cn[r[2]]++})});
+  var nr=[null,null,null,null,null];
+  ts.forEach(function(rows){rows.forEach(function(r){var dd=hav(lat,lng,r[0],r[1]);if(dd<=rc){cn[r[2]]++;if(!nr[r[2]]||dd<nr[r[2]].d)nr[r[2]]={d:dd,n:r[4]||r[3]||""}}})});
+  LAST.cnt=cn;LAST.near=nr;LAST.rc=rc;
+  $("connNear").innerHTML="<details class='det'><summary>"+t.near_h+"</summary>"+tbl([t.c_cat,t.c_what,t.c_d,t.c_cnt],t.am.map(function(n,i){return["<span class='dot' style='background:"+AMC[i]+"'></span> "+n,nr[i]?esc(nr[i].n||"–"):"<span class='sub'>"+t.none+"</span>",nr[i]?fi(nr[i].d):"–",cn[i]]}))+"</details>";
   var sc=cn.filter(function(x){return x>0}).length;
-  $("cAmCard").innerHTML=card("a","k_am","<div class='big'>"+sc+" / 5 <span class='sub'>"+t.am_score+"</span></div><div class='chips2'>"+t.am.map(function(n,i){return"<span class='chip2 "+(cn[i]?"on":"")+"' style='--c:"+AMC[i]+"'>"+n+" <b>"+cn[i]+"</b></span>"}).join("")+"</div><div class='sub'>"+MIN+t.min+" · "+t.am_in.replace("{m}",fi(rc))+". "+t.am_note+"</div>")}).catch(function(){$("cAmCard").innerHTML=card("a","k_am","<div class='sub'>"+t.err+"</div>")});
+  $("cAmCard").innerHTML=card("a","k_am","<div class='big'>"+sc+" / 5 <span class='sub'>"+t.am_score+"</span></div><div class='chips2'>"+t.am.map(function(n,i){return"<span class='chip2 "+(cn[i]?"on":"")+"' style='--c:"+AMC[i]+"'>"+n+" <b>"+cn[i]+"</b></span>"}).join("")+"</div><div class='sub'>"+(ar>0?"":MIN+t.min+" · ")+t.am_in.replace("{m}",fi(rc))+". "+t.am_note+"</div>")}).catch(function(){$("cAmCard").innerHTML=card("a","k_am","<div class='sub'>"+t.err+"</div>")});
  load("poi").then(function(po){if(my!==SEQ)return;var hs=po.map(function(q){return{q:q,d:hav(lat,lng,q[1],q[0])}}).filter(function(x){return x.d<=5000}).sort(function(a,b){return a.d-b.d}).slice(0,10);
   $("connHub").innerHTML=hs.length?"<details class='det'><summary>"+t.det_hub+"</summary>"+tbl([t.c_nm,t.c_ty,t.c_d],hs.map(function(x){return[esc(x.q[3]||"–"),t.hub[x.q[2]]||x.q[2],fi(x.d)]}))+"</details>":""}).catch(function(){$("connHub").innerHTML=""});
  map.setView([lat,lng],Math.max(map.getZoom(),14))}
@@ -181,8 +202,14 @@ $("cLoc").addEventListener("click",function(){var t=T[L];if(!navigator.geolocati
  navigator.geolocation.getCurrentPosition(function(p){setPoint(p.coords.latitude,p.coords.longitude)},function(){$("connOut").innerHTML="<p class='warn'>"+t.geo_deny+"</p>"},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})});
 $("cGo").addEventListener("click",function(){var m=($("cLL").value||"").replace(/,/g," ").trim().split(/\s+/).map(Number);if(m.length>=2&&isFinite(m[0])&&isFinite(m[1])&&Math.abs(m[0])<=90&&Math.abs(m[1])<=180)setPoint(m[0],m[1])});
 $("cClr").addEventListener("click",function(){PIN=null;SEQ++;RG.clearLayers();if(HL){map.removeLayer(HL);HL=null}$("connOut").innerHTML="<p class='sub'>"+T[L].pick+"</p>";$("connBus").innerHTML="";$("connHub").innerHTML=""});
-["cSpd","cDet","cBr","cBs"].forEach(function(id){$(id).addEventListener("change",function(){if(PIN)analyse(PIN[0],PIN[1])})});
+["cSpd","cDet","cBr","cBs","cAr"].forEach(function(id){$(id).addEventListener("change",function(){if(PIN)analyse(PIN[0],PIN[1])})});
 document.querySelectorAll("#cMin button").forEach(function(b){b.addEventListener("click",function(){MIN=+b.getAttribute("data-m");document.querySelectorAll("#cMin button").forEach(function(x){x.classList.toggle("on",x===b)});if(PIN)analyse(PIN[0],PIN[1])})});
+/* share link and CSV */
+$("cShare").addEventListener("click",function(){if(!PIN)return;var u=location.origin+location.pathname+"?p="+PIN[0].toFixed(5)+","+PIN[1].toFixed(5)+"#conn-s";try{history.replaceState(null,"",u)}catch(e){}
+ var done=function(){$("connLoad").textContent=T[L].copied};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(done,done);else done()});
+$("cCsv").addEventListener("click",function(){if(!PIN||!LAST.lat)return;var t=T.en,cats=t.am,h=["lat","lng","nearest_station","line","walk_m","walk_min","straight_m","line1_ring","walk_speed_kmh","detour_factor","amenity_radius_m"],v=[LAST.lat,LAST.lng,LAST.stn,LAST.line,LAST.wm,LAST.wmin,LAST.straight,LAST.ring,LAST.spd,LAST.det,LAST.rc?Math.round(LAST.rc):""];
+ cats.forEach(function(n,i){h.push(n+" count");v.push(LAST.cnt?LAST.cnt[i]:"");h.push(n+" nearest_m");v.push(LAST.near&&LAST.near[i]?Math.round(LAST.near[i].d):"")});
+ var q=function(x){return'"'+String(x).replace(/"/g,'""')+'"'},s=h.map(q).join(",")+"\n"+v.map(q).join(",")+"\n",a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+s],{type:"text/csv"}));a.download="place_connectivity.csv";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)});
 /* go-to menus */
 function bigPoly(g){var P=g.type==="Polygon"?[g.coordinates]:g.coordinates,best=null,ba=-1;P.forEach(function(q){var r=q[0],a=1e9,b=1e9,c=-1e9,d=-1e9;r.forEach(function(x){a=Math.min(a,x[1]);b=Math.min(b,x[0]);c=Math.max(c,x[1]);d=Math.max(d,x[0])});var ar=(c-a)*(d-b);if(ar>ba){ba=ar;best=[[a,b],[c,d]]}});return best}
 function fillMenus(){var t=T[L],ps=$("cProvSel"),ss=$("cStnSel"),pv=ps.value,sv=ss.value;
@@ -203,4 +230,5 @@ function render(){var t=T[L];
  if(PIN)analyse(PIN[0],PIN[1]);else $("connOut").innerHTML="<p class='sub'>"+t.pick+"</p>"}
 var lb=$("lang");if(lb)lb.addEventListener("click",function(){setTimeout(function(){L=document.documentElement.lang==="vi"?"vi":"en";render()},60)});
 render();
+(function(){try{var m=(new URLSearchParams(location.search).get("p")||"").split(",").map(Number);if(m.length===2&&isFinite(m[0])&&isFinite(m[1])&&Math.abs(m[0])<=90&&Math.abs(m[1])<=180)setTimeout(function(){setPoint(m[0],m[1])},400)}catch(e){}})();
 })();

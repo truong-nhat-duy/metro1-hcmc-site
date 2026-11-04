@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
 <link rel="stylesheet" href="vendor/leaflet.css?v=1027133000">
-<link rel="stylesheet" href="style.css?v=1105001000">
+<link rel="stylesheet" href="style.css?v=1105003000">
 </head>
 <body>
 <div id="prog"></div>
@@ -83,15 +83,15 @@
 <select id="cProvSel" aria-label="Province"></select><select id="cStnSel" aria-label="Station"></select></div>
 <div class="chips" id="cChips"></div><small data-c="s1h"></small></div></div>
 <div class="step"><span class="sn">2</span><div><b data-c="s2"></b>
-<div class="seg" id="cMin"><button type="button" data-m="5"></button><button type="button" data-m="10" class="on"></button><button type="button" data-m="15"></button></div></div></div>
-<div class="step"><span class="sn">3</span><div><b data-c="s3"></b><small data-c="s3h"></small><div><button class="btn2 sec2" id="cClr" type="button" data-c="clear"></button></div></div></div>
+<div class="seg" id="cMin"><button type="button" data-m="5"></button><button type="button" data-m="10" class="on"></button><button type="button" data-m="15"></button><button type="button" data-m="20"></button><button type="button" data-m="30"></button></div></div></div>
+<div class="step"><span class="sn">3</span><div><b data-c="s3"></b><small data-c="s3h"></small><div><button class="btn2 sec2" id="cClr" type="button" data-c="clear"></button> <button class="btn2 sec2" id="cShare" type="button" data-c="share"></button> <button class="btn2 sec2" id="cCsv" type="button" data-c="csv"></button></div></div></div>
 </div>
-<div class="mapcard conn"><div id="mapConn" class="map2" role="application" aria-label="Map"></div><aside class="connside" aria-live="polite"><div id="connOut"></div><div id="connBus"></div><div id="connHub"></div></aside></div>
+<div class="mapcard conn"><div id="mapConn" class="map2" role="application" aria-label="Map"></div><aside class="connside" aria-live="polite"><div id="connOut"></div><div id="connBus"></div><div id="connNear"></div><div id="connHub"></div></aside></div>
 <span class="sub" id="connLoad" aria-live="polite"></span>
 <details class="adv"><summary data-c="adv"></summary>
 <div class="advg">
 <fieldset><legend data-c="lay"></legend>
-<b class="gl" data-c="g_metro"></b><label><input type="checkbox" id="cStn" checked> <span data-c="l_stn"></span></label><label><input type="checkbox" id="cRail"> <span data-c="l_rail"></span></label><label><input type="checkbox" id="cTod"> <span data-c="l_tod"></span></label><label><input type="checkbox" id="cPlan"> <span data-c="l_plan"></span></label>
+<b class="gl" data-c="g_metro"></b><label><input type="checkbox" id="cStn" checked> <span data-c="l_stn"></span></label><label class="sublab"><input type="checkbox" id="cSo" checked> <span data-c="st_op"></span></label><label class="sublab"><input type="checkbox" id="cSu" checked> <span data-c="st_uc"></span></label><label class="sublab"><input type="checkbox" id="cSp" checked> <span data-c="st_pl"></span></label><label><input type="checkbox" id="cRail"> <span data-c="l_rail"></span></label><label><input type="checkbox" id="cTod"> <span data-c="l_tod"></span></label><label><input type="checkbox" id="cPlan"> <span data-c="l_plan"></span></label>
 <b class="gl" data-c="g_road"></b><label><input type="checkbox" id="cRoad"> <span data-c="l_road"></span></label>
 <b class="gl" data-c="g_bnd"></b><label><input type="checkbox" id="cProv"> <span data-c="l_prov"></span></label><label><input type="checkbox" id="cGadm"> <span data-c="l_gadm"></span></label>
 <b class="gl" data-c="g_bus"></b><label><input type="checkbox" id="cBus"> <span data-c="l_bus"></span></label>
@@ -99,6 +99,8 @@
 <b class="gl" data-c="g_poi"></b><label><input type="checkbox" id="cPoi"> <span data-c="l_poi"></span></label>
 </fieldset>
 <fieldset><legend data-c="set"></legend>
+<label><span data-c="bm"></span> <select id="cBase"><option value="osm" data-c="bm1"></option><option value="carto" data-c="bm2"></option><option value="sat" data-c="bm3"></option></select></label>
+<label><span data-c="ar"></span> <select id="cAr"><option value="0" data-c="ar0"></option><option value="400">400 m</option><option value="800">800 m</option><option value="1200">1,200 m</option><option value="2000">2,000 m</option></select></label>
 <label><span data-c="speed"></span> <input id="cSpd" type="number" min="2" max="8" step="0.1" value="4.8" style="width:64px"></label>
 <label><span data-c="detour"></span> <input id="cDet" type="number" min="1" max="2" step="0.05" value="1.3" style="width:64px"></label>
 <label><span data-c="bspd"></span> <input id="cBs" type="number" min="5" max="40" step="1" value="15" style="width:64px"></label>
@@ -438,7 +440,7 @@
 <script src="app.js?v=1104220000"></script>
 <script src="data_net.js?v=1102120000"></script>
 <script src="net.js?v=1104220000"></script>
-<script src="conn.js?v=1105001000"></script>
+<script src="conn.js?v=1105003000"></script>
 <script src="advui.js?v=1104220000"></script>
 <script src="x.js?v=1104220000"></script>
 <script src="x2.js?v=1105001000"></script>
