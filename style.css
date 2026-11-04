@@ -400,3 +400,8 @@ html[lang="en"] .vi-only{display:none} html[lang="vi"] .en-only{display:none}
 
 #legal-s .lgrp td{background:var(--bg);padding-top:14px;font-size:.9rem}
 #legal-s .littab a{text-decoration:underline;text-underline-offset:2px}
+
+#methx .rdt td:nth-child(n+3){text-align:right;white-space:nowrap}
+#methx .rdt{font-size:.82rem}
+#methx .rdn{margin:8px 0 0;font-size:.86rem}
+#methx .rdn.src{color:var(--mute);font-size:.78rem}
