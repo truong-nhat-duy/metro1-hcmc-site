@@ -3,7 +3,7 @@
 var $=function(i){return document.getElementById(i)},D=window.DEV,N=window.NET,Lf=window.L;if(!D||!$("devRoot"))return;
 var L=document.documentElement.lang==="vi"?"vi":"en",S={beta:0.121,g:"all"},CH=null,MAP=null,LAY=null;
 var T={en:{
-h:"Developers and projects: exposure to the lines",
+h:"Benefit analysis for developers and projects: how close they are to each metro line",
 p:"Which developments sit near a metro line today, and which near lines that are still being built or planned? The figures below show exposure: how many apartment listings of each developer lie within 800 m of an operating, under-construction or planned station. Exposure is not a benefit, and nothing here shows that a developer gained from Metro.",
 warn:"Data: Chợ Tốt apartment listings from the 19 October 2026 tracking run (2,240 listings, not the frozen run). All lie inside the current Ho Chi Minh City outline but in the former city area; none come from the Bình Dương or Bà Rịa–Vũng Tàu parts of the enlarged city. Developers are assigned from project names: 596 listings were checked against web excerpts, 197 inferred from the brand in the name, 16 from memory, 935 projects are unverified and 496 listings have no project name. Planned stations include 38 whose line is not verified and the 14 points of the planned east extension of Line 1.",
 c1:"Where each developer’s listings lie relative to the lines",c1x:"Share of the developer’s listings",
@@ -23,7 +23,7 @@ lim:"Limits",
 limL:["Exposure counts listings, not units sold or land owned, so it says nothing about profit.","Developers with the highest exposure also sell the highest-priced central units, so brand, segment and location are tangled with the line.","No listings before 22 December 2024: no developer’s price change can be measured.","Planned stations are partly unverified and the Line 1 extension is schematic.","The data cover the former city area only; a view of the enlarged city needs listings from Bình Dương and Bà Rịa–Vũng Tàu."],
 src:"Source: apt_project_developer_20261019.csv and apt_project_table_20261019.csv (tracking run), stations from the project’s network table."
 },vi:{
-h:"Chủ đầu tư và dự án: mức tiếp xúc với các tuyến",
+h:"Phân tích mức độ hưởng lợi của Chủ đầu tư và dự án bất động sản về mức độ tiếp cận với các tuyến metro",
 p:"Dự án nào đang nằm gần tuyến metro hiện nay, dự án nào gần các tuyến đang xây hoặc quy hoạch? Các số liệu dưới đây cho thấy mức tiếp xúc: bao nhiêu tin căn hộ của mỗi chủ đầu tư nằm trong 800 m quanh ga đang vận hành, đang xây hoặc quy hoạch. Tiếp xúc không phải là hưởng lợi, và không có số liệu nào ở đây cho thấy chủ đầu tư nào được lợi từ Metro.",
 warn:"Dữ liệu: tin căn hộ Chợ Tốt của lần chạy theo dõi 19/10/2026 (2.240 tin, không phải lần chạy đóng băng). Tất cả nằm trong ranh giới TP.HCM hiện hành nhưng thuộc địa bàn thành phố cũ; không có tin từ phần Bình Dương hoặc Bà Rịa–Vũng Tàu của thành phố mở rộng. Chủ đầu tư được gán theo tên dự án: 596 tin đã đối chiếu với trích đoạn web, 197 tin suy từ thương hiệu trong tên, 16 tin theo trí nhớ, 935 tin thuộc dự án chưa xác minh và 496 tin không có tên dự án. Ga quy hoạch gồm 38 ga chưa xác minh tuyến và 14 điểm của đoạn kéo dài phía đông tuyến 1.",
 c1:"Tin của từng chủ đầu tư nằm ở đâu so với các tuyến",c1x:"Tỷ lệ tin của chủ đầu tư",

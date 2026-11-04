@@ -6,7 +6,7 @@ var T={
 en:{title:"Metro Line 1 and asking prices in Ho Chi Minh City",subtitle:"Interactive companion to the Fulbright MPP thesis: station-distance rings, hedonic models, machine learning (SHAP) and night lights.",
 warn:"Associational evidence. Final sample: asking prices posted after Line 1 opened (22 Dec 2024), plus 2019–2024 listings recovered from the Wayback Machine for a ward-level before–after comparison. Nothing here is a causal estimate of the Metro's total effect.",
 nav_map:"Map",nav_coef:"Ring coefficients",nav_ml:"Machine learning",nav_ntl:"Night lights",nav_hyp:"Hypotheses",nav_about:"About",
-map_h:"Listings around Metro Line 1",map_p:"Each dot is an asking price per m² (million VND). Move the slider to restrict to listings near a station, change property type, or click anywhere on the map to see its distance ring.",
+map_h:"Metro Line 1",ext_l:"Show all collected points of enlarged Ho Chi Minh City",map_p:"Each dot is an asking price per m² (million VND). Move the slider to restrict to listings near a station, change property type, or click anywhere on the map to see its distance ring.",
 max_d:"Max distance to station:",type:"Type:",t_all:"All",t_house:"House",t_land:"Land",t_apt:"Apartment",rings:"Rings (500/800/1,200/2,000 m)",listings:"Listings",cheap:"20",dear:"400+",
 n_l:"Listings:",med_l:"Median:",mean_l:"Mean:",click_hint:"Click the map: nearest station, distance and ring-1 to ring-4 premium from the baseline model.",
 coef_h:"Distance-ring coefficients",coef_p:"Difference in log asking price per m² relative to listings more than 2,000 m from a station, within the same 2 km grid cell. Bars show 95% confidence intervals (standard errors clustered on 5 km cells). Add controls step by step and watch the near-station premium shrink.",
@@ -27,7 +27,7 @@ mdl:{"Hồi quy tuyến tính":"Linear","Rừng ngẫu nhiên":"Random forest","
 vi:{title:"Metro số 1 và giá rao bất động sản tại TP.HCM",subtitle:"Trang tương tác đi kèm luận văn MPP Fulbright: vành khoảng cách tới ga, mô hình hedonic, học máy (SHAP) và ánh sáng đêm.",
 warn:"Bằng chứng mang tính tương quan. Mẫu cuối: giá rao sau khi Tuyến 1 vận hành (22/12/2024), cùng tin 2019–2024 thu từ Wayback Machine cho so sánh trước–sau theo phường. Không có gì ở đây là ước lượng nhân quả về tác động toàn phần của Metro.",
 nav_map:"Bản đồ",nav_coef:"Hệ số vành",nav_ml:"Học máy",nav_ntl:"Ánh sáng đêm",nav_hyp:"Giả thuyết",nav_about:"Giới thiệu",
-map_h:"Tin đăng quanh Metro số 1",map_p:"Mỗi chấm là giá rao trên m² (triệu đồng). Kéo thanh trượt để chỉ xem tin gần ga, đổi loại hình, hoặc bấm vào bất kỳ điểm nào trên bản đồ để biết vành khoảng cách của nó.",
+map_h:"Metro số 1",ext_l:"Hiện toàn bộ điểm dữ liệu TP.HCM mở rộng",map_p:"Mỗi chấm là giá rao trên m² (triệu đồng). Kéo thanh trượt để chỉ xem tin gần ga, đổi loại hình, hoặc bấm vào bất kỳ điểm nào trên bản đồ để biết vành khoảng cách của nó.",
 max_d:"Khoảng cách tối đa tới ga:",type:"Loại hình:",t_all:"Tất cả",t_house:"Nhà riêng",t_land:"Đất",t_apt:"Căn hộ",rings:"Vành (500/800/1.200/2.000 m)",listings:"Tin đăng",cheap:"20",dear:"400+",
 n_l:"Số tin:",med_l:"Trung vị:",mean_l:"Trung bình:",click_hint:"Bấm vào bản đồ: ga gần nhất, khoảng cách và mức chênh lệch vành từ mô hình cơ sở.",
 coef_h:"Hệ số vành khoảng cách",coef_p:"Chênh lệch log giá rao/m² so với tin cách ga trên 2.000 m, trong cùng ô lưới 2 km. Thanh là khoảng tin cậy 95% (sai số chuẩn gom cụm theo ô 5 km). Thêm biến kiểm soát từng bước để thấy mức chênh lệch gần ga thu hẹp.",
@@ -57,8 +57,16 @@ var PM=400, ptsL=new Geo.TypeLayer(D.points,{city:"hcm",filter:function(p){retur
 function drawStations(){stLayer.clearLayers();D.stations.forEach(function(s){var m=GM.station(s,{label:L==="vi"?s.vi:s.en,ix:s.id==="S01"}).addTo(stLayer);s.m=m;});}
 function drawRings(){ringLayer.clearLayers();if(!$("rings").checked)return;D.stations.forEach(function(s){RING_R.forEach(function(r,i){Lf.circle([s.lat,s.lng],{radius:r,color:RING_C[i],weight:1,fill:true,fillColor:RING_C[i],fillOpacity:.05,opacity:.75,interactive:false}).addTo(ringLayer)})});}
 function median(a){if(!a.length)return NaN;a=a.slice().sort(function(x,y){return x-y});var m=a.length>>1;return a.length%2?a[m]:(a[m-1]+a[m])/2;}
+var EXTD=null,EXTB=false;
+function curPts(){var e=$("extpts");return e&&e.checked&&EXTD?EXTD:D.points}
+function loadExt(){if(EXTD||EXTB)return;EXTB=true;var ks=["hcm","bd","brvt"],out=[],ok=0;
+ ks.forEach(function(k){fetch("data/sale_"+k+".json").then(function(r){return r.json()}).then(function(j){j.p.forEach(function(r){var t=r[3];if(t!=="n"&&t!=="d"&&t!=="c")return;var bd=1e12;D.stations.forEach(function(s){var d=hav(r[0],r[1],s.lat,s.lng);if(d<bd)bd=d});
+  out.push([r[0],r[1],r[2],t,Math.round(bd),bd<=500?"r1":bd<=800?"r2":bd<=1200?"r3":bd<=2000?"r4":"r5"])});
+  if(++ok===ks.length){EXTD=out;applyExt(true)}}).catch(function(){EXTB=false})})}
+function applyExt(first){var on=$("extpts").checked&&EXTD,r=$("rng");ptsL._p=on?EXTD:D.points;r.max=on?40000:6000;r.step=on?500:100;if(first||!on||+r.value>+r.max)r.value=on?40000:6000;
+ if(on&&first)map.setView([10.88,106.8],10);drawPts()}
 function drawPts(){MD=+$("rng").value;TP=$("typ").value;PM=+$("pmx").value;var v=[];$("rngv").textContent=fmtInt(MD)+" m";$("pmxv").textContent=PM>=400?"400+":PM;
- D.points.forEach(function(p){if(p[4]<=MD&&p[2]<=PM&&(TP==="all"||p[3]===TP))v.push(p[2])});
+ curPts().forEach(function(p){if(p[4]<=MD&&p[2]<=PM&&(TP==="all"||p[3]===TP))v.push(p[2])});
  if($("pts").checked){if(!map.hasLayer(ptsL))map.addLayer(ptsL);ptsL.redraw()}else map.removeLayer(ptsL);
  $("sn").textContent=v.length?fmtInt(v.length):"\u2013";$("sm").textContent=v.length?nf(median(v),1):"\u2013";$("sa").textContent=v.length?nf(v.reduce(function(a,b){return a+b},0)/v.length,1):"\u2013";}
 function hav(a,b,c,d){var R=6371000,r=Math.PI/180,x=(c-a)*r,y=(d-b)*r,h=Math.sin(x/2)*Math.sin(x/2)+Math.cos(a*r)*Math.cos(c*r)*Math.sin(y/2)*Math.sin(y/2);return 2*R*Math.asin(Math.sqrt(h));}
@@ -66,7 +74,7 @@ map.on("click",function(e){if(ptsL._map&&ptsL.hit(e.containerPoint))return;var b
  var r=bd<=500?"r1":bd<=800?"r2":bd<=1200?"r3":bd<=2000?"r4":null,t=T[L],c=D.coefs.hcm.M1.rings.filter(function(x){return x.t===r})[0];
  clickLayer.clearLayers();Lf.marker(e.latlng).addTo(clickLayer);Lf.polyline([e.latlng,[best.lat,best.lng]],{color:"#c2410c",dashArray:"4 4"}).addTo(clickLayer);
  $("clickinfo").textContent=t.nearest+": "+(L==="vi"?best.vi:best.en)+" · "+t.dist+": "+fmtInt(bd)+" m · "+(r?t.ring+" "+t.rn[r]+" · E0: "+nf(c.est,3)+" ("+t.ci+" "+nf(c.lo,3)+" … "+nf(c.hi,3)+")":t.ref);});
-["rng","typ","pts","pmx"].forEach(function(i){$(i).addEventListener("input",drawPts)});$("rings").addEventListener("input",drawRings);
+["rng","typ","pts","pmx"].forEach(function(i){$(i).addEventListener("input",drawPts)});$("extpts").addEventListener("change",function(){if(this.checked&&!EXTD)loadExt();else applyExt(true)});if($("extpts").checked)loadExt();$("rings").addEventListener("input",drawRings);
 // ---------- charts
 var ch={};function mk(id,cfg){if(ch[id])ch[id].destroy();ch[id]=new Chart($(id).getContext("2d"),cfg);}
 var css=function(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()};

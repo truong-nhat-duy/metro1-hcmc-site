@@ -45,6 +45,8 @@ function txt(){var t=T[L];document.querySelectorAll("[data-x]").forEach(function
 // ---------- ring map
 var RS=null;
 function divColor(v){var m=.5,t=Math.max(-1,Math.min(1,v/m)),a=t<0?[37,99,235]:[220,38,38],w=[250,250,250],k=Math.abs(t);return "rgb("+[0,1,2].map(function(i){return Math.round(w[i]+(a[i]-w[i])*k)}).join(",")+")"}
+var RF={r1:true,r2:true,r3:true,r4:true,ref:true,ty:"all",pmin:null,pmax:null,dmax:null,op:.55,lbl:true},RFM=false;
+function rfOk(p){if(RF.ty!=="all"&&p[3]!==RF.ty)return false;if(RF.pmin!=null&&p[2]<RF.pmin)return false;if(RF.pmax!=null&&p[2]>RF.pmax)return false;if(RF.dmax!=null&&p[4]>RF.dmax)return false;if(p[5]==="ref"?!RF.ref:RF[p[5]]===false)return false;return true}
 function ringMap(city,keep){var mapEl=$("mapRing");if(!mapEl||RS)return;city=city||"hcm";
  var map=Lf.map(mapEl).setView(city==="hcm"?[10.8,106.72]:[21.0,105.82],12),G=Geo.init(map,city,{types:true}),st=keep||{city:city,spec:"M1",bands:true,pts:true};
  RS={map:map,G:G,st:st,band:Lf.layerGroup().addTo(map),stn:Lf.layerGroup().addTo(map)};
@@ -52,19 +54,24 @@ function ringMap(city,keep){var mapEl=$("mapRing");if(!mapEl||RS)return;city=cit
  var cs=$("rCity"),sp=$("rSpec");
  cs.addEventListener("change",function(){var keep=st;var old=RS;old.map.remove();var ix=Geo.reg.indexOf(old.G);if(ix>=0)Geo.reg.splice(ix,1);var lg=$("mapRing").nextElementSibling;if(lg&&lg.classList.contains("mlg"))lg.remove();RS=null;ringMap(keep.city=cs.value,keep)});sp.addEventListener("change",function(){st.spec=sp.value;ringDraw(false)});
  $("rPts").addEventListener("change",function(){st.pts=this.checked;ringDraw(false)});$("rBands").addEventListener("change",function(){st.bands=this.checked;ringDraw(false)});
- $("rCity").value=st.city;ringDraw(true)}
+ $("rCity").value=st.city;
+ if(!RFM&&window.AdvUI){RFM=true;AdvUI.mount("ringAdv",{title:{en:"Advanced options",vi:"Tùy chọn nâng cao"},state:RF,onChange:function(){ringDraw(false)},groups:[
+  {t:{en:"Rings to show",vi:"Vành hiển thị"},f:[{k:"r1",t:"chk",l:{en:"0–500 m",vi:"0–500 m"}},{k:"r2",t:"chk",l:{en:"500–800 m",vi:"500–800 m"}},{k:"r3",t:"chk",l:{en:"800–1,200 m",vi:"800–1.200 m"}},{k:"r4",t:"chk",l:{en:"1,200–2,000 m",vi:"1.200–2.000 m"}},{k:"ref",t:"chk",l:{en:"Listings beyond 2 km",vi:"Tin ngoài 2 km"}}]},
+  {t:{en:"Listings",vi:"Tin đăng"},f:[{k:"ty",t:"sel",l:{en:"Property type",vi:"Loại tài sản"},o:[["all",{en:"All",vi:"Tất cả"}],["n",{en:"Houses",vi:"Nhà"}],["d",{en:"Land",vi:"Đất"}],["c",{en:"Apartments",vi:"Căn hộ"}]]},{k:"pmin",t:"num",l:{en:"Price from (million VND/m²)",vi:"Giá từ (triệu đồng/m²)"},step:1},{k:"pmax",t:"num",l:{en:"Price to",vi:"Giá đến"},step:1},{k:"dmax",t:"num",l:{en:"Max distance to station (m)",vi:"Cách ga tối đa (m)"},step:100,ph:{en:"no limit",vi:"không giới hạn"}}]},
+  {t:{en:"Display",vi:"Hiển thị"},f:[{k:"lbl",t:"chk",l:{en:"Station names",vi:"Tên ga"}},{k:"op",t:"rng",l:{en:"Band opacity",vi:"Độ đậm của vành"},min:.2,max:.9,step:.05}]}]})}
+ ringDraw(true)}
 function ringDraw(recenter){if(!RS)return;var t=T[L],st=RS.st,city=st.city,map=RS.map,coefs=D.coefs[city],sp=$("rSpec");
  if(recenter||!sp.options.length){var cur=sp.value;sp.innerHTML="";["M1","M0","M2","R1","R2","R3","R4","R5","T1","T2"].forEach(function(k){if(coefs[k]){var o=document.createElement("option");o.value=k;o.textContent=k;sp.appendChild(o)}});sp.value=coefs[cur]?cur:"M1";st.spec=sp.value}
  var stns=Geo.stationsOf(city),cf=coefs[st.spec].rings,byR={};cf.forEach(function(r){byR[r.t]=r});
  RS.band.clearLayers();RS.stn.clearLayers();
  if(recenter){map.setView(city==="hcm"?[10.8,106.72]:[21.0,105.82],city==="hcm"?12:12)}
- if(st.bands){["r4","r3","r2","r1"].forEach(function(k){var rad={r1:500,r2:800,r3:1200,r4:2000}[k],r=byR[k],pn=Geo.bpane(map,k,.55);stns.forEach(function(s){
+ if(st.bands){["r4","r3","r2","r1"].forEach(function(k){var rad={r1:500,r2:800,r3:1200,r4:2000}[k],r=byR[k],pn=Geo.bpane(map,k,RF.op);if(!RF[k])return;stns.forEach(function(s){
    var c=Lf.circle([s.lat,s.lng],{pane:pn,radius:rad,stroke:false,fillColor:r?divColor(r.est):"#cbd5e1",fillOpacity:1});
    c.on("click",function(e){if(RS.layer._map&&RS.layer.hit(e.containerPoint))return;Lf.popup({className:"pkp"}).setLatLng(e.latlng).setContent(ringPopup(k,byR[k],city)).openOn(map)});
    c.addTo(RS.band)})})}
- stns.forEach(function(s){Geo.stMarker(s.lat,s.lng,{color:city==="hcm"?"#0079b8":"#c2410c",sm:true}).bindTooltip(s.n,{className:"stl",direction:"right",offset:[0,0],permanent:true}).addTo(RS.stn)});
+ stns.forEach(function(s){Geo.stMarker(s.lat,s.lng,{color:city==="hcm"?"#0079b8":"#c2410c",sm:true}).bindTooltip(s.n,{className:"stl",direction:"right",offset:[0,0],permanent:RF.lbl}).addTo(RS.stn)});
  if(RS.layer._map)map.removeLayer(RS.layer);
- RS.layer=new Geo.TypeLayer(Geo.pointsOf(city),{city:city,filter:function(p){return true}});if(st.pts)RS.layer.addTo(map);
+ RS.layer=new Geo.TypeLayer(Geo.pointsOf(city),{city:city,filter:rfOk});if(st.pts)RS.layer.addTo(map);
  ringTable();ringLegend()}
 function ringPopup(k,r,city){var tx=Geo.tx(),pts=Geo.pointsOf(city).filter(function(p){return p[5]===k}),v=pts.map(function(p){return p[2]});
  return "<div class='pk'><div class='pk-h'><span class='pk-dot' style='background:"+(r?divColor(r.est):"#cbd5e1")+";width:14px;height:14px'></span><div><small>"+tx.lgr+"</small><b>"+tx.rn[k]+"</b></div></div><table>"+

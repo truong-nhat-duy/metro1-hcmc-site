@@ -4,7 +4,7 @@ var $=function(i){return document.getElementById(i)},root=$("vzRoot");if(!root)r
 var L=document.documentElement.lang==="vi"?"vi":"en";
 var S={scale:"station",ring:null,phase:"all",t:25,m:2,leak:30,beta:0.162};
 var T={en:{
-h:"The theory in pictures",p:"Four figures connect the framework chapter to the estimates: where the rings come from, how a station can raise land value, when that value is capitalised, and how a ring coefficient reads. All four are illustrations of the theory; only the bars in figure 1 are estimates.",
+h:"Theoretical model and predictions",p:"Four figures connect the framework chapter to the estimates: where the rings come from, how a station can raise land value, when that value is capitalised, and how a ring coefficient reads. All four are illustrations of the theory; only the bars in figure 1 are estimates.",
 a_h:"1 · Concentric rings",a_p:"The monocentric city sets rents by distance to the centre; a station adds a second, local access point. The model measures that local effect with rings around each station.",
 a_t1:"City scale",a_t2:"Station scale",
 cbd:"CBD (Bến Thành)",suoi:"Suối Tiên",rentdown:"Rent and price fall with distance to the CBD",km:"km",
@@ -32,7 +32,7 @@ d_calc:"Coefficient β (ln points)",d_res:"Asking price higher by",d_f:"= exp(β
 d_ex:"Example, ≤ 500 m ring: no location fixed effects 0.413 gives 51.1%; main model (2-km cells) 0.162 gives 17.6%; trimming price tails 0.069 gives 7.1% (not significant).",
 d_n:"Log points are not percentages: the two agree only for small values. A coefficient is a descriptive gap in asking prices, not the price effect of Metro."
 },vi:{
-h:"Lý thuyết bằng hình",p:"Bốn hình nối chương khung lý thuyết với các ước lượng: vành khoảng cách đến từ đâu, một ga có thể nâng giá đất ra sao, khi nào giá trị được vốn hóa, và cách đọc một hệ số vành. Cả bốn là hình minh họa lý thuyết; chỉ các cột ở hình 1 là ước lượng.",
+h:"Mô hình lý thuyết và các dự báo",p:"Bốn hình nối chương khung lý thuyết với các ước lượng: vành khoảng cách đến từ đâu, một ga có thể nâng giá đất ra sao, khi nào giá trị được vốn hóa, và cách đọc một hệ số vành. Cả bốn là hình minh họa lý thuyết; chỉ các cột ở hình 1 là ước lượng.",
 a_h:"1 · Vành đồng tâm",a_p:"Mô hình đơn tâm đặt tiền tô theo khoảng cách đến trung tâm; một ga thêm điểm tiếp cận cục bộ thứ hai. Mô hình đo hiệu ứng cục bộ đó bằng các vành quanh từng ga.",
 a_t1:"Quy mô thành phố",a_t2:"Quy mô ga",
 cbd:"Trung tâm (Bến Thành)",suoi:"Suối Tiên",rentdown:"Tiền tô và giá giảm theo khoảng cách đến trung tâm",km:"km",
