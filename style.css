@@ -387,3 +387,13 @@ html[lang="en"] .vi-only{display:none} html[lang="vi"] .en-only{display:none}
 .eqc p{margin:6px 0 0;font-size:.88rem;color:var(--mute)}
 .vt table{min-width:820px}.vt td.sg{white-space:nowrap;text-align:center}
 .vt td a{overflow-wrap:anywhere}
+
+/* equation cards v2 */
+.eqh{align-items:center}.eqn{display:inline-grid;place-items:center;min-width:26px;height:26px;border-radius:50%;background:var(--acc2);color:#fff;font:700 .8rem var(--sans)}
+.eqw{margin:2px 0 10px;font-size:.95rem;font-style:italic}
+.eqm{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 12px;margin:8px 0;overflow-x:auto;text-align:center}
+.eqm math{font-size:1.3rem;font-family:"Latin Modern Math","STIX Two Math","Cambria Math",var(--serif),serif}
+.eqm mi.b,.eqm mn.b{font-weight:700;font-style:normal}
+.eqd{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:6px 22px;margin:12px 0 4px;font-size:.86rem}
+.eqd>div{display:flex;gap:10px;align-items:baseline;min-width:0}.eqd b{flex:0 0 auto;min-width:3.6em;font:600 .95rem var(--serif);white-space:nowrap}.eqd span{color:var(--mute);min-width:0}
+.eqr{margin:8px 0 0;font-size:.82rem;color:var(--mute);border-top:1px dashed var(--line);padding-top:8px}
