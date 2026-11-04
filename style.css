@@ -397,3 +397,6 @@ html[lang="en"] .vi-only{display:none} html[lang="vi"] .en-only{display:none}
 .eqd{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:6px 22px;margin:12px 0 4px;font-size:.86rem}
 .eqd>div{display:flex;gap:10px;align-items:baseline;min-width:0}.eqd b{flex:0 0 auto;min-width:3.6em;font:600 .95rem var(--serif);white-space:nowrap}.eqd span{color:var(--mute);min-width:0}
 .eqr{margin:8px 0 0;font-size:.82rem;color:var(--mute);border-top:1px dashed var(--line);padding-top:8px}
+
+#legal-s .lgrp td{background:var(--bg);padding-top:14px;font-size:.9rem}
+#legal-s .littab a{text-decoration:underline;text-underline-offset:2px}
