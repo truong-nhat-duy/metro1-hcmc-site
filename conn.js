@@ -7,7 +7,7 @@
 var Lf=window.L,N=window.NET;if(!Lf||!N||!document.getElementById("mapConn"))return;
 var L="en";try{var s0=localStorage.getItem("lang");if(s0==="vi"||s0==="en")L=s0;else if((navigator.language||"").slice(0,2)==="vi")L="vi"}catch(e){}
 var T={en:{
-nav_conn:"Where to go",h:"Where do you want to go? See what connects you there",
+nav_conn:"Where to go",h:"What connects the place where you live? See what this study shows",
 p:"Choose a destination anywhere in Vietnam. In seconds you see the nearest metro station, the walk to it, the bus that links to it and the everyday amenities within walking distance.",chipsT:"Try a destination",
 warn:"Illustration, not a timetable. Walking: shortest path on the OpenStreetMap walking network, snapped to a 120 m grid (about ±100 m) and limited to 3 km from a station; beyond that, straight line × a detour factor. Bus: ride time = distance along the route’s stops ÷ an assumed speed; waiting = half the OSM “interval” tag where it exists (completeness not verified). No GTFS exists, so transfers, congestion and real departure times are not modelled. Metro headways are not in OSM and are not included. Amenities come from OpenStreetMap and are incomplete, especially outside big cities. Your position stays in your browser.",
 s1:"Choose where you want to go",s1h:"Pick a suggestion, a province or station from the menus, use your location, or click the map.",s2:"Walking time to check",s3:"Read the result",s3h:"Results appear beside the map.",
@@ -34,7 +34,7 @@ op:"Operating",uc:"Under construction",pl:"Planned / unassigned",
 hub:{air:"Airport",rail:"Railway station",metro:"Metro station",busst:"Bus terminal",uni:"University",hosp:"Hospital",attr:"Attraction",mall:"Mall"},
 src:"Sources: OpenStreetMap contributors (ODbL; extract of 10 Oct 2026), GADM 4.1 (non-commercial use), the project’s station table. Walking grid, bus headways and amenities are derived from OpenStreetMap."},
 vi:{
-nav_conn:"Nơi muốn đến",h:"Hãy chọn nơi bạn muốn đến: có những tiện ích kết nối nào?",
+nav_conn:"Nơi muốn đến",h:"Nơi bạn ở có những tiện ích kết nối nào theo nghiên cứu này?",
 p:"Chọn một nơi bất kỳ ở Việt Nam. Bạn sẽ thấy ga metro gần nhất, quãng đi bộ tới ga, tuyến buýt nối với ga và các tiện ích hằng ngày trong tầm đi bộ.",chipsT:"Thử một điểm đến",
 warn:"Chỉ để minh họa, không phải lịch chạy. Đi bộ: đường ngắn nhất trên mạng đi bộ OpenStreetMap, gán vào lưới 120 m (sai số khoảng ±100 m) và giới hạn 3 km quanh ga; xa hơn thì dùng đường chim bay × hệ số đường vòng. Buýt: thời gian đi xe = chiều dài dọc các trạm của tuyến ÷ tốc độ giả định; thời gian chờ = một nửa thẻ “interval” của OSM nếu có (chưa kiểm tra độ đầy đủ). Không có GTFS nên chưa mô hình hóa chuyển tuyến, kẹt xe và giờ xuất bến thực. Giãn cách metro không có trong OSM nên không tính. Tiện ích lấy từ OpenStreetMap, chưa đầy đủ, nhất là ngoài các thành phố lớn. Vị trí của bạn chỉ nằm trong trình duyệt.",
 s1:"Chọn nơi bạn muốn đến",s1h:"Chọn gợi ý, tỉnh hoặc ga trong danh sách, dùng vị trí của bạn, hoặc bấm vào bản đồ.",s2:"Thời gian đi bộ cần kiểm tra",s3:"Đọc kết quả",s3h:"Kết quả hiện bên cạnh bản đồ.",

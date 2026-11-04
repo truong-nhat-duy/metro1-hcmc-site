@@ -9,9 +9,9 @@ var doi=function(d){return"https://doi.org/"+d};
 var C={
  rosen:A("Rosen (1974)",doi("10.1086/260169")),
  lewis:"Lewis (2007)",nguyen:"Nguyen (2020)",gao:"Gao & Feng (2023)",
- deb:"Debrezion, Pels & Rietveld (2007)",
+ deb:A("Debrezion, Pels & Rietveld (2007)",doi("10.1007/s11146-007-9032-z")),
  diao:A("Diao, Leonard & Sing (2017)",doi("10.1016/j.regsciurbeco.2017.08.006")),
- ang:"Anggara (2026)",gm:"Gibbons & Machin (2005)",
+ ang:"Anggara (2026)",gm:A("Gibbons & Machin (2005)","https://doi.org/10.1016/j.jue.2004.10.002"),
  alo:"Alonso (1964)",muth:"Muth (1969)",mills:"Mills (1972)",
  tl:A("Nguyễn Lâm Quỳnh Trâm & Nguyễn Xuân Long (2025)",doi("10.54772/jomc.06.2025.1131")),
  pl:A("Phạm Chánh Toàn & Nguyễn Xuân Long (2025)",doi("10.54772/jomc.06.2025.1109")),
@@ -20,9 +20,9 @@ var C={
  tatem:A("Tatem (2017)",doi("10.1038/sdata.2017.4")),
  elv:A("Elvidge et al. (2017)",doi("10.1080/01431161.2017.1342050")),
  rom:A("Román et al. (2018)",doi("10.1016/j.rse.2018.03.017")),
- bdm:"Bertrand, Duflo & Mullainathan (2004)",
+ bdm:A("Bertrand, Duflo & Mullainathan (2004)","https://www.nber.org/papers/w8841"),
  lsp:"LeSage & Pace (2009)",elh:"Elhorst (2014)",ans:"Anselin (1988)",
- kt:"Keele & Titiunik (2015)",gnt:"Grembi, Nannicini & Troiano (2016)",cct:"Calonico, Cattaneo & Titiunik (2014)",
+ kt:"Keele & Titiunik (2015)",gnt:"Grembi, Nannicini & Troiano (2016)",cct:A("Calonico, Cattaneo & Titiunik (2014)","https://www.econometricsociety.org/publications/econometrica/2014/11/01/robust-nonparametric-confidence-intervals-regression"),
  br:"Breiman (2001)",lun:"Lundberg & Lee (2017)",
  unv:{en:"unverified",vi:"CHƯA XÁC MINH"}
 };
