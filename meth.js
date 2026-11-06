@@ -170,7 +170,18 @@ function accHTML(L){var t=ACCT,h="<h3>"+t.h[L]+"</h3><p>"+t.p[L]+"</p>";
  var pl=B("Planned","Kế hoạch")[L];
  h+="<div class=\"tw vt\"><table><thead><tr>"+TXT.th.map(function(x){return"<th>"+x[L]+"</th>"}).join("")+"</tr></thead><tbody>"+ACCM.map(function(r){return"<tr><td><b>"+r[0][L]+"</b><br><small>"+r[2][L]+"</small></td><td>"+r[1][L]+"</td><td class=\"sg\">–</td><td>"+pl+"</td><td>"+r[3][L]+"</td></tr>"}).join("")+"</tbody></table></div>";
  return h+"<p class=\"sub\">"+t.cv[L]+"</p>"}
-function accSrc(){var seen={};SRC.forEach(function(r){seen[r[3]]=1});var out=[];ACCS.forEach(function(g){g[2].forEach(function(r){if(seen[r[1]])return;seen[r[1]]=1;out.push([B(r[0],r[0]),B(r[2].en+" — "+r[3].en,r[2].vi+" — "+r[3].vi),B(g[0]+". "+g[1].en,g[0]+". "+g[1].vi),r[1]])})});return out}
+var SGRP={L:B("Listing platforms and archives","Sàn tin rao và kho lưu trữ"),M:B("Metro stations and boundaries","Ga metro và ranh giới"),G:B("Planning and GIS, Ho Chi Minh City","Quy hoạch và GIS, TP.HCM"),P:B("Population and urbanisation","Dân số và đô thị hóa"),O:B("Maps, points of interest and remote sensing","Bản đồ, điểm quan tâm và viễn thám"),Y:B("Land prices and policy","Giá đất và chính sách")};
+var SORD=["L","M","G","P","O","Y"],SOF={0:"L",1:"L",2:"L",3:"L",4:"L",5:"M",6:"O",7:"P",8:"O",9:"O",10:"M"},AOF={A:"L",B:"G",C:"P",D:"O",E:"Y"};
+var SMERGE={"https://www.nhatot.com/":1,"https://batdongsan.com.vn/":3,"https://guland.vn/":0,"https://www.worldpop.org/datacatalog/":7,"https://sdi.worldpop.org/wpdata":7,"https://www.openstreetmap.org/":8,"https://overpass-api.de/":8,"https://download.geofabrik.de/":8,"https://www.nso.gov.vn/en/statistical-data/":"nso"};
+function srcRows(){var rows=[],byUrl={},nso=null;
+ SRC.forEach(function(r,i){var o={g:SOF[i],n:r[0],u:r[1],c:r[2],l:[r[3]]};rows.push(o);byUrl[r[3]]=o;byUrl[i]=o});
+ ACCS.forEach(function(g){g[2].forEach(function(r){var url=r[1];if(byUrl[url])return;
+  var t=SMERGE[url];if(t!==undefined){var host=t==="nso"?byUrl["https://www.nso.gov.vn/dan-so/"]:byUrl[t];if(host){host.l.push(url);byUrl[url]=host;return}}
+  var o={g:AOF[g[0]],n:B(r[0],r[0]),u:B(r[2].en+" — "+r[3].en,r[2].vi+" — "+r[3].vi),c:B("",""),l:[url]};rows.push(o);byUrl[url]=o})});
+ rows.sort(function(a,b){return SORD.indexOf(a.g)-SORD.indexOf(b.g)});return rows}
+function srcHTML(L){var rows=srcRows(),h="<div class=\"tw vt\"><table><thead><tr><th>"+B("Type","Loại")[L]+"</th>"+TXT.sth.map(function(x){return"<th>"+x[L]+"</th>"}).join("")+"</tr></thead><tbody>";
+ SORD.forEach(function(k){var rs=rows.filter(function(r){return r.g===k});rs.forEach(function(r,i){h+="<tr>"+(i===0?"<td rowspan=\""+rs.length+"\"><b>"+SGRP[k][L]+"</b></td>":"")+"<td><b>"+r.n[L]+"</b></td><td>"+r.u[L]+"</td><td>"+(r.c[L]||"–")+"</td><td>"+r.l.map(function(u){return"<a href=\""+u+"\" target=\"_blank\" rel=\"noopener\">"+u.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,"")+"</a>"}).join("<br>")+"</td></tr>"})});
+ return h+"</tbody></table></div>"}
 function esc(s){return s}
 function render(){
  var el=document.getElementById("methx");if(!el)return;var L=Lg(),h="";
@@ -178,9 +189,8 @@ function render(){
  h+="<h3>"+TXT.mh[L]+"</h3><p>"+TXT.mp[L]+"</p><div class=\"eqs\">"+EQ.map(function(q,n){return"<div class=\"eqc\"><div class=\"eqh\"><span class=\"eqn\">"+(n+1)+"</span><b>"+q.t[L]+"</b><small>"+q.k[L]+"</small></div><p class=\"eqw\">"+q.w[L]+"</p>"+q.e.map(function(x){return"<div class=\"eqm\">"+x+"</div>"}).join("")+"<div class=\"eqd\">"+q.d.map(function(d){return"<div><b>"+d[0]+"</b><span>"+d[1][L]+"</span></div>"}).join("")+"</div>"+(q.tab?q.tab[L]:"")+"<p class=\"eqr\">"+q.r[L]+"</p></div>"}).join("")+"</div>";
  h+="<h3>"+TXT.vh[L]+"</h3><p>"+TXT.vp[L]+"</p><div class=\"tw vt\"><table><thead><tr>"+TXT.th.map(function(x){return"<th>"+x[L]+"</th>"}).join("")+"</tr></thead><tbody>"+VAR.map(function(r){return"<tr><td><b>"+r[0][L]+"</b></td><td>"+r[1][L]+"</td><td class=\"sg\">"+r[2]+"</td><td>"+r[3][L]+"</td><td>"+r[4][L]+"</td></tr>"}).join("")+"</tbody></table></div>";
  h+=accHTML(L);
- h+="<h3>"+TXT.sh[L]+"</h3><p>"+TXT.sp[L]+"</p><div class=\"tw vt\"><table><thead><tr>"+TXT.sth.map(function(x){return"<th>"+x[L]+"</th>"}).join("")+"</tr></thead><tbody>"+SRC.concat(accSrc()).map(function(r){return"<tr><td><b>"+r[0][L]+"</b></td><td>"+r[1][L]+"</td><td>"+(r[2][L]||"–")+"</td><td>"+(r[3]?"<a href=\""+r[3]+"\" target=\"_blank\" rel=\"noopener\">"+r[3].replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,"")+"</a>":"–")+"</td></tr>"}).join("")+"</tbody></table></div>";
- h+="<p class=\"sub\">"+TXT.note[L]+"</p>";
  el.innerHTML=h;
+ var sx=document.getElementById("srcx");if(sx)sx.innerHTML="<h3>"+TXT.sh[L]+"</h3><p>"+TXT.sp[L]+"</p>"+srcHTML(L)+"<p class=\"sub\">"+TXT.note[L]+"</p>";
 }
 render();
 var lb=document.getElementById("lang");if(lb)lb.addEventListener("click",function(){setTimeout(render,60)});
