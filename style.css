@@ -440,3 +440,5 @@ html[lang="en"] .vi-only{display:none} html[lang="vi"] .en-only{display:none}
 .aqc small{display:block;color:var(--mute)}.aqlab{background:transparent;border:0;box-shadow:none;font:600 .72rem var(--sans);color:#111;text-shadow:0 0 3px #fff}
 
 .plhub span{display:block;width:14px;height:14px;border:2px solid #fff;border-radius:3px;transform:rotate(45deg);box-shadow:0 0 0 1px #0006}
+
+#cChips .cg{flex-basis:100%;font:600 .78rem var(--sans);color:var(--mute);margin-top:6px}#cChips .clg{height:16px;width:auto;vertical-align:-3px}
