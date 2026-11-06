@@ -45,22 +45,34 @@ var T={en:{sum:"Long-horizon master plan (schematic)",show:"Show planning view",
  z:"Urban regions and centres",a:"Growth axes and corridors",r:"Ring roads (indicative radius)",h:"Connecting hubs",rl:"Also show railways and metro lines",ro:"Also show existing ring roads and expressways",lab:"Show names",
  go:"Zoom to",hor:"Horizons in the sources: Hanoi 2021–2030, vision to 2050; HCMC to 2040, vision to 2060. “100 years” is not an official horizon.",
  cav:"Schematic only. Positions are approximate, axes are straight lines between named places, and ring-road circles have invented radii that only show order. They are not official boundaries or routes, and they do not measure anything in this study.",
- lh:"Legend",len:"Length",src:"Sources"},
+ lh:"Legend",len:"Length",src:"Sources",st:"Metro stations by status",rg:"TOD rings 500 / 800 / 1,000 m (research convention)",tp:"Planned TOD sites and Metro 2 areas (schematic)",po:"5 growth poles (schematic)",s1:"operating",s2:"under construction",s3:"planned",line:"Line"},
 vi:{sum:"Quy hoạch dài hạn (sơ đồ)",show:"Hiện lớp quy hoạch",city:"Thành phố",both:"Hà Nội và TP.HCM",hn:"Hà Nội",hcm:"TP.HCM",
  z:"Vùng đô thị và trung tâm",a:"Trục động lực và hành lang",r:"Đường vành đai (bán kính minh họa)",h:"Đầu mối kết nối",rl:"Hiện thêm đường sắt và tuyến metro",ro:"Hiện thêm vành đai và cao tốc hiện có",lab:"Hiện tên",
  go:"Phóng tới",hor:"Mốc trong các nguồn: Hà Nội 2021–2030, tầm nhìn đến 2050; TP.HCM đến 2040, tầm nhìn đến 2060. “100 năm” không phải mốc chính thức.",
  cav:"Chỉ là sơ đồ. Vị trí xấp xỉ, trục là đường thẳng nối các địa danh, vòng tròn vành đai có bán kính tự đặt chỉ để thể hiện thứ tự. Không phải ranh giới hay tuyến chính thức và không đo lường gì trong nghiên cứu này.",
- lh:"Chú giải",len:"Chiều dài",src:"Nguồn"}};
+ lh:"Chú giải",len:"Chiều dài",src:"Nguồn",st:"Ga metro theo trạng thái",rg:"Vành TOD 500 / 800 / 1.000 m (quy ước nghiên cứu)",tp:"Khu TOD quy hoạch và vùng Metro 2 (sơ đồ)",po:"5 cực tăng trưởng (sơ đồ)",s1:"đang chạy",s2:"đang xây",s3:"quy hoạch",line:"Tuyến"}};
 function lang(){var l="en";try{var s=localStorage.getItem("lang");if(s==="vi"||s==="en")l=s;else if((navigator.language||"").slice(0,2)==="vi")l="vi"}catch(e){}
  if(document.documentElement.lang==="vi")l="vi";return l}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function attach(map,opts){opts=opts||{};
- var S={on:false,city:"both",z:true,a:true,r:true,h:true,lab:true,rl:false,ro:false},grp=Lf.layerGroup(),ctl=Lf.control({position:opts.pos||"topright"}),el,L=lang();
+ var S={on:!!opts.on,city:opts.city||"both",z:true,a:true,r:true,h:true,lab:true,rl:false,ro:false,st:true,rg:false,tp:true,po:true},TD=null,PH=null,SEQ=0,grp=Lf.layerGroup(),ctl=Lf.control({position:opts.pos||"topright"}),el,L=lang();
  ctl.onAdd=function(){el=Lf.DomUtil.create("div","aqp leaflet-bar");Lf.DomEvent.disableClickPropagation(el);Lf.DomEvent.disableScrollPropagation(el);ui();return el};
  function ok(c){return S.city==="both"||S.city===c}
  function srcs(c){return "<hr><small>"+T[L].cav+"<br>"+T[L].src+": <a href='"+SRC[c].u+"' target='_blank' rel='noopener'>"+esc(SRC[c].t)+"</a></small>"}
  function tip(m,txt){if(S.lab)m.bindTooltip(esc(txt),{permanent:true,direction:"right",className:"aqlab",opacity:1});return m}
- function draw(){grp.clearLayers();if(!S.on)return;var t=T[L];
+ function need(){if(!opts.tod)return;if(!TD)TD=fetch("data/tod_layers.json").then(function(r){return r.json()}).catch(function(){return null});if(!PH)PH=fetch("data/plan_hcm.json").then(function(r){return r.json()}).catch(function(){return null});
+  Promise.all([TD,PH]).then(function(){draw()})}
+ function extra(){var t=T[L],my=++SEQ;if(!opts.tod||!TD||!PH)return;
+  Promise.all([TD,PH]).then(function(v){var d=v[0],ph=v[1];if(!d||!S.on||my!==SEQ)return;var cs=[];if(ok("hcm"))cs.push("hcm");if(ok("hn"))cs.push("hn");
+   cs.forEach(function(c){var C=d[c];
+    if(S.rg){var R=c==="hcm"?[C.rings_ops,C.rings_con]:[C.rings],RC={"500":"#b45309","800":"#d97706","1000":"#f59e0b"};R.forEach(function(rs,ri){["1000","800","500"].forEach(function(k){if(rs&&rs[k])Lf.geoJSON({type:"Feature",geometry:rs[k]},{interactive:false,style:{color:RC[k],weight:1,fillColor:RC[k],fillOpacity:ri?.05:.1,dashArray:ri?"4 4":null}}).addTo(grp)})})}
+    if(S.st)C.stations.forEach(function(s){var col=s.s==="operating"?"#0079b8":s.s==="under_construction"?"#ea580c":"#7c8795";var m=Lf.circleMarker([s.p[1],s.p[0]],{radius:s.s==="operating"?6:5,color:"#fff",weight:1.2,fillColor:col,fillOpacity:.95});
+     m.bindTooltip(esc(s.n)+" · "+t.line+" "+esc(s.l==="chua_gan"?"–":s.l)+" · "+t[s.s==="operating"?"s1":s.s==="under_construction"?"s2":"s3"]);m.addTo(grp)})});
+   if(ph&&ok("hcm")){var cav=L==="vi"?ph.meta.caveat_vi:ph.meta.caveat_en;
+    if(S.tp){ph.metro2.forEach(function(a){Lf.geoJSON(a.geom,{style:{color:"#7e22ce",weight:1.5,fillOpacity:.15}}).bindPopup("<b>Metro 2 TOD: "+esc(a.name)+"</b><br>"+a.ha+" ha<hr><small>"+esc(cav)+"</small>",{maxWidth:280}).addTo(grp)});
+     ph.nq98.forEach(function(a){if(a.geom)Lf.geoJSON(a.geom,{style:{color:"#0f766e",weight:1.5,fillOpacity:.15}}).bindPopup("<b>#"+a.id+" "+esc(a.name)+"</b><br>"+a.ha+" ha · "+esc(a.line)+"<hr><small>"+esc(cav)+"</small>",{maxWidth:280}).addTo(grp)})}
+    if(S.po)ph.poles.forEach(function(q){Lf.circleMarker([q.lat,q.lon],{radius:10,color:"#be123c",weight:2.5,fillColor:"#be123c",fillOpacity:.25}).bindPopup("<b>"+esc(q.name)+"</b><br>"+esc(q.role)+"<hr><small>"+esc(cav)+"</small>",{maxWidth:280}).addTo(grp)})}})}
+ function draw(){grp.clearLayers();if(!S.on)return;var t=T[L];extra();
   if(S.z)Z.forEach(function(z){if(!ok(z[0]))return;var m=Lf.circleMarker([z[1],z[2]],{radius:8,color:"#fff",weight:1.5,fillColor:CITY[z[0]].col,fillOpacity:.9});
    m.bindPopup("<b>"+esc(L==="vi"?z[3]:z[4])+"</b><br>"+esc(L==="vi"?z[5]:z[6])+srcs(z[0]),{maxWidth:300});tip(m,L==="vi"?z[3]:z[4]);m.addTo(grp)});
   if(S.a)A.forEach(function(a){if(!ok(a[0]))return;var p=Lf.polyline(a[3],{color:CITY[a[0]].col,weight:3,opacity:.8,dashArray:"2 7",lineCap:"round"});
@@ -73,17 +85,17 @@ function attach(map,opts){opts=opts||{};
   function cb(k,x){return"<label><input type='checkbox' data-k='"+k+"'"+(S[k]?" checked":"")+"> "+x+"</label>"}
   var ex=(document.getElementById("cRail")?cb("rl",t.rl)+cb("ro",t.ro):"");
   el.innerHTML="<details"+open+"><summary>"+t.sum+"</summary><div class='aqb'>"+cb("on",t.show)+
-  "<label>"+t.city+" <select class='plc'><option value='both'"+(S.city==="both"?" selected":"")+">"+t.both+"</option><option value='hn'"+(S.city==="hn"?" selected":"")+">"+t.hn+"</option><option value='hcm'"+(S.city==="hcm"?" selected":"")+">"+t.hcm+"</option></select></label>"+
-  cb("z",t.z)+cb("a",t.a)+cb("r",t.r)+cb("h",t.h)+ex+cb("lab",t.lab)+
-  "<div class='aqbt'>"+t.go+": <button type='button' data-z='hn'>"+t.hn+"</button><button type='button' data-z='hcm'>"+t.hcm+"</button></div>"+
+  (opts.city?"":"<label>"+t.city+" <select class='plc'><option value='both'"+(S.city==="both"?" selected":"")+">"+t.both+"</option><option value='hn'"+(S.city==="hn"?" selected":"")+">"+t.hn+"</option><option value='hcm'"+(S.city==="hcm"?" selected":"")+">"+t.hcm+"</option></select></label>")+
+  cb("z",t.z)+cb("a",t.a)+cb("r",t.r)+cb("h",t.h)+(opts.tod?cb("st",t.st)+cb("rg",t.rg)+(S.city!=="hn"?cb("tp",t.tp)+cb("po",t.po):""):"")+ex+cb("lab",t.lab)+
+  (opts.city?"":"<div class='aqbt'>"+t.go+": <button type='button' data-z='hn'>"+t.hn+"</button><button type='button' data-z='hcm'>"+t.hcm+"</button></div>")+
   "<div class='aqleg'><span><i style='background:"+CITY.hn.col+"'></i>"+t.hn+"</span><span><i style='background:"+CITY.hcm.col+"'></i>"+t.hcm+"</span></div>"+
   "<small>"+t.hor+" "+t.cav+"</small></div></details>";wire()}
  function other(id,on){var c=document.getElementById(id);if(c&&c.checked!==on){c.checked=on;c.dispatchEvent(new Event("change",{bubbles:true}))}}
  function wire(){el.querySelectorAll("input[data-k]").forEach(function(i){i.addEventListener("change",function(){var k=i.getAttribute("data-k");S[k]=i.checked;
-   if(k==="on"){if(S.on)grp.addTo(map);else map.removeLayer(grp)}if(k==="rl")other("cRail",S.rl);if(k==="ro")other("cRoad",S.ro);draw()})});
-  el.querySelector(".plc").addEventListener("change",function(){S.city=this.value;draw();if(S.on){if(S.city==="hn")map.setView(CITY.hn.c,9);else if(S.city==="hcm")map.setView(CITY.hcm.c,9);else map.setView([16,106.5],5)}});
+   if(k==="on"){if(S.on){grp.addTo(map);need()}else map.removeLayer(grp)}if(k==="rl")other("cRail",S.rl);if(k==="ro")other("cRoad",S.ro);draw()})});
+  var pc=el.querySelector(".plc");if(pc)pc.addEventListener("change",function(){S.city=this.value;draw();if(S.on){if(S.city==="hn")map.setView(CITY.hn.c,9);else if(S.city==="hcm")map.setView(CITY.hcm.c,9);else map.setView([16,106.5],5)}});
   el.querySelectorAll("[data-z]").forEach(function(b){b.addEventListener("click",function(){var z=b.getAttribute("data-z");map.setView(CITY[z].c,9);if(!S.on){S.on=true;el.querySelector("input[data-k=on]").checked=true;grp.addTo(map);draw()}})})}
- ctl.addTo(map);
+ ctl.addTo(map);if(S.on){grp.addTo(map);need();draw()}
  var lb=document.getElementById("lang");if(lb)lb.addEventListener("click",function(){setTimeout(function(){L=lang();if(el){var o=el.querySelector("details").open;ui();el.querySelector("details").open=o;draw()}},80)});
  return{layer:grp,state:S}}
 window.PLAN={attach:attach};
