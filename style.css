@@ -462,3 +462,20 @@ html[lang="en"] .vi-only{display:none} html[lang="vi"] .en-only{display:none}
 .hstage{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:14px 0}.hstage i{align-self:center;font-style:normal;color:var(--mute)}
 .hs{flex:1 1 180px;background:var(--chip);border-radius:12px;padding:10px 14px;display:flex;flex-direction:column;gap:3px;font-size:.86rem}.hs b{font-size:.92rem}.hs.hw{background:color-mix(in srgb,var(--acc2) 14%,var(--chip))}
 @media(max-width:700px){.hstage i{display:none}}
+
+/* connectivity: wider destination step, compact steps 2-3, designed destination buttons */
+@media (min-width:960px){#conn-s .steps{grid-template-columns:minmax(0,2.3fr) minmax(0,.8fr) minmax(0,.8fr)}}
+#conn-s .step{padding:16px}
+#cChips{gap:6px 6px;margin:10px 0 6px}
+#cChips .ct{flex-basis:100%;display:flex;align-items:center;gap:8px;font:700 .72rem var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
+#cChips .ct::after{content:"";flex:1;height:1px;background:var(--line)}
+#cChips .cg{flex-basis:100%;display:flex;align-items:center;gap:8px;margin-top:10px;font:700 .72rem var(--sans);letter-spacing:.04em;color:var(--mute)}
+#cChips .cg::after{content:"";flex:1;height:1px;background:var(--line)}
+#cChips button.dst{--ac:#0ea5e9;display:inline-flex;align-items:center;gap:6px;padding:3px 11px 3px 4px;border:1px solid color-mix(in srgb,var(--ac) 28%,var(--line));border-radius:999px;background:linear-gradient(180deg,var(--card),color-mix(in srgb,var(--ac) 7%,var(--card)));color:var(--ink);font:600 .79rem/1.2 var(--sans);box-shadow:0 1px 2px rgba(10,25,45,.06);transition:transform .14s,box-shadow .14s,border-color .14s,background .14s}
+#cChips button.dst[data-g="1"]{--ac:#1d4ed8}#cChips button.dst[data-g="2"]{--ac:#7c3aed}#cChips button.dst[data-g="3"]{--ac:#0d9488}#cChips button.dst[data-g="4"]{--ac:#d97706}
+#cChips button.dst::before{content:"";flex:none;width:20px;height:20px;border-radius:50%;background:var(--ac) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z'/%3E%3Ccircle cx='12' cy='10' r='2.3'/%3E%3C/svg%3E") center/12px no-repeat;box-shadow:0 1px 3px color-mix(in srgb,var(--ac) 45%,transparent)}
+#cChips button.dst:has(.clg)::before{display:none}
+#cChips button.dst .clg{height:20px;width:20px;object-fit:contain;border-radius:50%;background:#fff;padding:2px;box-shadow:0 0 0 1px var(--line);vertical-align:0}
+#cChips button.dst:hover,#cChips button.dst:focus-visible{transform:translateY(-2px);border-color:var(--ac);box-shadow:0 6px 14px color-mix(in srgb,var(--ac) 22%,transparent);background:linear-gradient(180deg,var(--card),color-mix(in srgb,var(--ac) 14%,var(--card)))}
+#cChips button.dst:active{transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){#cChips button.dst{transition:none}}
