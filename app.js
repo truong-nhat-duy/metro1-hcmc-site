@@ -51,7 +51,7 @@ var nf=function(x,k){var s=(+x).toFixed(k==null?3:k);return L==="vi"?s.replace("
 var fmtInt=function(x){return Math.round(x).toLocaleString(L==="vi"?"vi-VN":"en-US");};
 // ---------- map
 var Lf=window.L, map=Lf.map("map").setView([10.8,106.74],12), GM=Geo.init(map,"hcm",{types:true,amen:true,mlu:true});
-if(window.AQ)AQ.attach(map,{pos:"topright"});
+if(window.AQ)AQ.attach(map,{pos:"topright"});if(window.PLAN)PLAN.attach(map,{pos:"topright"});
 var ringLayer=Lf.layerGroup().addTo(map), stLayer=Lf.layerGroup().addTo(map), clickLayer=Lf.layerGroup().addTo(map);
 var RING_R=[500,800,1200,2000], RING_C=["#0b5ea8","#2e86c1","#85c1e9","#aed6f1"], MD=6000, TP="all";
 var PM=400, ptsL=new Geo.TypeLayer(D.points,{city:"hcm",filter:function(p){return p[4]<=MD&&p[2]<=PM&&(TP==="all"||p[3]===TP)},onView:function(l){var v=l.map(function(p){return p[2]}),e=$("sv");if(e)e.textContent=v.length?fmtInt(v.length)+" · "+nf(median(v),1):"\u2013"}});

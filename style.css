@@ -432,9 +432,11 @@ html[lang="en"] .vi-only{display:none} html[lang="vi"] .en-only{display:none}
 .aqy .pt.l1{fill:#d9480f}.aqy .pt.l2{fill:#2e7fc1}.aqy .pt.l3{fill:#7a3b8f}.lg2 .aqf{display:inline-block;width:12px;height:12px;border-radius:3px;margin:0 4px 0 0}
 .airq tr.me td{font-weight:600}.airq .tw{overflow-x:auto}
 
-.aqp{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;max-width:min(300px,78vw);font-size:.8rem;box-shadow:var(--shadow)}
+.aqp{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;max-width:min(300px,calc(100vw - 140px));font-size:.8rem;box-shadow:var(--shadow)}
 .aqp summary{cursor:pointer;padding:7px 10px;font-weight:600}.aqb{padding:2px 10px 10px;display:flex;flex-direction:column;gap:6px;max-height:min(60vh,420px);overflow:auto}
 .aqb label{display:flex;flex-direction:column;gap:2px}.aqb label:has(input[type=checkbox]){flex-direction:row;gap:6px;align-items:center}
 .aqb select,.aqb input[type=range]{width:100%;font:inherit;min-width:0}.aqbt button{font:inherit;padding:2px 8px;margin:2px 4px 2px 0;border:1px solid var(--line);border-radius:999px;background:var(--chip);color:var(--ink);cursor:pointer}
 .aqleg{display:flex;flex-direction:column;gap:2px}.aqleg i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-2px}.aqmsg{color:#b45309}
 .aqc small{display:block;color:var(--mute)}.aqlab{background:transparent;border:0;box-shadow:none;font:600 .72rem var(--sans);color:#111;text-shadow:0 0 3px #fff}
+
+.plhub span{display:block;width:14px;height:14px;border:2px solid #fff;border-radius:3px;transform:rotate(45deg);box-shadow:0 0 0 1px #0006}

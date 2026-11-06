@@ -82,7 +82,7 @@ window.addEventListener("resize",fixSize);window.addEventListener("load",functio
 if(window.ResizeObserver)new ResizeObserver(fixSize).observe($("mapConn"));
 if(window.IntersectionObserver)new IntersectionObserver(function(e){if(e[0].isIntersecting)fixSize()}).observe($("mapConn"));
 setTimeout(fixSize,300);setTimeout(fixSize,1500);
-if(window.AQ)AQ.attach(map,{pos:"topright"});
+if(window.AQ)AQ.attach(map,{pos:"topright"});if(window.PLAN)PLAN.attach(map,{pos:"topright"});
 var cv=Lf.canvas({padding:.3});
 var LAY={},DAT={},PEND={};
 var FILES={prov:"data/prov34.json",gadm:"data/gadm1.json",road:"data/roads.json",rail:"data/rail.json",tod:"data/tod_layers.json",plan:"data/plan_hcm.json",bus:"data/bus_routes.json",poi:"data/poi_vn.json",wg:"data/walkgrid.json",ai:"data/amen_index.json"};
