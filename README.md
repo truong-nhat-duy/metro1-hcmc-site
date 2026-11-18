@@ -81,7 +81,7 @@ Status: work in progress. Everything shown is descriptive. The data are asking p
 ## Repository contents and data dictionary
 
 - README.md, LICENSE (CC BY-NC 4.0) and THIRD_PARTY_NOTICES.md: documentation, licence and third-party terms.
-- index.html, style.css, app.js, x.js, x2.js, maps.js, net.js: page and interactive code.
+- index.html, style.css, app.js, x.js, x2.js, meth.js, maps.js, net.js: page and interactive code.
 - conn.js and data/*.json: connectivity explorer and its lazily loaded layers (prov34, gadm1, roads, rail, bus_routes with `iv`/`oh` headway and opening-hours tags, poi_vn, walkgrid, amen_index and amen/ tiles (nationwide amenities)), derived from OpenStreetMap (10 Oct 2026 extract) and GADM 4.1; bus data are incomplete, there is no GTFS timetable, and walkgrid is a 120 m approximation (about ±100 m snapping error, 65 of 70 HCMC and 20 of 22 Hanoi stations could be attached to the walking network).
 - data*.js: embedded data (listing sample, results, boundaries, station network). assets/: images, night-light and population overlays (webp) with metadata. vendor/: Leaflet and Chart.js.
 - Run locally: serve the folder with any static server, for example python -m http.server 8000, then open http://localhost:8000.
