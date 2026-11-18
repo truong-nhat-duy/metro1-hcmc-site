@@ -48,10 +48,10 @@ Status: work in progress. Everything shown is descriptive. The data are asking p
 - Your browser does contact third parties when you open the page: Esri and OpenStreetMap tile servers for base maps, and Google Fonts for typefaces. Those providers can see your IP address under their own policies.
 - To report a security problem, open a GitHub issue without exploit details or personal data, or use GitHub’s private vulnerability reporting if it is enabled for this repository.
 
-## Final results (thesis submitted 2 November 2026)
+## Final results (updated 18 November 2026)
 
-- HCMC: asking price per m² within 500 m of a Line 1 station is about 18% higher than beyond 2 km in the same 2-km cell (0.162, SE 0.037); flat to about 1.5 km; concentrated in land plots and eastern-corridor stations; about zero in Hanoi.
-- Before–after: ward difference-in-differences with 2019–2024 Wayback listings gives −0.081 (SE 0.082); the gap was already priced in before opening. Pre-trends are not flat.
+- HCMC: matching ATT within 500 m is 0.204 (SE 0.118, about +22.6%); hedonic baseline (5-km FE) is −0.153 (SE 0.026), shrinking to −0.059 (p CR1 = 0.085, wild bootstrap p = 0.218) with 2-km FE. Only 8% of placebo ATTs exceed the real ATT. Hanoi: ATT 0.052 (SE 0.069); 62% of placebo ATTs exceed real.
+- Before–after: ward difference-in-differences with 2019–2024 Wayback listings (expanded sample) gives −0.065 (SE 0.063; bootstrap p = 0.31); no increase in the near-station gap after opening. Pre-trends are not flat.
 - The `final-s` section of the site shows these results; older panels come from preliminary runs.
 
 ## Method and main numbers in brief
